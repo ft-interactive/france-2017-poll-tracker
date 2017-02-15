@@ -11,39 +11,38 @@ export default () => ({ // eslint-disable-line
   //       new Date('2016-05-17T17:11:22Z')
   publishedDate: new Date(),
 
-  headline: 'Politics and the English Language',
+  headline: 'Poll tracker',
 
   // summary === standfirst (Summary is what the content API calls it)
-  summary: 'Political language is designed to make lies sound truthful' +
-           'and murder respectable, and to give an appearance of solidity to pure wind',
+  summary: 'Opinion polls for the French presidential election, 2017',
 
   topic: {
-    name: 'Starter Kit',
-    url: '/foo',
+    name: 'France presidential election 2017',
+    url: 'https://www.ft.com/topics/themes/France_presidential_election',
   },
 
-  relatedArticle: {
-    text: 'Related article »',
-    url: 'https://en.wikipedia.org/wiki/Politics_and_the_English_Language',
-  },
+  // relatedArticle: {
+  //   text: 'Related article »',
+  //   url: 'https://en.wikipedia.org/wiki/Politics_and_the_English_Language',
+  // },
 
-  mainImage: {
-    title: '',
-    description: '',
-    url: '',
-    width: 2048, // ensure correct width
-    height: 1152, // ensure correct height
-  },
+  // mainImage: {
+  //   title: '',
+  //   description: '',
+  //   url: '',
+  //   width: 2048, // ensure correct width
+  //   height: 1152, // ensure correct height
+  // },
 
   // Byline can by a plain string, markdown, or array of authors
   // if array of authors, url is optional
-  byline: [
-    { name: 'Author One', url: '/foo/bar' },
-    { name: 'Author Two' },
-  ],
+  // byline: [
+  //   { name: 'Author One', url: '/foo/bar' },
+  //   { name: 'Author Two' },
+  // ],
 
   // Appears in the HTML <title>
-  title: '',
+  title: 'Poll tracker: French presidential election',
 
   // meta data
   description: '',

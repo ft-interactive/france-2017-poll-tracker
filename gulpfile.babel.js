@@ -1,5 +1,6 @@
 /* eslint-disable no-console, global-require, import/no-extraneous-dependencies */
 
+import 'dotenv/config';
 import browserify from 'browserify';
 import browserSync from 'browser-sync';
 import gulp from 'gulp';
@@ -20,6 +21,8 @@ import util from 'gulp-util';
 import autoprefixer from 'gulp-autoprefixer';
 import plumber from 'gulp-plumber';
 import http from 'http';
+import fs from 'fs';
+import axios from 'axios';
 
 const ansiToHTML = new AnsiToHTML();
 
@@ -148,6 +151,7 @@ function getBundlers(useWatchify) {
 gulp.task('default', (done) => {
   process.env.NODE_ENV = 'production';
   runSequence(
+    ['download-data'],
     ['scripts', 'styles', 'build-pages', 'copy'],
     ['html'/* 'images' */],
     ['revreplace'],
@@ -309,4 +313,9 @@ gulp.task('test:preflight', ['test:install-selenium'], () => {
       process.exit(1);
     }
   });
+});
+
+gulp.task('download-data', async () => {
+  const { data } = await axios.get(process.env.DATA_URL);
+  fs.writeFileSync('./config/data.json', JSON.stringify(data, null, 2));
 });
