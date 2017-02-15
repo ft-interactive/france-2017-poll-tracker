@@ -316,6 +316,10 @@ gulp.task('test:preflight', ['test:install-selenium'], () => {
 });
 
 gulp.task('download-data', async () => {
-  const { data } = await axios.get(process.env.DATA_URL);
+  if (!process.env.SPREADSHEET_KEY) {
+    throw new Error('You need to set the SPREADSHEET_KEY environment variable!');
+  }
+
+  const { data } = await axios.get(`https://bertha.ig.ft.com/republish/publish/gss/${process.env.SPREADSHEET_KEY}/polls,candidates`);
   fs.writeFileSync('./config/data.json', JSON.stringify(data, null, 2));
 });
