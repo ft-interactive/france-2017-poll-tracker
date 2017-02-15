@@ -2,37 +2,66 @@
 
 {% block article_body %}
 
-<h2>Polls</h2>
-<table>
-  <thead>
-    <tr>
-      <td>Date</td>
-      <td>Pollster</td>
-      {% for candidate in data.candidates %}
-      <td>{{ candidate.name.last }}</td>
-      {% endfor %}
-      <td>Sample*</td>
-    </tr>
-  </thead>
-  <tbody>
-    {% for poll in data.polls %}
-    <tr>
-      <td>{{ poll.start }}–{{ poll.end }}</td>
-      <td>{{ poll.pollster }}</td>
-      {% for candidate in data.candidates %}
-      <td>{{ poll.candidate[candidate.key] }}</td>
-      {% endfor %}
-      <td>{{ poll.sample.size }} {{ poll.sample.type }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<section>
+  <h2>Who is leading in the polls?</h2>
 
-<h2>Candidates</h2>
-<ul>
-{% for candidate in data.candidates %}
-<li>{{ candidate.name.first }} {{ candidate.name.last }}</li>
-{% endfor %}
-</ul>
+  <div><i>TK: this chart will show the leading 5 candidates' polling over time, and also vertical lines marking the dates of the 1st and 2nd voting rounds so we can see how far there is to go.</i></div>
+  <figure>
+    <img src="http://placehold.it/450x350?text=first+round+chart">
+  </figure>
+</section>
+
+<section>
+  <h2>Who are the candidates?</h2>
+  <i>TK: illustrations and blurbs</i>
+
+  <ul>
+  {% for candidate in data.candidates %}
+  <li>{{ candidate.name.first }} {{ candidate.name.last }}</li>
+  {% endfor %}
+  </ul>
+
+  <a href="#">Full candidate profiles</a>
+</section>
+
+<hr>
+
+<section>
+  <h2>Who will face Le Pen in a run-off?</h2>
+
+  <p>Unless a single candidate wins more than 50% of votes in the first round (unlikely), the top two candidates will go head to head on May 7. It is likely that Le Pen will face either Macron or Fillon.</p>
+
+
+  <img src="http://placehold.it/300?text=le+pen+vs+macron">
+  <img src="http://placehold.it/300?text=le+pen+vs+fillon">
+</section>
+
+<section>
+  <h2>The data</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Date</td>
+        <td>Pollster</td>
+        {% for candidate in data.candidates %}
+        <td>{{ candidate.name.last }}</td>
+        {% endfor %}
+        <td>Sample*</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for poll in data.polls %}
+      <tr>
+        <td>{{ poll.start }}–{{ poll.end }}</td>
+        <td>{{ poll.pollster }}</td>
+        {% for candidate in data.candidates %}
+        <td>{{ poll.candidate[candidate.key] }}</td>
+        {% endfor %}
+        <td>{{ poll.sample.size }} {{ poll.sample.type }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
 
 {% endblock %}
