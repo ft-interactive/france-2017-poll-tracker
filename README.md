@@ -12,6 +12,8 @@ npm start
 
 Build/compile, start a dev server and watches for changes.
 
+Also: `gulp download-data`. Relies on a SPREADSHEET_KEY environment variable (put it in a .env file).
+
 # Deploy
 
 1. Write code in a branch.
