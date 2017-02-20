@@ -1,7 +1,7 @@
 export default () => ({ // eslint-disable-line
 
   // link file UUID
-  id: '',
+  id: 'c83014f8-f779-11e6-9516-2d969e0d3b65',
 
   // canonical URL of the published page
   // https://ig.ft.com/sites/france-2017-poll-tracker get filled in by the ./configure script
@@ -17,7 +17,7 @@ export default () => ({ // eslint-disable-line
   summary: 'Opinion polls for the French presidential election, 2017',
 
   topic: {
-    name: 'France presidential election 2017',
+    name: 'France presidential election',
     url: 'https://www.ft.com/topics/themes/France_presidential_election',
   },
 
@@ -42,7 +42,7 @@ export default () => ({ // eslint-disable-line
   // ],
 
   // Appears in the HTML <title>
-  title: 'Poll tracker: French presidential election',
+  title: 'Poll tracker: French presidential election 2017',
 
   // meta data
   description: '',
