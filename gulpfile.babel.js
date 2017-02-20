@@ -153,7 +153,7 @@ gulp.task('default', (done) => {
   runSequence(
     ['download-data'],
     ['scripts', 'styles', 'build-pages', 'copy'],
-    ['html'/* 'images' */],
+    ['html', 'images'],
     ['revreplace'],
   done);
 });
@@ -188,7 +188,7 @@ gulp.task('watch', ['styles', 'build-pages', 'copy'], (done) => {
     gulp.watch(copyGlob, ['copy', reload]);
 
     // UNCOMMENT IF USING IMAGEMIN
-    // gulp.watch(['client/images/**/*'], reload);
+    gulp.watch(['client/images/**/*'], reload);
 
     done();
   });
@@ -267,13 +267,13 @@ gulp.task('revreplace', ['revision'], () =>
 //  2. uncomment task below
 //  3. Find other commented out stuff related to imagemin elsewhere in this gulpfile
 //
-// gulp.task('images', () => gulp.src('dist/**/*.{jpg,png,gif,svg}')
-//   .pipe(gulpimagemin({
-//     progressive: true,
-//     interlaced: true,
-//   }))
-//   .pipe(gulp.dest('dist'))
-// );
+gulp.task('images', () => gulp.src('dist/**/*.{jpg,png,gif,svg}')
+  .pipe(gulpimagemin({
+    progressive: true,
+    interlaced: true,
+  }))
+  .pipe(gulp.dest('dist'))
+);
 function distServer() {
   const serveStatic = require('serve-static');
   const finalhandler = require('finalhandler');
@@ -315,11 +315,11 @@ gulp.task('test:preflight', ['test:install-selenium'], () => {
   });
 });
 
-gulp.task('download-data', async () => {
-  if (!process.env.SPREADSHEET_KEY) {
-    throw new Error('You need to set the SPREADSHEET_KEY environment variable!');
-  }
-
-  const { data } = await axios.get(`https://bertha.ig.ft.com/republish/publish/gss/${process.env.SPREADSHEET_KEY}/polls,candidates`);
-  fs.writeFileSync('./config/data.json', JSON.stringify(data, null, 2));
-});
+// gulp.task('download-data', async () => {
+//   if (!process.env.SPREADSHEET_KEY) {
+//     throw new Error('You need to set the SPREADSHEET_KEY environment variable!');
+//   }
+//
+//   const { data } = await axios.get(`https://bertha.ig.ft.com/republish/publish/gss/${process.env.SPREADSHEET_KEY}/polls,candidates`);
+//   fs.writeFileSync('./config/data.json', JSON.stringify(data, null, 2));
+// });

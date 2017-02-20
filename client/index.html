@@ -2,38 +2,52 @@
 
 {% block article_body %}
 
-<section>
-  <h2>Who is leading in the polls?</h2>
-
-  <div><i>TK: this chart will show the leading 5 candidates' polling over time, and also vertical lines marking the dates of the 1st and 2nd voting rounds so we can see how far there is to go.</i></div>
-  <figure>
-    <img src="http://placehold.it/450x350?text=first+round+chart">
-  </figure>
+<section class="button-navigation">
+  <a href="#polls" class="navigation-item">
+    Polls
+  </a>
+  <a href="#results" class="navigation-item">
+    Results
+  </a>
+  <a href="#profiles" class="navigation-item">
+    Profiles
+  </a>
 </section>
 
-<section>
-  <h2>Who are the candidates?</h2>
-  <i>TK: illustrations and blurbs</i>
+<section class="candidates">
+  <h2 class="candidates--heading">The candidates</h2>
 
-  <ul>
+  <ul class="candidates--grid">
+  {% set latestPoll = data.polls.data | sort(true, false, 'date') | first %}
   {% for candidate in data.candidates %}
-  <li>{{ candidate.name.first }} {{ candidate.name.last }}</li>
+    {% set candidateslug = (candidate.name.normalize('NFD') | replace(r/[\u0300-\u036f]/g, '') | replace(r/^[\w-]+\s/, '') | replace(r/\s/g, '') | lower) + '1' %}
+    <li class="candidates--candidate candidates--candidate__{{candidate.name}}">
+      <img class="candidates--profile-image" src="images/FE--{{candidate.name | replace(r/^[\w-ç]+\s/, '') | replace(r/\s/g, '-')}}.png" />
+      <h2 class="candidates--name">{{candidate.name}}</h2>
+      <h3 class="candidates--polling-numbers">Polling at {{latestPoll[candidateslug]}}%</h3>
+      <p>{{candidate.copy | safe}}</p>
+      <a href="{{candidate.linkurl}}" class="candidates--full-profile-button">Full profile</a>
+    </li>
   {% endfor %}
   </ul>
-
-  <a href="#">Full candidate profiles</a>
 </section>
 
-<hr>
+<section class="polls">
+  <p>
+    {{polls.introText}}
+  </p>
 
-<section>
-  <h2>Who will face Le Pen in a run-off?</h2>
+  <figure class="polls--current-state">
+    <!-- I have no idea how the data looks on this -->
+  </figure>
 
-  <p>Unless a single candidate wins more than 50% of votes in the first round (unlikely), the top two candidates will go head to head on May 7. It is likely that Le Pen will face either Macron or Fillon.</p>
+  <figure class="polls--scenario-1">
+    <!-- I have no idea how the data looks on this -->
+  </figure>
 
-
-  <img src="http://placehold.it/300?text=le+pen+vs+macron">
-  <img src="http://placehold.it/300?text=le+pen+vs+fillon">
+  <figure class="polls--scenario-2">
+    <!-- I have no idea how the data looks on this -->
+  </figure>
 </section>
 
 <section>

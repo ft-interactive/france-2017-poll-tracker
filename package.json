@@ -37,6 +37,7 @@
     "gulp-data": "^1.2.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.1.1",
     "gulp-inline-source": "^3.0.0",
     "gulp-minify-html": "^1.0.6",
     "gulp-nunjucks": "^3.0.0",
@@ -89,5 +90,8 @@
     "prestart": "npm run clean",
     "start": "nodemon --watch gulpfile.babel.js --exec 'gulp watch'",
     "test": "npm run lint && npm run build"
+  },
+  "dependencies": {
+    "axios": "^0.15.3"
   }
 }

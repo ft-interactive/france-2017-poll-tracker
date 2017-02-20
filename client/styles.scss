@@ -1,16 +1,30 @@
+@import 'o-buttons/main';
 @import 'o-colors/main';
 @import 'components/core/main';
 
-/*
-      TODO: delete this comment
 
-      Write your code here - keep it neat!
-      Split logical parts of you project into components e.g.
+.fr-pres-elec--topic {
+  .fr-pres-elec--title-part-1 {
+  }
 
-      /client
-        - /components
-            - /component-name
-                - styles.scss
-                - index.js
-                - template.html
-*/
+  .fr-pres-elec--title-part-2 {
+  }
+}
+
+.button-navigation {
+  @include oButtonsGroup('navigation-item');
+}
+
+.candidates {
+  .candidates--heading {
+
+  }
+
+  .candidates--grid {
+
+  }
+
+  .candidates--full-profile-button {
+
+  }
+}
