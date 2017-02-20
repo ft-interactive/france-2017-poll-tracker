@@ -8,7 +8,7 @@ export default async () => {
   const flags = await getFlags();
   const onwardJourney = await getOnwardJourney();
   const endpointProfiles = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish/' : ''}publish/gss/${process.env.SPREADSHEET_PROFILES}/data`;
-  const endpointPolls = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish/' : ''}publish/gss/${process.env.SPREADSHEET_POLLS}/data,data_round2`;
+  const endpointPolls = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish/' : ''}publish/gss/${process.env.SPREADSHEET_POLLS}/data,data_round2,microcopy`;
   /*
   An experimental demo that gets content from the API
   and overwrites some model values. This requires the Link File
@@ -35,6 +35,7 @@ export default async () => {
   const data = {
     candidates: profiles,
     polls,
+    microcopy: polls.microcopy,
   };
 
   return {

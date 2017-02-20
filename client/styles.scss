@@ -1,30 +1,152 @@
+$o-expander-is-silent: false;
+
+@import 'o-expander/main';
 @import 'o-buttons/main';
 @import 'o-colors/main';
+@import 'o-grid/main';
 @import 'components/core/main';
 
+// Sundry highlights and text colors
+$color_lePen: #67ACCF; // @TODO confirm colour with Caroline
+$color_fillon: #126797; // @TODO confirm colour with Caroline
+$color_macron: #F01511; // @TODO confirm colour with Caroline
+$color_melenchon: #99090A; // @TODO confirm colour with Caroline
+$color_hamon: #D5726F; // @TODO confirm colour with Caroline
+$color_bayrou: purple; // @TODO change to an actual colour
 
-.fr-pres-elec--topic {
-  .fr-pres-elec--title-part-1 {
+.color {
+  &--le-pen {
+    color: $color_lePen;
   }
 
-  .fr-pres-elec--title-part-2 {
+  &--fillon {
+    color: $color_fillon;
+  }
+
+  &--macron {
+    color: $color_macron;
+  }
+
+  &--melenchon {
+    color: $color_melenchon;
+  }
+
+  &--hamon {
+    color: $color_hamon;
+  }
+
+  &--bayrou {
+    color: $color_bayrou;
   }
 }
 
-.button-navigation {
+.fr-pres-elec--topic {
+  .fr-pres-elect--link__image {
+    @include oGridColspan((default: hide, S: full-width));
+    padding-left: 0;
+    img {
+      width: 364px;
+    }
+  }
+
+  .fr-pres-elect--link__text {
+    padding-left: 0;
+    @include oGridColspan((default: full-width, S: hide))
+  }
+}
+
+.button-navigation { // @TODO figure out why this doesn't work. :rage:
   @include oButtonsGroup('navigation-item');
+  @include oGridColspan((default: hide, S: 12));
 }
 
 .candidates {
-  .candidates--heading {
-
+  .candidates--grid {
+    padding: 0;
   }
 
-  .candidates--grid {
+  .candidates--candidate {
+    @include oGridColspan((default: full-width, M: 2, L: 3));
+    padding: .5em 0;
 
+    &__marine-le-pen {
+      .candidates--name {
+        color: $color_lePen;
+      }
+    }
+
+    &__francois-fillon {
+      .candidates--name {
+        color: $color_fillon;
+      }
+    }
+
+    &__emmanuel-macron {
+      .candidates--name {
+        color: $color_macron;
+      }
+    }
+
+    &__jean-luc-melenchon {
+      .candidates--name {
+        color: $color_melenchon;
+      }
+    }
+
+    &__benoit-hamon {
+      .candidates--name {
+        color: $color_hamon;
+      }
+    }
+
+    &__francois-bayrou {
+      .candidates--name {
+        color: $color_bayrou;
+      }
+    }
+  }
+
+  .candidates--profile-image {
+    @include oGridColspan((default: 3, S: full-width));
+  }
+
+  .candidates--details {
+    @include oGridColspan((default: 9, S: full-width));
+    border-bottom: 1px solid #ccc;
+  }
+
+  .candidates--name {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .candidates--party-polling {
+    font-weight: bold;
+    &__mobile {
+      @include oGridColspan((default: full-width, S: hide));
+    }
   }
 
   .candidates--full-profile-button {
-
+    @include oGridColspan((default: hide, S: full-width));
   }
+}
+
+.polls-and-data {
+  overflow: hidden;
+}
+
+.polls-and-data--data-table {
+  overflow: scroll;
+}
+
+.js-success .o-expander__content {
+    max-height: 150px;
+    width: 175%; // @TODO This value might need some tweaking
+    display: block;
+    overflow-y: hidden;
+}
+
+.js-success .o-expander__content.o-expander__content--expanded, .o-expander__content {
+    max-height: none;
 }

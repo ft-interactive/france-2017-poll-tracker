@@ -206,7 +206,7 @@ gulp.task('build-pages', () => {
   delete require.cache[require.resolve('./config/article')];
   delete require.cache[require.resolve('./config/index')];
 
-  return gulp.src('client/**/*.html')
+  return gulp.src('client/**/*.{html,njk}')
     .pipe(plumber())
     .pipe(gulpdata(async d => require('./config').default(d)))
     .pipe(gulpnunjucks.compile(null, { env: require('./views').configure() }))

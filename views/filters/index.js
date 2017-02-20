@@ -3,10 +3,15 @@ import removeMarkdown from 'remove-markdown';
 import { utcFormat } from 'd3-time-format';
 import nunjucks from 'nunjucks';
 
+export { default as slugify } from 'slugify';
 const SafeString = nunjucks.runtime.SafeString;
 
 const formatterCache = new Map();
 const defaultFTDateFormat = '%A, %-e %B %Y';
+
+// export function slugify(text) {
+//   return slug(text);
+// }
 
 export function isotime(date) {
   if (!date) {
@@ -20,6 +25,7 @@ export function isotime(date) {
 
 // strftime format docs: https://github.com/d3/d3-time-format
 export function strftime(date, format = defaultFTDateFormat) {
+  date = new Date(date);
   if (!date) {
     return '';
   } else if (!(date instanceof Date)) {

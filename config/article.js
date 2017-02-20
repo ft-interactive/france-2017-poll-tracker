@@ -1,7 +1,7 @@
 export default () => ({ // eslint-disable-line
 
   // link file UUID
-  id: '',
+  id: 'c83014f8-f779-11e6-9516-2d969e0d3b65',
 
   // canonical URL of the published page
   // https://ig.ft.com/sites/france-2017-poll-tracker get filled in by the ./configure script
@@ -11,10 +11,10 @@ export default () => ({ // eslint-disable-line
   //       new Date('2016-05-17T17:11:22Z')
   publishedDate: new Date(),
 
-  headline: 'Poll tracker',
+  headline: 'French election poll tracker',
 
   // summary === standfirst (Summary is what the content API calls it)
-  summary: 'Opinion polls for the French presidential election, 2017',
+  summary: 'Who is leading the presidential race?',
 
   topic: {
     name: 'France presidential election 2017',

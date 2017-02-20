@@ -17,3 +17,6 @@
             - template.html
 
 */
+// Origami, Y U NO NPM!?!?!?!
+import * as expander from 'o-expander'; // eslint-disable-line
+expander.init();

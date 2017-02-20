@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block article_body %}
-
-<section class="button-navigation">
+{% set txt = (data.microcopy | first) %}
+<nav class="button-navigation">
   <a href="#polls" class="navigation-item">
     Polls
   </a>
@@ -12,7 +12,7 @@
   <a href="#profiles" class="navigation-item">
     Profiles
   </a>
-</section>
+</nav>
 
 <section class="candidates">
   <h2 class="candidates--heading">The candidates</h2>
@@ -21,61 +21,76 @@
   {% set latestPoll = data.polls.data | sort(true, false, 'date') | first %}
   {% for candidate in data.candidates %}
     {% set candidateslug = (candidate.name.normalize('NFD') | replace(r/[\u0300-\u036f]/g, '') | replace(r/^[\w-]+\s/, '') | replace(r/\s/g, '') | lower) + '1' %}
-    <li class="candidates--candidate candidates--candidate__{{candidate.name}}">
+    <li class="candidates--candidate candidates--candidate__{{candidate.name | slugify | lower}}">
       <img class="candidates--profile-image" src="images/FE--{{candidate.name | replace(r/^[\w-ç]+\s/, '') | replace(r/\s/g, '-')}}.png" />
-      <h2 class="candidates--name">{{candidate.name}}</h2>
-      <h3 class="candidates--polling-numbers">Polling at {{latestPoll[candidateslug]}}%</h3>
-      <p>{{candidate.copy | safe}}</p>
-      <a href="{{candidate.linkurl}}" class="candidates--full-profile-button">Full profile</a>
+      <div class="candidates--details">
+        <h2 class="candidates--name">{{candidate.name}}</h2>
+        <h3 class="candidates--party-polling candidates--party-polling__mobile">
+          {{candidate.role | replace(r/\scandidate/i, '')}} &mdash; Polling at {{latestPoll[candidateslug]}}%
+        </h3>
+        {#<!-- this needs to be replaced with something shorter -->
+        <p>{{candidate.copy | safe}}</p>#}
+        <p>texttexttexttexttext</p>
+        <a href="{{candidate.linkurl}}" class="candidates--full-profile-button">Full profile</a>
+      </div>
     </li>
   {% endfor %}
   </ul>
 </section>
 
-<section class="polls">
+<section class="polls-and-data">
   <p>
-    {{polls.introText}}
+    {{txt.pollintro}}
   </p>
 
+  <h3 class="polls--heading">Current state of the polls</h3>
   <figure class="polls--current-state">
-    <!-- I have no idea how the data looks on this -->
   </figure>
 
-  <figure class="polls--scenario-1">
-    <!-- I have no idea how the data looks on this -->
-  </figure>
+  <div class="polls-and-data--data-table o-expander" data-o-component="o-expander">
+    <h2>The data</h2>
+    <table class="polls-and-data--data-table o-expander__content">
+      <thead>
+        <tr>
+          <td>Date</td>
+          <td>Pollster</td>
+          {% for candidate in data.candidates %}
+          <td>{{ candidate.name | replace(r/^[\w-ç]+\s/, '') }}</td>
+          {% endfor %}
+          <td>Sample*</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for poll in data.polls.data %}
+        <tr>
+          <td>{{ poll.startdate | strftime('%b %-d') }} – {{ poll.enddate | strftime('%-d') }}</td>
+          <td>{{ poll.pollster }}</td>
+          {% for candidate in data.candidates %}
+          {% set candidateslug = (candidate.name.normalize('NFD') | replace(r/[\u0300-\u036f]/g, '') | replace(r/^[\w-]+\s/, '') | replace(r/\s/g, '') | lower) + '1' %}
+          <td>{{ (poll[candidateslug] | round(1)) + '%' if poll[candidateslug] else 'N/A' }}</td>
+          {% endfor %}
+          <td>{{ poll.sample }}{# {{ poll.sample.type }}#}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-  <figure class="polls--scenario-2">
-    <!-- I have no idea how the data looks on this -->
-  </figure>
+    <button class="o-expander__toggle">Show more polls</a>
+  </div>
+
+  <h2>Other scenarios...</h2>
+
+  <h3 class="polls--heading">
+    <span class="color--le-pen">Le Pen</span> vs <span class="color--macron">Macron</span>
+  </h3>
+  <figure class="polls--scenario-1"></figure>
+
+  <h3 class="polls--heading">
+    <span class="color--le-pen">Le Pen</span> vs <span class="color--fillon">Fillon</span>
+  </h3>
+  <figure class="polls--scenario-2"></figure>
 </section>
 
-<section>
-  <h2>The data</h2>
-  <table>
-    <thead>
-      <tr>
-        <td>Date</td>
-        <td>Pollster</td>
-        {% for candidate in data.candidates %}
-        <td>{{ candidate.name.last }}</td>
-        {% endfor %}
-        <td>Sample*</td>
-      </tr>
-    </thead>
-    <tbody>
-      {% for poll in data.polls %}
-      <tr>
-        <td>{{ poll.start }}–{{ poll.end }}</td>
-        <td>{{ poll.pollster }}</td>
-        {% for candidate in data.candidates %}
-        <td>{{ poll.candidate[candidate.key] }}</td>
-        {% endfor %}
-        <td>{{ poll.sample.size }} {{ poll.sample.type }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
+
 
 {% endblock %}
