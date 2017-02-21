@@ -1,18 +1,17 @@
 $o-expander-is-silent: false;
 
 @import 'o-expander/main';
-@import 'o-buttons/main';
 @import 'o-colors/main';
 @import 'o-grid/main';
 @import 'components/core/main';
 
 // Sundry highlights and text colors
-$color_lePen: #67ACCF; // @TODO confirm colour with Caroline
-$color_fillon: #126797; // @TODO confirm colour with Caroline
-$color_macron: #F01511; // @TODO confirm colour with Caroline
-$color_melenchon: #99090A; // @TODO confirm colour with Caroline
-$color_hamon: #D5726F; // @TODO confirm colour with Caroline
-$color_bayrou: purple; // @TODO change to an actual colour
+$color_lePen:     #67ACCF;
+$color_fillon:    #005C91;
+$color_macron:    #F00F0C;
+$color_melenchon: #991B1E;
+$color_hamon:     #D36C6A;
+$color_bayrou:    purple; // @TODO change to an actual colour
 
 .color {
   &--le-pen {
@@ -40,34 +39,76 @@ $color_bayrou: purple; // @TODO change to an actual colour
   }
 }
 
+.article-head {
+  padding: 0;
+  margin: 1em;
+
+  @include oGridRespondTo(M) {
+    margin: 1em 2em;
+  }
+
+  header {
+    width: 100%;
+    max-width: none;
+  }
+}
+
 .fr-pres-elec--topic {
   .fr-pres-elect--link__image {
     @include oGridColspan((default: hide, S: full-width));
-    padding-left: 0;
+    padding-left: 0 !important;
+
     img {
       width: 364px;
     }
   }
 
   .fr-pres-elect--link__text {
-    padding-left: 0;
+    padding-left: 0 !important;
     @include oGridColspan((default: full-width, S: hide))
   }
 }
 
-.button-navigation { // @TODO figure out why this doesn't work. :rage:
-  @include oButtonsGroup('navigation-item');
-  @include oGridColspan((default: hide, S: 12));
-}
-
 .candidates {
+  @include oGridContainer();
+  .article-body & {
+    max-width: none;
+    padding: 0 1em;
+    margin: 0 auto;
+  }
+
+  @include oGridRespondTo(M) {
+    .article-body & {
+      max-width: none;
+      padding: 0 2em;
+      margin: 0 auto;
+    }
+  }
+
   .candidates--grid {
     padding: 0;
+    justify-content: center;
+    align-items: center;
+
+    @include oGridRow();
+    @include oGridRespondTo(L) {
+      justify-content: space-between;
+    }
   }
 
   .candidates--candidate {
-    @include oGridColspan((default: full-width, M: 2, L: 3));
     padding: .5em 0;
+    text-align: center;
+
+    @include oGridColspan((default: full-width, M: 4, L: 2));
+
+    @include oGridRespondTo(M, L) {
+      padding: 1em 2em;
+    }
+
+    @include oGridRespondTo(L) {
+      padding: 0 !important;
+    }
 
     &__marine-le-pen {
       .candidates--name {
@@ -107,44 +148,119 @@ $color_bayrou: purple; // @TODO change to an actual colour
   }
 
   .candidates--profile-image {
-    @include oGridColspan((default: 3, S: full-width));
+    @include oGridColspan((default: 3, M: full-width));
+    padding: 0 !important;
   }
 
   .candidates--details {
-    @include oGridColspan((default: 9, S: full-width));
-    border-bottom: 1px solid #ccc;
+    text-align: left;
+
+
+    @include oGridColspan((default: 9, M: full-width));
+    @include oGridRespondTo(S, M) {
+      padding: 0 2em !important;
+    }
+    @include oGridRespondTo(M) {
+      text-align: center;
+      &, & > * {
+        padding-left: 0;
+      }
+    }
   }
 
   .candidates--name {
     margin-top: 0;
     margin-bottom: 0;
-  }
 
-  .candidates--party-polling {
-    font-weight: bold;
-    &__mobile {
-      @include oGridColspan((default: full-width, S: hide));
+    @include oGridRespondTo(M) {
+      font-size: 1em;
+      line-height: 1em;
+      padding-top: .5em;
     }
   }
 
-  .candidates--full-profile-button {
-    @include oGridColspan((default: hide, S: full-width));
+  .candidates--party-polling {
+    @include oGridColspan((default: full-width, M: hide));
+    font-weight: 600;
+    font-family: MetricWeb,sans-serif;
+    padding-left: 0;
+    font-size: 1em;
+  }
+
+  .candidates--copy {
+    color: #666;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em;
+
+    @include oGridRespondTo(M) {
+      border-bottom: 0;
+    }
   }
 }
 
 .polls-and-data {
   overflow: hidden;
+  .article-body & {
+    max-width: none;
+
+    @include oGridRespondTo(L) {
+      padding: 0 4em;
+    }
+  }
 }
 
 .polls-and-data--data-table {
   overflow: scroll;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  thead, tbody, tr {
+    width: 100%;
+  }
+
+  thead tr td {
+    border-bottom: 1px solid #979797;
+    line-height: 2em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 3em;
+    &:first-child, &:nth-child(2) {
+      text-align: left;
+      padding: 0;
+    }
+  }
+
+  tbody td {
+    border-right: 1px solid #CEC6B9;
+    border-bottom: 1px solid #CEC6B9;
+    text-align: center;
+    padding: 0.25em 1em;
+
+
+    &.polls-and-data--table-cell__date, &:last-child {
+      border-right: 0;
+    }
+
+    &.polls-and-data--table-cell__date, &:nth-child(2) {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  .polls-and-data--table-cell__date {
+    color: #979797;
+  }
 }
 
 .js-success .o-expander__content {
-    max-height: 150px;
+    max-height: 190px;
     width: 175%; // @TODO This value might need some tweaking
     display: block;
     overflow-y: hidden;
+
+    @include oGridRespondTo(L) {
+      width: auto;
+    }
 }
 
 .js-success .o-expander__content.o-expander__content--expanded, .o-expander__content {

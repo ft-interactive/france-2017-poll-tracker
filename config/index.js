@@ -32,6 +32,9 @@ export default async () => {
   */
   const profiles = (await axios.get(endpointProfiles)).data;
   const polls = (await axios.get(endpointPolls)).data;
+
+  profiles.pop(); // Remove Bayrou for now
+
   const data = {
     candidates: profiles,
     polls,

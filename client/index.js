@@ -19,4 +19,7 @@
 */
 // Origami, Y U NO NPM!?!?!?!
 import * as expander from 'o-expander'; // eslint-disable-line
-expander.init();
+expander.init(null, {
+  expandedToggleText: 'Show fewer polls',
+  collapsedToggleText: 'Show more polls',
+});
