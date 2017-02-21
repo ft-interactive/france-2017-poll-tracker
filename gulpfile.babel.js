@@ -15,7 +15,6 @@ import inlineSource from 'gulp-inline-source';
 import htmlmin from 'gulp-htmlmin';
 import rev from 'gulp-rev';
 import revReplace from 'gulp-rev-replace';
-import gulpdata from 'gulp-data';
 import sass from 'gulp-sass';
 import util from 'gulp-util';
 import autoprefixer from 'gulp-autoprefixer';
@@ -207,7 +206,7 @@ gulp.task('build-pages', () => {
 
   return gulp.src('client/**/*.{html,njk}')
     .pipe(plumber())
-    .pipe(gulpdata(async d => require('./config').default(d)))
+    // .pipe(gulpdata(async d => require('./config').default(d)))
     .pipe(gulpnunjucks.compile(null, { env: require('./views').configure() }))
     .pipe(gulp.dest('dist'));
 });
