@@ -21,8 +21,7 @@ import util from 'gulp-util';
 import autoprefixer from 'gulp-autoprefixer';
 import plumber from 'gulp-plumber';
 import http from 'http';
-import fs from 'fs';
-import axios from 'axios';
+import gulpimagemin from 'gulp-imagemin';
 
 const ansiToHTML = new AnsiToHTML();
 
@@ -151,7 +150,7 @@ function getBundlers(useWatchify) {
 gulp.task('default', (done) => {
   process.env.NODE_ENV = 'production';
   runSequence(
-    ['download-data'],
+    // ['download-data'],
     ['scripts', 'styles', 'build-pages', 'copy'],
     ['html', 'images'],
     ['revreplace'],
