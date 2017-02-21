@@ -239,6 +239,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
 
     &.polls-and-data--table-cell__date, &:last-child {
       border-right: 0;
+
     }
 
     &.polls-and-data--table-cell__date, &:nth-child(2) {
@@ -249,6 +250,10 @@ $color_bayrou:    purple; // @TODO change to an actual colour
 
   .polls-and-data--table-cell__date {
     color: #979797;
+
+    @include oGridRespondTo($until: M) {
+      min-width: 4em;
+    }
   }
 }
 
