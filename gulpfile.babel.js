@@ -21,6 +21,7 @@ import autoprefixer from 'gulp-autoprefixer';
 import plumber from 'gulp-plumber';
 import http from 'http';
 import gulpimagemin from 'gulp-imagemin';
+import gulpdata from 'gulp-data';
 
 const ansiToHTML = new AnsiToHTML();
 
@@ -206,7 +207,7 @@ gulp.task('build-pages', () => {
 
   return gulp.src('client/**/*.{html,njk}')
     .pipe(plumber())
-    // .pipe(gulpdata(async d => require('./config').default(d)))
+    .pipe(gulpdata(async d => require('./config').default(d)))
     .pipe(gulpnunjucks.compile(null, { env: require('./views').configure() }))
     .pipe(gulp.dest('dist'));
 });
