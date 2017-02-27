@@ -251,10 +251,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
 
   .polls-and-data--table-cell__date {
     color: #828282;
-
-    @include oGridRespondTo($until: M) {
-      min-width: 4em;
-    }
+    min-width: 4em;
   }
 }
 
