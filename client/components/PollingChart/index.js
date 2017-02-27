@@ -20,7 +20,7 @@ export default class PollingChart {
     });
   }
 
-  constructor({ container, data, yMax = 60 }) {
+  constructor({ container, data, yMax = 35 }) {
     this.container = container;
 
     this.polls = data.polls.map(poll => ({
@@ -51,10 +51,10 @@ export default class PollingChart {
     svg.attr('width', availableWidth);
     svg.attr('height', availableHeight);
 
-    const margin = { top: 20, right: 20, bottom: 30, left: 50 },
-      width = availableWidth - margin.left - margin.right,
-      height = availableHeight - margin.top - margin.bottom,
-      g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    const margin = { top: 20, right: 100, bottom: 30, left: 50 };
+    const width = availableWidth - margin.left - margin.right;
+    const height = availableHeight - margin.top - margin.bottom;
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
     const x = d3.scaleTime().rangeRound([0, width]);
 
@@ -68,13 +68,11 @@ export default class PollingChart {
     y.domain([0, yMax]);
 
     g.append('g')
-        .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x))
-      .select('.domain')
-        .remove();
+      .attr('transform', `translate(0,${height})`)
+      .call(d3.axisBottom(x));
 
     g.append('g')
-        .call(d3.axisLeft(y))
+      .call(d3.axisLeft(y))
       .append('text')
         .attr('fill', '#000')
         .attr('transform', 'rotate(-90)')
@@ -98,7 +96,7 @@ export default class PollingChart {
           return accumulator;
         }, []))
         .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
+        .attr('stroke', candidate.color)
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
         .attr('stroke-width', 1.5)
