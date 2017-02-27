@@ -28,6 +28,7 @@
     "bower": "^1.8.0",
     "browser-sync": "^2.18.8",
     "browserify": "^14.1.0",
+    "d3": "^4.6.0",
     "d3-time-format": "^2.0.3",
     "debowerify": "^1.5.0",
     "dotenv": "^4.0.0",
@@ -89,7 +90,7 @@
     "prebuild": "yarn run clean",
     "preflight": "gulp test:preflight",
     "prestart": "yarn run clean",
-    "start": "nodemon --watch gulpfile.babel.js --exec 'gulp watch'",
+    "start": "nodemon --watch gulpfile.babel.js --watch config --exec 'gulp watch'",
     "test": "yarn run lint && yarn run build"
   }
 }

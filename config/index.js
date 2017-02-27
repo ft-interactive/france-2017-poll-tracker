@@ -9,6 +9,8 @@ export default async () => {
   const onwardJourney = await getOnwardJourney();
   const endpointProfiles = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_PROFILES}/data`;
   const endpointPolls = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_POLLS}/data,data_round2,microcopy`;
+
+  const combinedEndpoint = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_KEY}/polls,candidates`;
   /*
   An experimental demo that gets content from the API
   and overwrites some model values. This requires the Link File
@@ -30,9 +32,12 @@ export default async () => {
   }
 
   */
+
+  const combined = (await axios.get(combinedEndpoint)).data;
   const profiles = (await axios.get(endpointProfiles)).data;
   const polls = (await axios.get(endpointPolls)).data;
   profiles.pop(); // Remove Bayrou for now
+
 
   const data = {
     candidates: profiles,
@@ -45,5 +50,25 @@ export default async () => {
     flags,
     onwardJourney,
     data,
+    pollingChartData: {
+      series: combined.candidates.map(candidate => ({
+        label: `${candidate.name.first} ${candidate.name.last}`,
+        shortLabel: candidate.name.last,
+        color: '#0000ff', // TODO
+        values: combined.polls.reduce((accumulator, poll) => {
+          const value = poll.result[candidate.key];
+
+          if (value) {
+            accumulator.push({
+              date: poll.end, // TODO is this the right date to use?
+              value,
+            });
+          }
+          return accumulator;
+        }, []),
+      })),
+      yDomain: [0, 60],
+      xDomain: [],
+    },
   };
 };

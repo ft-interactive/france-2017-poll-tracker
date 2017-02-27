@@ -258,6 +258,16 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   }
 }
 
+.polls--current-state {
+  margin: 0;
+
+  svg {
+    outline: 1px solid blue;
+    background: white;
+    display: block;
+  }
+}
+
 .js-success .o-expander__content {
     max-height: 190px;
     width: 175%; // @TODO This value might need some tweaking
