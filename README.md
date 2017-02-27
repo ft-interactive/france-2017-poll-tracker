@@ -1,4 +1,4 @@
-# [france-2017-poll-tracker](https://ig.ft.com/sites/france-2017-poll-tracker)
+# france-2017-poll-tracker
 
 > Poll tracker for the French presidential election in 2017
 
