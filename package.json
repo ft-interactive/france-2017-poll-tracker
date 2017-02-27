@@ -55,12 +55,13 @@
     "remove-markdown": "^0.1.0",
     "run-sequence": "^1.2.2",
     "serve-static": "^1.12.0",
+    "slugify": "^1.1.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
   "engines": {
     "node": ">=7.5",
-    "yarn": ">=0.19.1"
+    "yarn": ">=0.20.3"
   },
   "optionalDependencies": {
     "babel-eslint": "^7.1.1",
@@ -85,14 +86,10 @@
     "deploy:confirm": "ft-graphics-deploy --assets-prefix=https://ig.ft.com/__v2-static-assets/ --confirm",
     "lint": "eslint --no-eslintrc --config=.eslintrc-ci.yml .",
     "postinstall": "bower install",
-    "prebuild": "npm run clean",
+    "prebuild": "yarn run clean",
     "preflight": "gulp test:preflight",
-    "prestart": "npm run clean",
+    "prestart": "yarn run clean",
     "start": "nodemon --watch gulpfile.babel.js --exec 'gulp watch'",
-    "test": "npm run lint && npm run build"
-  },
-  "dependencies": {
-    "axios": "^0.15.3",
-    "slugify": "^1.1.0"
+    "test": "yarn run lint && yarn run build"
   }
 }
