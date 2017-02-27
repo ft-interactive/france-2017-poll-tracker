@@ -50,25 +50,7 @@ export default async () => {
     flags,
     onwardJourney,
     data,
-    pollingChartData: {
-      series: combined.candidates.map(candidate => ({
-        label: `${candidate.name.first} ${candidate.name.last}`,
-        shortLabel: candidate.name.last,
-        color: '#0000ff', // TODO
-        values: combined.polls.reduce((accumulator, poll) => {
-          const value = poll.result[candidate.key];
 
-          if (value) {
-            accumulator.push({
-              date: poll.end, // TODO is this the right date to use?
-              value,
-            });
-          }
-          return accumulator;
-        }, []),
-      })),
-      yDomain: [0, 60],
-      xDomain: [],
-    },
+    combinedData: combined,
   };
 };

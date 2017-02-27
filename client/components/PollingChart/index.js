@@ -5,55 +5,56 @@ import * as d3 from 'd3';
 export default class PollingChart {
   static init() {
     [...document.querySelectorAll('[data-polling-chart]')].forEach((container) => {
-      console.log(container);
       const data = JSON.parse(container.getAttribute('data-polling-chart'));
 
-      new PollingChart({
+      const chart = new PollingChart({
         container,
-        series: data.series,
-      }).render();
+        data,
+      })
+      .setDimensions(container.offsetWidth, 400)
+      .render();
 
-      // TODO hook up to resize
+      window.addEventListener('resize', () => {
+        chart.setDimensions(container.offsetWidth, 400).render();
+      });
     });
   }
 
-  constructor({ container, series }) {
+  constructor({ container, data, yMax = 60 }) {
     this.container = container;
-    this.series = series;
+
+    this.polls = data.polls.map(poll => ({
+      ...poll,
+      date: new Date(poll.date),
+    }));
+
+    this.candidates = data.candidates;
+    this.yMax = yMax;
+  }
+
+  setDimensions(width, height) {
+    this.availableWidth = width;
+    this.availableHeight = height;
+    return this;
   }
 
   render() {
-    // console.log('rendering chart', this);
-    const { container, series } = this;
+    const { container, polls, candidates, yMax, availableWidth, availableHeight } = this;
+
+    // destroy previous render, if any
     container.innerHTML = '';
 
-    const data = series[0].values.map(value => ({
-      date: new Date(value.date),
-      value: Number(value.value),
-    })); // TODO
-
-    console.log('data', data);
-
     const svg = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
+
     container.appendChild(svg.node());
 
-    const TOTAL_WIDTH = 960;
-    const TOTAL_HEIGHT = 500;
-    svg.attr('width', TOTAL_WIDTH);
-    svg.attr('height', TOTAL_HEIGHT);
-
-    svg.append('rect')
-      .attr('x', '10')
-      .attr('y', '10')
-      .attr('width', '100')
-      .attr('height', '100')
-      .attr('fill', 'red')
-    ;
+    svg.attr('width', availableWidth);
+    svg.attr('height', availableHeight);
 
     const margin = { top: 20, right: 20, bottom: 30, left: 50 },
-      width = TOTAL_WIDTH - margin.left - margin.right,
-      height = TOTAL_HEIGHT - margin.top - margin.bottom,
-      g = svg.append('g').attr('transform', 'translate(' + margin.left + 'px,' + margin.top + 'px)');
+      width = availableWidth - margin.left - margin.right,
+      height = availableHeight - margin.top - margin.bottom,
+      g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     const x = d3.scaleTime().rangeRound([0, width]);
 
@@ -63,11 +64,11 @@ export default class PollingChart {
       .x(d => x(d.date))
       .y(d => y(d.value));
 
-    x.domain(d3.extent(data, d => d.date));
-    y.domain(d3.extent(data, d => d.value));
+    x.domain(d3.extent(polls, d => d.date));
+    y.domain([0, yMax]);
 
     g.append('g')
-        .attr('transform', 'translate(0,' + height + 'px)')
+        .attr('transform', `translate(0,${height})`)
         .call(d3.axisBottom(x))
       .select('.domain')
         .remove();
@@ -80,15 +81,30 @@ export default class PollingChart {
         .attr('y', 6)
         .attr('dy', '0.71em')
         .attr('text-anchor', 'end')
-        .text('Price ($)');
+        .text('Percentage');
 
-    g.append('path')
-        .datum(data)
+    candidates.forEach((candidate) => {
+      g.append('path')
+        .datum(polls.reduce((accumulator, poll) => {
+          const value = poll.result[candidate.key];
+
+          if (value) {
+            accumulator.push({
+              date: poll.date,
+              value,
+            });
+          }
+
+          return accumulator;
+        }, []))
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
         .attr('stroke-width', 1.5)
         .attr('d', line);
+    });
+
+    return this;
   }
 }
