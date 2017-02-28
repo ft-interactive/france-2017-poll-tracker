@@ -13,6 +13,15 @@ $color_melenchon: #991B1E;
 $color_hamon:     #D36C6A;
 $color_bayrou:    purple; // @TODO change to an actual colour
 
+.round-1-chart {
+  height: 300px;
+  width: 100%;
+
+  @include oGridRespondTo(M) {
+    height: 400px;
+  }
+}
+
 .color {
   &--le-pen {
     color: $color_lePen;
