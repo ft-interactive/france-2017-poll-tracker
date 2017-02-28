@@ -38,7 +38,7 @@ export default async () => {
           }, []),
         })),
         minValue: 0,
-        maxValue: 60,
+        maxValue: 30,
       },
 
       round2: {

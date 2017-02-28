@@ -41,7 +41,7 @@ export default class MultiTimeSeries {
 
     this.lines = lines.map(line => ({
       ...line,
-      points: line.points.sort((a, b) => b.date - a.date),
+      points: line.points.sort((a, b) => a.date - b.date),
     }));
 
     // determine the domain of dates, if not provided
@@ -84,7 +84,7 @@ export default class MultiTimeSeries {
     svg.attr('width', width);
     svg.attr('height', height);
 
-    // determine chart dimensions
+    // determine chart dimensions - TODO: ensure right margin is big enough for biggest label?
     const margin = { top: 20, right: 100, bottom: 30, left: 50 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
@@ -126,7 +126,7 @@ export default class MultiTimeSeries {
         .text('Percentage')
     ;
 
-    lines.forEach(({ points, color }) => {
+    lines.forEach(({ points, color, label }) => {
       // draw this line
       g.append('path')
         .datum(points)
@@ -139,9 +139,25 @@ export default class MultiTimeSeries {
       ;
 
       // draw a dot at the end
+      const lastPoint = points[points.length - 1];
       g.append('circle')
         .attr('fill', color)
-        .attr('stroke', 'white') // TODO
+        .attr('r', '4')
+        .attr('cx', xScale(lastPoint.date))
+        .attr('cy', yScale(lastPoint.value))
+        .attr('stroke-width', '2')
+        .attr('stroke', '#fff1e0') // TODO
+      ;
+
+      // draw a label at the end
+      g.append('text')
+        .attr('fill', color)
+        .attr('x', xScale(lastPoint.date))
+        .attr('y', yScale(lastPoint.value))
+        .attr('font-size', '12px')
+        .attr('dx', '8px')
+        .attr('dy', '.3em')
+        .text(`${lastPoint.value}%${label ? ` ${label}` : ''}`)
       ;
     });
 
