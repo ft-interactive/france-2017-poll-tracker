@@ -7,43 +7,45 @@ export default async () => {
   const d = await article();
   const flags = await getFlags();
   const onwardJourney = await getOnwardJourney();
-  const endpointProfiles = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_PROFILES}/data`;
-  const endpointPolls = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_POLLS}/data,data_round2,microcopy`;
-  /*
-  An experimental demo that gets content from the API
-  and overwrites some model values. This requires the Link File
-  to have been published. Also next-es-interface.ft.com probably
-  isn't a reliable source. Also this has no way to prevent development
-  values being seen in productions... use with care.
+  const combinedEndpoint = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_KEY}/candidates,round1,round2`;
 
-  try {
-    const a = (await axios(`https://next-es-interface.ft.com/content/${d.id}`)).data;
-    d.headline = a.title;
-    d.byline = a.byline;
-    d.summary = a.summaries[0];
-    d.title = d.title || a.title;
-    d.description = d.description || a.summaries[1] || a.summaries[0];
-    d.publishedDate = new Date(a.publishedDate);
-    f.comments = a.comments;
-  } catch (e) {
-    console.log('Error getting content from content API');
-  }
-
-  */
-  const profiles = (await axios.get(endpointProfiles)).data;
-  const polls = (await axios.get(endpointPolls)).data;
-  profiles.pop(); // Remove Bayrou for now
-
-  const data = {
-    candidates: profiles,
-    polls,
-    microcopy: polls.microcopy,
-  };
+  const data = (await axios.get(combinedEndpoint)).data;
 
   return {
     ...d,
     flags,
     onwardJourney,
     data,
+
+    charts: {
+      round1: {
+        lines: data.candidates.map(({ color, name, key }) => ({
+          color,
+          label: name.last,
+          points: data.round1.reduce((result, poll) => {
+            // TODO adjust value with weighting logic
+
+            const value = poll.result[key];
+
+            if (value) {
+              result.push({
+                date: poll.date,
+                value,
+              });
+            }
+
+            return result;
+          }, []),
+        })),
+        minValue: 0,
+        maxValue: 30,
+      },
+
+      round2: {
+        // TODO
+        scenario1: {},
+        scenario2: {},
+      },
+    },
   };
 };

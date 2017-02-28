@@ -1,25 +1,20 @@
 {% extends "layout.html" %}
 
 {% block article_body %}
-{% set txt = (data.microcopy | first) %}
 
 <section class="candidates">
   <h2 class="candidates--heading">The candidates</h2>
 
   <ul class="candidates--grid">
-  {% set latestPoll = data.polls.data | sort(true, false, 'date') | first %}
+  {% set latestPoll = data.round1 | sort(true, false, 'date') | first %}
   {% for candidate in data.candidates %}
-    {% set candidateslug = (candidate.name.normalize('NFD') | replace(r/[\u0300-\u036f]/g, '') | replace(r/^[\w-]+\s/, '') | replace(r/\s/g, '') | lower) + '1' %}
-    <li class="candidates--candidate candidates--candidate__{{candidate.name | slugify | lower}}">
-      <img class="candidates--profile-image" src="images/FE--{{candidate.name | replace(r/^[\w-ç]+\s/, '') | replace(r/\s/g, '-')}}.png" />
+    <li class="candidates--candidate candidates--candidate__{{candidate.key}}">
+      <img class="candidates--profile-image" src="images/illustrations/{{candidate.key}}.png" />
       <div class="candidates--details">
-        <h2 class="candidates--name">{{candidate.name}}</h2>
+        <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
         <h3 class="candidates--party-polling candidates--party-polling__mobile">
-          {{candidate.role | replace(r/\scandidate/i, '')}}{{ ' — Polling at ' + latestPoll[candidateslug] + '%' if latestPoll[candidateslug]}}
+          TKTK
         </h3>
-        {#<!-- this needs to be replaced with something shorter -->
-        <p class="candidates--copy">{{candidate.copy | safe}}</p>#}
-        <p class="candidates--copy">texttexttexttexttext</p> {# @TODO remove #}
       </div>
     </li>
   {% endfor %}
@@ -27,12 +22,9 @@
 </section>
 
 <section class="polls-and-data">
-  <p>
-    {{txt.pollintro}}
-  </p>
-
   <h2 class="polls--heading">Current state of the polls</h2>
   <figure class="polls--current-state">
+    <div class="round-1-chart" data-multi-time-series="{{charts.round1 | dump}}"></div>
   </figure>
 
   <div class="polls-and-data--data-table o-expander" data-o-component="o-expander">
@@ -43,21 +35,20 @@
           <td>Date</td>
           <td>Pollster</td>
           {% for candidate in data.candidates %}
-          <td>{{ candidate.name | replace(r/^[\w-ç]+\s/, '') }}</td>
+          <td>{{ candidate.name.last }}</td>
           {% endfor %}
           <td>Sample*</td>
         </tr>
       </thead>
       <tbody>
-        {% for poll in data.polls.data %}
+        {% for poll in data.round1 %}
         <tr>
-          <td class="polls-and-data--table-cell__date">{{ poll.startdate | strftime('%b %-d') }} – {{ poll.enddate | strftime('%-d') }}</td>
+          <td class="polls-and-data--table-cell__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
           <td>{{ poll.pollster }}</td>
           {% for candidate in data.candidates %}
-          {% set candidateslug = (candidate.name.normalize('NFD') | replace(r/[\u0300-\u036f]/g, '') | replace(r/^[\w-]+\s/, '') | replace(r/\s/g, '') | lower) + '1' %}
-          <td>{{ (poll[candidateslug] | round(1)) + '%' if poll[candidateslug] else 'N/A' }}</td>
+          <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
           {% endfor %}
-          <td>{{ poll.sample }}{# {{ poll.sample.type }}#}</td>
+          <td>{{ poll.sample }}</td>
         </tr>
         {% endfor %}
       </tbody>
