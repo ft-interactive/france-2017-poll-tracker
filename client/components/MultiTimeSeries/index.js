@@ -44,24 +44,26 @@ export default class MultiTimeSeries {
       points: line.points.sort((a, b) => a.date - b.date),
     }));
 
-    // determine the domain of dates, if not provided
-    let realMinDate: ?Date = minDate;
-    let realMaxDate: ?Date = maxDate;
-    if (!realMinDate || !realMaxDate) {
-      this.lines.forEach((line) => {
-        line.points.forEach((point: TimePoint) => {
-          if (!minDate && (!realMinDate || point.date < realMinDate)) realMinDate = point.date;
-          if (!maxDate && (!realMaxDate || point.date > realMaxDate)) realMaxDate = point.date;
+    // determine min and max dates, unless provided
+    {
+      let realMinDate = minDate;
+      let realMaxDate = maxDate;
+      if (!realMinDate || !realMaxDate) {
+        this.lines.forEach((line) => {
+          line.points.forEach((point: TimePoint) => {
+            if (!minDate && (!realMinDate || point.date < realMinDate)) realMinDate = point.date;
+            if (!maxDate && (!realMaxDate || point.date > realMaxDate)) realMaxDate = point.date;
+          });
         });
-      });
+      }
+
+      if (!realMinDate || !realMaxDate) throw new Error('Failed to determine date domain');
+
+      this.minDate = realMinDate;
+      this.maxDate = realMaxDate;
     }
 
-    if (!realMinDate || !realMaxDate) throw new Error('Failed to determine date domain');
-
-    this.minDate = realMinDate;
-    this.maxDate = realMaxDate;
-
-    // TODO auto-determine these from input if not supplied
+    // determine min and max values, unless provided
     this.minValue = minValue;
     this.maxValue = maxValue;
   }
@@ -85,7 +87,7 @@ export default class MultiTimeSeries {
     svg.attr('height', height);
 
     // determine chart dimensions - TODO: ensure right margin is big enough for biggest label?
-    const margin = { top: 20, right: 100, bottom: 30, left: 50 };
+    const margin = { top: 20, right: 120, bottom: 30, left: 50 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
@@ -106,6 +108,13 @@ export default class MultiTimeSeries {
     xScale.domain([minDate, maxDate]);
     yScale.domain([minValue, maxValue]);
 
+    // add background rectangle
+    g.append('rect')
+      .attr('width', chartWidth)
+      .attr('height', chartHeight)
+      .attr('fill', '#fff4e7')
+    ;
+
     // add x-axis along bottom
     g.append('g')
       .attr('transform', `translate(0,${chartHeight})`)
@@ -113,18 +122,26 @@ export default class MultiTimeSeries {
       .call(d3.axisBottom(xScale))
     ;
 
-    // add y-axis on left
-    g.append('g')
-      .call(d3.axisLeft(yScale))
-      .attr('class', 'y-axis')
-      .append('text')
-        .attr('fill', '#000')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '0.71em')
-        .attr('text-anchor', 'end')
-        .text('Percentage')
-    ;
+    // add y-axis
+    {
+      // first just use D3's generic y-axis
+      const yAxisGroup = g.append('g')
+        .call(d3.axisRight(yScale)
+          .ticks(3)
+          .tickSize(chartWidth))
+        .attr('class', 'y-axis')
+      ;
+
+      // then hack it to look right
+      yAxisGroup.select('.domain').remove();
+      yAxisGroup.selectAll('.tick:not(:first-of-type) line')
+        .attr('stroke', '#bbb')
+        .attr('stroke-dasharray', '1,4');
+      yAxisGroup.selectAll('.tick text')
+        .attr('x', '-20')
+        // .attr('dy', -4)
+      ;
+    }
 
     lines.forEach(({ points, color, label }) => {
       // draw this line
@@ -134,7 +151,7 @@ export default class MultiTimeSeries {
         .attr('stroke', color)
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
-        .attr('stroke-width', 1.5)
+        .attr('stroke-width', '3')
         .attr('d', drawLine)
       ;
 
@@ -154,7 +171,8 @@ export default class MultiTimeSeries {
         .attr('fill', color)
         .attr('x', xScale(lastPoint.date))
         .attr('y', yScale(lastPoint.value))
-        .attr('font-size', '12px')
+        .attr('font-size', '17px')
+        .attr('font-weight', '600')
         .attr('dx', '8px')
         .attr('dy', '.3em')
         .text(`${lastPoint.value}%${label ? ` ${label}` : ''}`)
