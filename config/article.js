@@ -17,7 +17,7 @@ export default () => ({ // eslint-disable-line
   summary: 'Who is leading the presidential race?',
 
   topic: {
-    name: 'France presidential election 2017',
+    name: 'France presidential election',
     url: 'https://www.ft.com/topics/themes/France_presidential_election',
   },
 
@@ -42,7 +42,7 @@ export default () => ({ // eslint-disable-line
   // ],
 
   // Appears in the HTML <title>
-  title: 'Poll tracker: French presidential election',
+  title: 'Poll tracker: French presidential election 2017',
 
   // meta data
   description: '',
