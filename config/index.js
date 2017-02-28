@@ -2,6 +2,7 @@ import * as axios from 'axios';
 import article from './article';
 import getFlags from './flags';
 import getOnwardJourney from './onward-journey';
+import makeRollingAverage from './makeRollingAverage';
 
 export default async () => {
   const d = await article();
@@ -22,27 +23,14 @@ export default async () => {
         lines: data.candidates.map(({ color, name, key }) => ({
           color,
           label: name.last,
-          points: data.round1.reduce((result, poll) => {
-            // TODO adjust value with weighting logic
-
-            const value = poll.result[key];
-
-            if (value) {
-              result.push({
-                date: poll.date,
-                value,
-              });
-            }
-
-            return result;
-          }, []),
+          points: makeRollingAverage(data.round1, poll => poll.result[key]),
         })),
         minValue: 0,
         maxValue: 30,
       },
 
       round2: {
-        // TODO
+        // TODO use
         scenario1: {},
         scenario2: {},
       },
