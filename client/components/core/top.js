@@ -5,7 +5,7 @@ window.cutsTheMustard = (typeof Function.prototype.bind !== 'undefined');
 
 ;(function(){
 
-function add_script(src, async, defer, cb, attributes) {
+function addScript(src, async, defer, cb, attributes) {
   var script = document.createElement('script');
   script.src = src;
   script.async = !!async;
@@ -45,7 +45,7 @@ function exec(script) {
   var s = typeof script;
   if (s === 'string') {
     try {
-      add_script.apply(window, arguments);
+      addScript.apply(window, arguments);
     } catch(e) {
       console.error(e);
     }
@@ -67,36 +67,36 @@ function exec(script) {
   }
 }
 
-var queued_scripts = [];
-var low_priority_queue = [];
+var queuedScripts = [];
+var lowPriorityQueue = [];
 
-function queue(src, cb, low_priority, attributes) {
-  var args = [src, true, !!low_priority, cb, attributes];
+function queue(src, cb, lowPriority, attributes) {
+  var args = [src, true, !!lowPriority, cb, attributes];
 
-  if (!queued_scripts) {
+  if (!queuedScripts) {
     exec.apply(window, args);
     return;
   }
 
-  if (low_priority) {
-    low_priority_queue.push(args);
+  if (lowPriority) {
+    lowPriorityQueue.push(args);
   } else {
-    queued_scripts.push(args);
+    queuedScripts.push(args);
   }
 }
 
-function empty_queue(q) {
+function emptyQueue(q) {
   var arr = q.slice(0);
   for (var i = 0; i < arr.length; i++) {
     exec.apply(window, arr[i]);
   }
 }
 
-function clear_queue() {
-  empty_queue(queued_scripts);
-  queued_scripts = null;
-  var callback = low_priority_queue.length
-                        ? low_priority_queue[low_priority_queue.length - 1][3]
+function clearQueue() {
+  emptyQueue(queuedScripts);
+  queuedScripts = null;
+  var callback = lowPriorityQueue.length
+                        ? lowPriorityQueue[lowPriorityQueue.length - 1][3]
                         : null;
 
   var done = function () {
@@ -108,18 +108,18 @@ function clear_queue() {
     done();
   }
 
-  if (low_priority_queue.length) {
-    low_priority_queue[low_priority_queue.length - 1][3] = onLoaded;
+  if (lowPriorityQueue.length) {
+    lowPriorityQueue[lowPriorityQueue.length - 1][3] = onLoaded;
   } else {
     setTimeout(function(){onLoaded()},1);
   }
 
-  empty_queue(low_priority_queue);
-  low_priority_queue = null;
+  emptyQueue(lowPriorityQueue);
+  lowPriorityQueue = null;
 }
 
 window.queue = queue;
-window.clear_queue = clear_queue;
+window.clearQueue = clearQueue;
 window.exec = exec;
 
 exec(function(){
@@ -134,7 +134,7 @@ exec(function(){
 
 // Load the polyfill service with custom features. Exclude big unneeded polyfills.
 // and use ?callback= to clear the queue of scripts to load
-var polyfill_features = [
+var polyfillFeatures = [
   'default-3.6',
   'matchMedia',
   'fetch',
@@ -142,10 +142,10 @@ var polyfill_features = [
   'HTMLPictureElement'
 ];
 
-var polfill_url = 'https://cdn.polyfill.io/v2/polyfill.min.js?callback=clear_queue&features='
-                    + polyfill_features.join(',')
+var polyfillUrl = 'https://cdn.polyfill.io/v2/polyfill.min.js?callback=clearQueue&features='
+                    + polyfillFeatures.join(',')
                     + '&excludes=Symbol,Symbol.iterator,Symbol.species';
 
-exec(polfill_url, true, false, null, {crossorigin: 'anonymous'})
+exec(polyfillUrl, true, false, null, {crossorigin: 'anonymous'})
 
 }());
