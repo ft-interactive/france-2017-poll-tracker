@@ -1,12 +1,6 @@
-/*
-  Calculates rolling average.
+const round = (number, dp = 1) => Math.round(number * (10 ** dp)) / (10 ** dp);
 
-  TODO: remove highest and lowest from the 7 to get 5 values for averaging.
-
-  could be more elegant
-*/
-
-export default (polls, selectValue, decayFactor = 0.85) => {
+export default (polls, selectValue, decayFactor = 0.75) => {
   const result = [];
 
   for (let i = polls.length - 1; i >= 0; i -= 1) {
@@ -42,21 +36,38 @@ export default (polls, selectValue, decayFactor = 0.85) => {
         j -= 1;
       }
 
-      // work out the weighted average
-      let value;
-      {
-        // determine total weights
-        const weightsTotal = accumulation.reduce((total, item) => total + item.weight, 0);
+      // delete highest and lowest values
+      if (accumulation.length >= 7) {
+        let lowestValue = Infinity;
+        let highestValue = -Infinity;
+        let indexOfLowest;
+        let indexOfHighest;
 
-        value = accumulation.reduce((total, item) =>
-          total + (item.value * (item.weight / weightsTotal)),
-          0,
-        );
+        accumulation.forEach(({ value }, index) => {
+          if (value < lowestValue) {
+            lowestValue = value;
+            indexOfLowest = index;
+          }
+          if (value > highestValue) {
+            highestValue = value;
+            indexOfHighest = index;
+          }
+        });
+
+        accumulation.splice(indexOfLowest, 1);
+        accumulation.splice(indexOfHighest, 1);
       }
+
+      // work out the weighted average of the remaining items
+      const weightsTotal = accumulation.reduce((total, { weight }) => total + weight, 0);
+      const weightedValue = accumulation.reduce((total, { value, weight }) =>
+        total + (value * (weight / weightsTotal)),
+        0,
+      );
 
       result.push({
         date: poll.date,
-        value,
+        value: round(weightedValue),
       });
     }
   }

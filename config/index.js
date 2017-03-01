@@ -12,6 +12,11 @@ export default async () => {
 
   const data = (await axios.get(combinedEndpoint)).data;
 
+  // sort all polls by date
+  [data.round1, data.round2].forEach((sheet) => {
+    sheet.sort((a, b) => new Date(a.date) - new Date(b.date));
+  });
+
   return {
     ...d,
     flags,
@@ -20,11 +25,13 @@ export default async () => {
 
     charts: {
       round1: {
-        lines: data.candidates.map(({ color, name, key }) => ({
-          color,
-          label: name.last,
-          points: makeRollingAverage(data.round1, poll => poll.result[key]),
-        })),
+        lines: data.candidates.map(({ color, name, key }) => {
+          return {
+            color,
+            label: name.last,
+            points: makeRollingAverage(data.round1, poll => poll.result[key]),
+          };
+        }),
         minValue: 0,
         maxValue: 30,
       },
