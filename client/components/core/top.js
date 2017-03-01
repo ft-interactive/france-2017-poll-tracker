@@ -135,11 +135,11 @@ exec(function(){
 // Load the polyfill service with custom features. Exclude big unneeded polyfills.
 // and use ?callback= to clear the queue of scripts to load
 var polyfillFeatures = [
-  'default-3.6',
-  'matchMedia',
-  'fetch',
-  'IntersectionObserver',
-  'HTMLPictureElement'
+  'default',
+  // 'matchMedia',
+  // 'fetch',
+  // 'IntersectionObserver',
+  // 'HTMLPictureElement'
 ];
 
 var polyfillUrl = 'https://cdn.polyfill.io/v2/polyfill.min.js?callback=clearQueue&features='
