@@ -12,18 +12,17 @@ export default (polls, selectValue, decayFactor = 0.85) => {
   for (let i = polls.length - 1; i >= 0; i -= 1) {
     const poll = polls[i];
     const rawValue = selectValue(poll);
+    const date = new Date(poll.date);
 
     if (rawValue) {
-      const accumulation = [{
-        value: rawValue,
-        weight: 1,
-      }];
+      const accumulation = [];
 
       // grab previous 6 values from unique pollsters, too
-      const encounteredPollsters = new Set([poll.pollster]);
-      let j = i - 1;
+      const encounteredPollsters = new Set();
+      let j = i;
       while (j >= 0 && accumulation.length < 7) {
         const previousPoll = polls[j];
+        const previousPollDate = new Date(previousPoll.date);
         const previousPollValueForCandidate = selectValue(previousPoll);
 
         if (
@@ -32,9 +31,11 @@ export default (polls, selectValue, decayFactor = 0.85) => {
         ) {
           encounteredPollsters.add(previousPoll.pollster);
 
+          const numDaysAgo = (date.getTime() - previousPollDate.getTime()) / (1000 * 60 * 60 * 24);
+
           accumulation.push({
             value: previousPollValueForCandidate,
-            weight: decayFactor ** (i - j),
+            weight: decayFactor ** numDaysAgo,
           });
         }
 
