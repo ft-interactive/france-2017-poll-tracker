@@ -25,13 +25,11 @@ export default async () => {
 
     charts: {
       round1: {
-        lines: data.candidates.map(({ color, name, key }) => {
-          return {
-            color,
-            label: name.last,
-            points: makeRollingAverage(data.round1, poll => poll.result[key]),
-          };
-        }),
+        lines: data.candidates.map(({ color, name, key }) => ({
+          color,
+          label: name.last,
+          points: makeRollingAverage(data.round1, poll => poll.result[key]),
+        })),
         minValue: 0,
         maxValue: 30,
       },
