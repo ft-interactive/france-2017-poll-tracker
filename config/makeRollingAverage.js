@@ -1,4 +1,5 @@
 const round = (number, dp = 1) => Math.round(number * (10 ** dp)) / (10 ** dp);
+const oneDay = (1000 * 60 * 60 * 24);
 
 export default (polls, selectValue, decayFactor = 0.75) => {
   const result = [];
@@ -25,7 +26,7 @@ export default (polls, selectValue, decayFactor = 0.75) => {
         ) {
           encounteredPollsters.add(previousPoll.pollster);
 
-          const numDaysAgo = (date.getTime() - previousPollDate.getTime()) / (1000 * 60 * 60 * 24);
+          const numDaysAgo = (date.getTime() - previousPollDate.getTime()) / oneDay;
 
           accumulation.push({
             value: previousPollValueForCandidate,
