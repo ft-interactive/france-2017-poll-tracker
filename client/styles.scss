@@ -109,6 +109,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   .candidates--candidate {
     padding: .5em 0;
     text-align: center;
+    
 
     @include oGridColspan((default: full-width, M: 4, L: 2));
 
@@ -178,11 +179,26 @@ $color_bayrou:    purple; // @TODO change to an actual colour
     }
   }
 
+  .candidates--heading{
+    font-size: 1.4em;
+    margin:0 0;
+
+     @include oGridRespondTo(M){
+      margin:0.4em 0;
+     }
+  }
+
   .candidates--name {
+    font-size: 1.15em;
+    font-weight: 400;
+    line-height: 1.1em;
     margin-top: 0;
     margin-bottom: 0;
 
+
     @include oGridRespondTo(M) {
+      font-size: 1.2em !important;
+      line-height: 1.2em;
       font-size: 1em;
       line-height: 1em;
       padding-top: .5em;
@@ -191,10 +207,10 @@ $color_bayrou:    purple; // @TODO change to an actual colour
 
   .candidates--party-polling {
     @include oGridColspan((default: full-width, M: hide));
-    font-weight: 600;
+    font-weight: 700;
     font-family: MetricWeb,sans-serif;
     padding-left: 0;
-    font-size: 1em;
+    font-size: 0.9em;
   }
 
   .candidates--copy {
@@ -217,6 +233,17 @@ $color_bayrou:    purple; // @TODO change to an actual colour
       padding: 0 4em;
     }
   }
+  >h2 {
+    font-size: 1.4em;
+     @include oGridRespondTo(M) {
+      margin: 2em 0 0;
+    }
+  }
+}
+
+.polls--heading{
+  font-size: 1.4em !important;
+  margin-top: 1.5em !important;
 }
 
 .polls-and-data--data-table {
@@ -224,13 +251,23 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   border-spacing: 0;
   border-collapse: collapse;
 
+  >h2 {
+    font-size: 1.4em;
+    margin: 1.2em 0 0;
+
+
+     @include oGridRespondTo(M) {
+      margin: 2em 0 1em !important;
+    }
+  }
+
   thead, tbody, tr {
     width: 100%;
   }
 
   thead tr td {
     border-bottom: 1px solid #979797;
-    line-height: 2em;
+    line-height: 1.2em;
     text-transform: uppercase;
     text-align: center;
     padding: 0 3em;

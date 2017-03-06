@@ -97,6 +97,7 @@
     "test": "yarn run lint && yarn run build"
   },
   "dependencies": {
-    "flow-bin": "^0.40.0"
+    "flow-bin": "^0.40.0",
+    "npmlog": "^4.0.2"
   }
 }
