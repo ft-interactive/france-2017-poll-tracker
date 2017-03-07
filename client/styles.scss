@@ -3,7 +3,6 @@ $o-expander-is-silent: false;
 @import 'o-expander/main';
 @import 'o-colors/main';
 @import 'o-grid/main';
-@import 'o-buttons/main';
 @import 'components/core/main';
 
 // Sundry highlights and text colors
@@ -14,15 +13,7 @@ $color_melenchon: #991B1E;
 $color_hamon:     #D36C6A;
 $color_bayrou:    purple; // @TODO change to an actual colour
 
-$candidates-top-border-color: #979797;
-$candidate-copy-color: #666;
-$candidate-copy-bottom-border-color: #ccc;
-
-$table-header-border-color: #979797;
-$cell-date-color: #828282;
-$cell-border-color: #CEC6B9;
-
-.round-1-chart { // Can we move this somewhere better?
+.round-1-chart {
   height: 300px;
   width: 100%;
 
@@ -89,9 +80,6 @@ $cell-border-color: #CEC6B9;
 
 .candidates {
   @include oGridContainer();
-  text-align: center;
-  top-border: 2px solid $candidates-top-border-color;
-
   .article-body & {
     max-width: none;
     padding: 0 1em;
@@ -122,7 +110,6 @@ $cell-border-color: #CEC6B9;
     padding: .5em 0;
     text-align: center;
 
-
     @include oGridColspan((default: full-width, M: 4, L: 2));
 
     @include oGridRespondTo(M, L) {
@@ -133,37 +120,37 @@ $cell-border-color: #CEC6B9;
       padding: 0 !important;
     }
 
-    &__lepen {
+    &__marine-le-pen {
       .candidates--name {
         color: $color_lePen;
       }
     }
 
-    &__fillon {
+    &__francois-fillon {
       .candidates--name {
         color: $color_fillon;
       }
     }
 
-    &__macron {
+    &__emmanuel-macron {
       .candidates--name {
         color: $color_macron;
       }
     }
 
-    &__melenchon {
+    &__jean-luc-melenchon {
       .candidates--name {
         color: $color_melenchon;
       }
     }
 
-    &__hamon {
+    &__benoit-hamon {
       .candidates--name {
         color: $color_hamon;
       }
     }
 
-    &__bayrou {
+    &__francois-bayrou {
       .candidates--name {
         color: $color_bayrou;
       }
@@ -191,53 +178,33 @@ $cell-border-color: #CEC6B9;
     }
   }
 
-  .candidates--heading{
-    font-size: 1.4em;
-    margin:0 0;
-    text-align: left;
-
-     @include oGridRespondTo(M){
-      margin:0.4em 0;
-     }
-  }
-
   .candidates--name {
-    font-size: 1.15em;
-    font-weight: 400;
-    line-height: 1.1em;
     margin-top: 0;
     margin-bottom: 0;
 
-
     @include oGridRespondTo(M) {
-      font-size: 1.2em !important;
-      line-height: 1.2em;
       font-size: 1em;
       line-height: 1em;
       padding-top: .5em;
     }
   }
 
-  .candidates--party-name {
-    font-weight: 700;
+  .candidates--party-polling {
+    @include oGridColspan((default: full-width, M: hide));
+    font-weight: 600;
     font-family: MetricWeb,sans-serif;
     padding-left: 0;
-    font-size: 0.9em;
+    font-size: 1em;
   }
 
   .candidates--copy {
-    color: $candidate-copy-color;
-    border-bottom: 1px solid $candidate-copy-bottom-border-color;
+    color: #666;
+    border-bottom: 1px solid #ccc;
     padding-bottom: 1em;
 
     @include oGridRespondTo(M) {
       border-bottom: 0;
     }
-  }
-
-  .candidates--read-more-button {
-    @include oButtons();
-    @include oButtonsSize(big);
   }
 }
 
@@ -250,17 +217,6 @@ $cell-border-color: #CEC6B9;
       padding: 0 4em;
     }
   }
-  >h2 {
-    font-size: 1.4em;
-     @include oGridRespondTo(M) {
-      margin: 2em 0 0;
-    }
-  }
-}
-
-.polls--heading{
-  font-size: 1.4em !important;
-  margin-top: 1.5em !important;
 }
 
 .polls-and-data--data-table {
@@ -268,23 +224,13 @@ $cell-border-color: #CEC6B9;
   border-spacing: 0;
   border-collapse: collapse;
 
-  >h2 {
-    font-size: 1.4em;
-    margin: 1.2em 0 0;
-
-
-     @include oGridRespondTo(M) {
-      margin: 2em 0 1em !important;
-    }
-  }
-
   thead, tbody, tr {
     width: 100%;
   }
 
   thead tr td {
-    border-bottom: 1px solid $table-header-border-color;
-    line-height: 1.2em;
+    border-bottom: 1px solid #979797;
+    line-height: 2em;
     text-transform: uppercase;
     text-align: center;
     padding: 0 3em;
@@ -295,8 +241,8 @@ $cell-border-color: #CEC6B9;
   }
 
   tbody td {
-    border-right: 1px solid $cell-border-color;
-    border-bottom: 1px solid $cell-border-color;
+    border-right: 1px solid #CEC6B9;
+    border-bottom: 1px solid #CEC6B9;
     text-align: center;
     padding: 0.25em 1em;
 
@@ -313,7 +259,7 @@ $cell-border-color: #CEC6B9;
   }
 
   .polls-and-data--table-cell__date {
-    color: $cell-date-color;
+    color: #828282;
     min-width: 4em;
   }
 }

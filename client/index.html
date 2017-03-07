@@ -1,3 +1,5 @@
+{% import "macros.html" as macros %}
+
 {% extends "layout.html" %}
 
 {% block article_body %}
@@ -9,20 +11,22 @@
   {% set latestPoll = data.round1 | sort(true, false, 'date') | first %}
   {% for candidate in data.candidates %}
     <li class="candidates--candidate candidates--candidate__{{candidate.key}}">
-      <img class="candidates--profile-image" src="images/illustrations/{{candidate.key}}.png" />
+      {{ macros.picture(
+        src=candidate.images.normal,
+        alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
+        class='candidates--profile-image',
+        widths=[130, 250, 260]
+      ) }}
+
       <div class="candidates--details">
         <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
-        <h3 class="candidates--party-name">{{candidate.party}}</h3>
+        <h3 class="candidates--party-polling candidates--party-polling__mobile">
+          TKTK
+        </h3>
       </div>
-      <p class="candidates--copy">tk tk tk tk tk tk tk</p>
     </li>
   {% endfor %}
   </ul>
-  <a role="button"
-    class="candidates--read-more-button"
-    href="https://ig.ft.com/sites/france-election/candidates/">
-    Read full profiles of candidates
-  </a>
 </section>
 
 <section class="polls-and-data">
