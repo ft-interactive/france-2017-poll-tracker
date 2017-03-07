@@ -3,6 +3,7 @@ $o-expander-is-silent: false;
 @import 'o-expander/main';
 @import 'o-colors/main';
 @import 'o-grid/main';
+@import 'o-buttons/main';
 @import 'components/core/main';
 
 // Sundry highlights and text colors
@@ -13,7 +14,15 @@ $color_melenchon: #991B1E;
 $color_hamon:     #D36C6A;
 $color_bayrou:    purple; // @TODO change to an actual colour
 
-.round-1-chart {
+$candidates-top-border-color: #979797;
+$candidate-copy-color: #666;
+$candidate-copy-bottom-border-color: #ccc;
+
+$table-header-border-color: #979797;
+$cell-date-color: #828282;
+$cell-border-color: #CEC6B9;
+
+.round-1-chart { // Can we move this somewhere better?
   height: 300px;
   width: 100%;
 
@@ -80,6 +89,9 @@ $color_bayrou:    purple; // @TODO change to an actual colour
 
 .candidates {
   @include oGridContainer();
+  text-align: center;
+  top-border: 2px solid $candidates-top-border-color;
+
   .article-body & {
     max-width: none;
     padding: 0 1em;
@@ -109,7 +121,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   .candidates--candidate {
     padding: .5em 0;
     text-align: center;
-    
+
 
     @include oGridColspan((default: full-width, M: 4, L: 2));
 
@@ -121,37 +133,37 @@ $color_bayrou:    purple; // @TODO change to an actual colour
       padding: 0 !important;
     }
 
-    &__marine-le-pen {
+    &__lepen {
       .candidates--name {
         color: $color_lePen;
       }
     }
 
-    &__francois-fillon {
+    &__fillon {
       .candidates--name {
         color: $color_fillon;
       }
     }
 
-    &__emmanuel-macron {
+    &__macron {
       .candidates--name {
         color: $color_macron;
       }
     }
 
-    &__jean-luc-melenchon {
+    &__melenchon {
       .candidates--name {
         color: $color_melenchon;
       }
     }
 
-    &__benoit-hamon {
+    &__hamon {
       .candidates--name {
         color: $color_hamon;
       }
     }
 
-    &__francois-bayrou {
+    &__bayrou {
       .candidates--name {
         color: $color_bayrou;
       }
@@ -182,6 +194,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   .candidates--heading{
     font-size: 1.4em;
     margin:0 0;
+    text-align: left;
 
      @include oGridRespondTo(M){
       margin:0.4em 0;
@@ -205,8 +218,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
     }
   }
 
-  .candidates--party-polling {
-    @include oGridColspan((default: full-width, M: hide));
+  .candidates--party-name {
     font-weight: 700;
     font-family: MetricWeb,sans-serif;
     padding-left: 0;
@@ -214,13 +226,18 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   }
 
   .candidates--copy {
-    color: #666;
-    border-bottom: 1px solid #ccc;
+    color: $candidate-copy-color;
+    border-bottom: 1px solid $candidate-copy-bottom-border-color;
     padding-bottom: 1em;
 
     @include oGridRespondTo(M) {
       border-bottom: 0;
     }
+  }
+
+  .candidates--read-more-button {
+    @include oButtons();
+    @include oButtonsSize(big);
   }
 }
 
@@ -266,7 +283,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   }
 
   thead tr td {
-    border-bottom: 1px solid #979797;
+    border-bottom: 1px solid $table-header-border-color;
     line-height: 1.2em;
     text-transform: uppercase;
     text-align: center;
@@ -278,8 +295,8 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   }
 
   tbody td {
-    border-right: 1px solid #CEC6B9;
-    border-bottom: 1px solid #CEC6B9;
+    border-right: 1px solid $cell-border-color;
+    border-bottom: 1px solid $cell-border-color;
     text-align: center;
     padding: 0.25em 1em;
 
@@ -296,7 +313,7 @@ $color_bayrou:    purple; // @TODO change to an actual colour
   }
 
   .polls-and-data--table-cell__date {
-    color: #828282;
+    color: $cell-date-color;
     min-width: 4em;
   }
 }
