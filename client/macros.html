@@ -1,5 +1,3 @@
-{# for putting a picture through the build service #}
-
 {% macro imageServiceImg(original, alt, class, widths=[], defaultWidth) %}
 <img srcset="{{original | imageServiceSrcset(widths)}}" src="{{src | imageServiceUrl({ width: widths | arrayMax })}}" class="{% if class %} {{class}}{% endif %}"{% if class %} class="{{class}}"{% endif %}>
 {% endmacro %}
