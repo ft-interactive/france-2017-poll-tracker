@@ -41,6 +41,7 @@
 
 .polls__data-table {
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   border-spacing: 0;
   border-collapse: collapse;
 
