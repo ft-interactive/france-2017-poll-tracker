@@ -14,7 +14,7 @@
       {{ macros.imageServiceImg(
         original=candidate.images.normal,
         alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
-        class='candidates--profile-image',
+        class='candidates--profile-image candidate__image candidate__image--' + candidate.key,
         widths=[130, 260, 390]
       ) }}
 
@@ -22,7 +22,7 @@
         <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
         <h3 class="candidates--party-name">{{candidate.party}}</h3>
       </div>
-      <p class="candidates--copy">tk tk tk tk tk tk tk</p>
+      <p class="candidates--copy">{{candidate.description}}</p>
     </li>
   {% endfor %}
   </ul>

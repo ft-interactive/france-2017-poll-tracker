@@ -7,7 +7,7 @@ $o-expander-is-silent: false;
 @import 'components/core/main';
 
 // Sundry highlights and text colors
-$color_lePen:     #67ACCF;
+$color_lepen:     #67ACCF;
 $color_fillon:    #005C91;
 $color_macron:    #F00F0C;
 $color_melenchon: #991B1E;
@@ -33,7 +33,7 @@ $cell-border-color: #CEC6B9;
 
 .color {
   &--le-pen {
-    color: $color_lePen;
+    color: $color_lepen;
   }
 
   &--fillon {
@@ -135,7 +135,7 @@ $cell-border-color: #CEC6B9;
 
     &__lepen {
       .candidates--name {
-        color: $color_lePen;
+        color: $color_lepen;
       }
     }
 
@@ -167,6 +167,20 @@ $cell-border-color: #CEC6B9;
       .candidates--name {
         color: $color_bayrou;
       }
+    }
+  }
+
+  .candidate {
+    &__image {
+      width: 130px;
+      border: 3px solid gray;
+      border-radius: 100%;
+
+      &--fillon { border-color: $color_fillon }
+      &--lepen { border-color: $color_lepen }
+      &--macron { border-color: $color_macron }
+      &--mele { border-color: $color_melenchon }
+      &--hamon { border-color: $color_hamon }
     }
   }
 
