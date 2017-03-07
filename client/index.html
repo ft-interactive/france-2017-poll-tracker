@@ -1,3 +1,5 @@
+{% import "macros.html" as macros %}
+
 {% extends "layout.html" %}
 
 {% block article_body %}
@@ -9,7 +11,12 @@
   {% set latestPoll = data.round1 | sort(true, false, 'date') | first %}
   {% for candidate in data.candidates %}
     <li class="candidates--candidate candidates--candidate__{{candidate.key}}">
-      <img class="candidates--profile-image" src="images/illustrations/{{candidate.key}}.png" />
+      {{ macros.imageServiceImg(
+        original=candidate.images.normal,
+        alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
+        class='candidates--profile-image',
+      ) }}
+
       <div class="candidates--details">
         <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
         <h3 class="candidates--party-name">{{candidate.party}}</h3>

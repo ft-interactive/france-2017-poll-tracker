@@ -104,3 +104,21 @@ export function spoorTrackingPixel(str) {
   <noscript data-o-component="o-tracking">${img}</noscript>`,
   );
 }
+
+// converts any URL to an Image Service URL (with the given query params)
+// - see https://www.ft.com/__origami/service/image/v2/docs/api for options
+export const imageServiceUrl = (url, queryParams = {}) => {
+  const queryString = Object.keys(queryParams)
+    .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(queryParams[name])}`);
+
+  return `https://www.ft.com/__origami/service/image/v2/images/raw/${encodeURIComponent(url)}?source=ig&${queryString}`;
+};
+
+// converts any URL to an `srcset` string containing *multiple* Image Service
+// URLs respecting the given widths
+export const imageServiceSrcset = (url, widths, queryParams) => widths.map(width =>
+  `${imageServiceUrl(url, { ...queryParams, width })} ${width}w`,
+).join(', ');
+
+// returns the largest item in an array of numbers
+export const arrayMax = array => Math.max(...array);
