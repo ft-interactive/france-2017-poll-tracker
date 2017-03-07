@@ -12,13 +12,17 @@
       <img class="candidates--profile-image" src="images/illustrations/{{candidate.key}}.png" />
       <div class="candidates--details">
         <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
-        <h3 class="candidates--party-polling candidates--party-polling__mobile">
-          TKTK
-        </h3>
+        <h3 class="candidates--party-name">{{candidate.party}}</h3>
       </div>
+      <p class="candidates--copy">tk tk tk tk tk tk tk</p>
     </li>
   {% endfor %}
   </ul>
+  <a role="button"
+    class="candidates--read-more-button"
+    href="https://ig.ft.com/sites/france-election/candidates/">
+    Read full profiles of candidates
+  </a>
 </section>
 
 <section class="polls-and-data">
