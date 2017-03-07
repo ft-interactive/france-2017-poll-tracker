@@ -7,10 +7,6 @@ $o-expander-is-silent: false;
 @import 'components/core/main';
 @import './styles/candidate-vars';
 
-$candidates-top-border-color: #979797;
-$candidate-copy-color: #666;
-$candidate-copy-bottom-border-color: #ccc;
-
 $table-header-border-color: #979797;
 $cell-date-color: #828282;
 $cell-border-color: #CEC6B9;
@@ -20,15 +16,16 @@ $cell-border-color: #CEC6B9;
 
 .article-head {
   padding: 0;
-  margin: 1em;
-
-  @include oGridRespondTo(M) {
-    margin: 1em 2em;
-  }
 
   header {
+    margin: 1em;
+
+    @include oGridRespondTo(M) {
+      margin: 1em 2em;
+    }
+
     width: 100%;
-    max-width: none;
+    max-width: 1200px;
   }
 }
 

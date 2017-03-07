@@ -8,8 +8,6 @@ expander.init(null, {
   collapsedToggleText: 'Show more polls',
 });
 
-// console.log('data', __francePollData);
-
 // set up all charts
 [...document.querySelectorAll('[data-multi-time-series]')].forEach((container) => {
   const json = container.getAttribute('data-multi-time-series');

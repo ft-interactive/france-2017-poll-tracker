@@ -119,7 +119,7 @@ export default class MultiTimeSeries {
     g.append('g')
       .attr('transform', `translate(0,${chartHeight})`)
       .attr('class', 'x-axis')
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(1)))
     ;
 
     // add y-axis

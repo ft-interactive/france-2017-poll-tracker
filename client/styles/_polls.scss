@@ -1,4 +1,6 @@
 .polls {
+  @include oGridContainer();
+
   overflow: hidden;
 
   .article-body & {
@@ -24,6 +26,8 @@
 
   &__round-2 {
     @include oGridRow;
+
+    &__intro { @include oGridColspan(12); }
 
     &__chart {
       @include oGridColspan((default: 12, M: 6));
@@ -93,7 +97,6 @@
 
   .js-success & {
     max-height: 190px;
-    // width: 175%; // @TODO This value might need some tweaking
     display: block;
     overflow-y: hidden;
 
