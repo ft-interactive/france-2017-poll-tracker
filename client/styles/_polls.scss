@@ -1,0 +1,113 @@
+.polls {
+  @include oGridContainer();
+
+  overflow: hidden;
+
+  .article-body & {
+    max-width: none;
+
+    @include oGridRespondTo(L) {
+      padding: 0 4em;
+    }
+  }
+
+  > h2 {
+    font-size: 1.4em;
+     @include oGridRespondTo(M) {
+      margin: 2em 0 0;
+    }
+  }
+
+  &__round-1 {
+    [data-multi-time-series] {
+      height: 350px;
+    }
+  }
+
+  &__round-2 {
+    @include oGridRow;
+
+    &__intro { @include oGridColspan(12); }
+
+    &__chart {
+      @include oGridColspan((default: 12, M: 6));
+    }
+
+    [data-multi-time-series] {
+      height: 250px;
+    }
+  }
+}
+
+.polls__data-table {
+  overflow: scroll;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  > h2 {
+    font-size: 1.4em;
+    margin: 1.2em 0 0;
+
+     @include oGridRespondTo(M) {
+      margin: 2em 0 1em !important;
+    }
+  }
+
+  thead, tbody, tr {
+    width: 100%;
+  }
+
+  thead tr td {
+    border-bottom: 1px solid $table-header-border-color;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 3em;
+
+    &:first-child, &:nth-child(2) {
+      text-align: left;
+      padding: 0;
+    }
+  }
+
+  tbody td {
+    border-right: 1px solid $cell-border-color;
+    border-bottom: 1px solid $cell-border-color;
+    text-align: center;
+    padding: 0.25em 1em;
+
+    &.polls__data-table__date, &:last-child {
+      border-right: 0;
+    }
+
+    &.polls__data-table__date, &:nth-child(2) {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  .polls__data-table__date {
+    color: $cell-date-color;
+    min-width: 4em;
+  }
+}
+
+.o-expander__content {
+  max-height: none;
+
+  .js-success & {
+    max-height: 190px;
+    display: block;
+    overflow-y: hidden;
+
+    @include oGridRespondTo(L) {
+      width: auto;
+    }
+  }
+
+  &--expanded {
+    .js-success & {
+      max-height: none;
+    }
+  }
+}

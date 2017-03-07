@@ -151,8 +151,8 @@ function getBundlers(useWatchify) {
 gulp.task('default', (done) => {
   process.env.NODE_ENV = 'production';
   runSequence(
-    // ['download-data'],
-    ['scripts', 'styles', 'build-pages', 'copy'],
+    ['build-pages'],
+    ['scripts', 'styles', 'copy'],
     ['html', 'images'],
     ['revreplace'],
   done);
@@ -314,12 +314,3 @@ gulp.task('test:preflight', ['test:install-selenium'], () => {
     }
   });
 });
-
-// gulp.task('download-data', async () => {
-//   if (!process.env.SPREADSHEET_KEY) {
-//     throw new Error('You need to set the SPREADSHEET_KEY environment variable!');
-//   }
-//
-//   const { data } = await axios.get(`https://bertha.ig.ft.com/republish/publish/gss/${process.env.SPREADSHEET_KEY}/polls,candidates`);
-//   fs.writeFileSync('./config/data.json', JSON.stringify(data, null, 2));
-// });

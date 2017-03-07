@@ -1,0 +1,139 @@
+// helper class for setting an element's text colour for a candidate
+@each $slug, $color in $candidates {
+  .color-#{$slug} { color: $color; }
+}
+
+.candidates {
+  @include oGridContainer();
+  max-width: 1200px;
+  margin: 0 auto;
+
+  top-border: 1px solid #979797;
+
+  &__list {
+    padding: 0;
+
+    @include oGridRespondTo(M) {
+      display: flex;
+      justify-content: center;
+    }
+
+    @include oGridRespondTo(M, $until: L) {
+      max-width: 660px;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    @include oGridRespondTo(L) {
+      justify-content: space-between;
+    }
+  }
+
+  > h2 {
+    display: none;
+
+    @include oGridRespondTo(M) {
+      display: block;
+      margin: 0.4em 0;
+    }
+  }
+
+  &__read-more {
+    text-align: center;
+    margin-top: 20px;
+
+    > a {
+      @include oButtons();
+      @include oButtonsSize(big);
+    }
+  }
+}
+
+.candidate {
+  position: relative;
+
+  @include oGridRespondTo($until: M) {
+    min-height: 100px + 15px;
+    padding-left: 100px + 15px;
+  }
+
+  @include oGridRespondTo(M) {
+    width: 180px;
+    margin: 10px 10px;
+  }
+
+  @include oGridRespondTo(L) {
+    width: 200px;
+  }
+
+  @each $slug, $color in $candidates {
+    &--#{$slug} .candidate__name {
+      color: $color;
+    }
+  }
+
+  &__image {
+    @include oGridRespondTo($until: M) {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    @include oGridRespondTo(M) {
+      margin: 0 auto;
+    }
+
+    > img {
+      border-radius: 100%;
+      border: 3px solid transparent;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      @each $slug, $color in $candidates {
+        .candidate--#{$slug} & { border-color: $color }
+      }
+    }
+
+    @include oGridRespondTo(M) {
+      width: 130px;
+      height: 130px;
+    }
+  }
+
+  &__details {
+    @include oGridRespondTo($until: M) {
+      border-bottom: 1px solid #ccc;
+      min-height: 100px;
+      padding: 10px 0;
+    }
+
+    @include oGridRespondTo(M) {
+      text-align: center;
+    }
+  }
+
+  .candidate &__name {
+    font-size: 1.15em;
+    font-weight: 500;
+    line-height: 1.1em;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .candidate &__party-name {
+    font-weight: 700;
+    font-family: MetricWeb, sans-serif;
+    padding-left: 0;
+    font-size: 0.9em;
+  }
+
+  .candidate &__description {
+    font-size: 1em;
+    color: #666;
+    margin: 0 0 10px;
+  }
+}

@@ -4,92 +4,102 @@
 
 {% block article_body %}
 
-<section class="candidates">
-  <h2 class="candidates--heading">The candidates</h2>
+<div class="graphic">
 
-  <ul class="candidates--grid">
-  {% set latestPoll = data.round1 | sort(true, false, 'date') | first %}
-  {% for candidate in data.candidates %}
-    <li class="candidates--candidate candidates--candidate__{{candidate.key}}">
-      {{ macros.imageServiceImg(
-        original=candidate.images.normal,
-        alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
-        class='candidates--profile-image',
-        widths=[130, 260, 390]
-      ) }}
+  <section class="candidates">
+    <h2>The candidates</h2>
 
-      <div class="candidates--details">
-        <h2 class="candidates--name">{{candidate.name.first}} {{candidate.name.last}}</h2>
-        <h3 class="candidates--party-name">{{candidate.party}}</h3>
+    <div class="candidates__list">
+    {% for candidate in data.candidates %}
+      <div class="candidate candidate--{{candidate.key}}">
+        <div class="candidate__image candidate__image--{{candidate.key}}">
+          {{ macros.imageServiceImg(
+            original=candidate.images.normal,
+            alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
+            widths=[94, 130, 188, 260]
+          ) }}
+        </div>
+
+        <div class="candidate__details">
+          <h2 class="candidate__name">{{candidate.name.first}} {{candidate.name.last}}</h2>
+          <h3 class="candidate__party-name">{{candidate.party}}</h3>
+
+          <p class="candidate__description">{{candidate.description}}</p>
+        </div>
       </div>
-      <p class="candidates--copy">tk tk tk tk tk tk tk</p>
-    </li>
-  {% endfor %}
-  </ul>
-  <a role="button"
-    class="candidates--read-more-button"
-    href="https://ig.ft.com/sites/france-election/candidates/">
-    Read full profiles of candidates
-  </a>
-</section>
-
-<section class="polls-and-data">
-  <h2 class="polls--heading">Current state of the polls</h2>
-  <figure class="polls--current-state">
-    <div class="round-1-chart" data-multi-time-series="{{charts.round1 | dump}}"></div>
-  </figure>
-
-  <div class="polls-and-data--data-table o-expander" data-o-component="o-expander">
-    <h2>The data</h2>
-    <table class="polls-and-data--data-table o-expander__content">
-      <thead>
-        <tr>
-          <td>Date</td>
-          <td>Pollster</td>
-          {% for candidate in data.candidates %}
-          <td>{{ candidate.name.last }}</td>
-          {% endfor %}
-          <td>Sample*</td>
-        </tr>
-      </thead>
-      <tbody>
-        {% for poll in data.round1 %}
-        <tr>
-          <td class="polls-and-data--table-cell__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
-          <td>{{ poll.pollster }}</td>
-          {% for candidate in data.candidates %}
-          <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
-          {% endfor %}
-          <td>{{ poll.sample }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <button class="o-expander__toggle">Show more polls</a>
-  </div>
-
-  <section class="round-2">
-    <h2>The run-off</h2>
-    <p>Assuming no candidate wins 50% of the votes in the first round, a second round will be held on May 7. These charts show polling history for the two most likely scenarios.</p>
-
-    <div class="round-2__chart">
-      <h3 class="polls--heading">
-        <span class="color--le-pen">Le Pen</span> vs <span class="color--macron">Macron</span>
-      </h3>
-      <figure>
-        <div class="round-1-chart" data-multi-time-series="{{charts.round2.scenario1 | dump}}"></div>
-      </figure>
+    {% endfor %}
     </div>
-
-    <div class="round-2__chart">
-      <h3 class="polls--heading">
-        <span class="color--le-pen">Le Pen</span> vs <span class="color--fillon">Fillon</span>
-      </h3>
-      <figure>
-        <div class="round-1-chart" data-multi-time-series="{{charts.round2.scenario2 | dump}}"></div>
-      </figure>
+    <div class="candidates__read-more">
+      <a role="button" href="https://ig.ft.com/sites/france-election/candidates/">
+        Read full profiles of candidates
+      </a>
     </div>
   </section>
-</section>
+
+  <section class="polls">
+    <h2>Current state of the polls</h2>
+
+    <figure class="polls__round-1">
+      <div data-multi-time-series="{{charts.round1 | dump}}"></div>
+    </figure>
+
+    <div data-o-component="o-expander">
+      <h2>The data</h2>
+
+      <table class="polls__data-table o-expander__content">
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>Pollster</td>
+            {% for candidate in data.candidates %}
+            <td>{{ candidate.name.last }}</td>
+            {% endfor %}
+            <td>Sample*</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for poll in data.round1 %}
+          <tr>
+            <td class="polls__data-table__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
+            <td>{{ poll.pollster }}</td>
+            {% for candidate in data.candidates %}
+            <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
+            {% endfor %}
+            <td>{{ poll.sample }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <button class="o-expander__toggle">Show more polls</a>
+    </div>
+
+    <section class="polls__round-2">
+      <div class="polls__round-2__intro">
+        <h2>The run-off</h2>
+        <p>Assuming no candidate wins 50% of the votes in the first round, a second round will be held on May 7. These charts show voter preference over time for the two most likely scenarios.</p>
+      </div>
+
+      <div class="polls__round-2__chart">
+        <h3>
+          <span class="color-lepen">Le Pen</span> vs <span class="color-macron">Macron</span>
+        </h3>
+
+        <figure>
+          <div data-multi-time-series="{{charts.round2.scenario1 | dump}}"></div>
+        </figure>
+      </div>
+
+      <div class="polls__round-2__chart">
+        <h3>
+          <span class="color-lepen">Le Pen</span> vs <span class="color-fillon">Fillon</span>
+        </h3>
+        <figure>
+          <div data-multi-time-series="{{charts.round2.scenario2 | dump}}"></div>
+        </figure>
+      </div>
+    </section>
+  </section>
+
+</div>
 {% endblock %}

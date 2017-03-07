@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import * as axios from 'axios';
 import article from './article';
 import getFlags from './flags';
@@ -16,6 +18,15 @@ export default async () => {
   [data.round1, data.round2].forEach((sheet) => {
     sheet.sort((a, b) => new Date(a.date) - new Date(b.date));
   });
+
+  // make candidate colours available to SCSS
+  {
+    const lines = data.candidates.map(({ key, color }) => `${key}: ${color}`);
+
+    const scss = `$candidates: (\n  ${lines.join(',\n  ')}\n);\n`;
+
+    fs.writeFileSync(path.resolve(__dirname, '..', 'client', 'styles', '_candidate-vars.scss'), scss);
+  }
 
   return {
     ...d,
