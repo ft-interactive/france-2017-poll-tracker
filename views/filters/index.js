@@ -104,3 +104,18 @@ export function spoorTrackingPixel(str) {
   <noscript data-o-component="o-tracking">${img}</noscript>`,
   );
 }
+
+export const imageServiceUrl = (url, options) => {
+  const queryString = Object.keys(options)
+    .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(options[name])}`);
+
+  return `https://www.ft.com/__origami/service/image/v2/images/raw/${encodeURIComponent(url)}?source=ig&${queryString}`;
+};
+
+export const imageServiceSrcset = (url, widths) => widths.map(width =>
+  // see https://www.ft.com/__origami/service/image/v2/docs/api for options
+
+  `${imageServiceUrl(url, { width })} ${width}w`,
+).join(', ');
+
+export const arrayMax = array => Math.max(...array);
