@@ -12,7 +12,7 @@ export default (polls, selectValue, decayFactor = 0.75) => {
     if (rawValue) {
       const accumulation = [];
 
-      // grab previous 6 values from unique pollsters, too
+      // get last 7 values from unique pollsters
       const encounteredPollsters = new Set();
       let j = i;
       while (j >= 0 && accumulation.length < 7) {
