@@ -322,6 +322,14 @@ $cell-border-color: #CEC6B9;
   margin: 0;
 }
 
+.round-2 {
+  @include oGridRow;
+
+  &__chart {
+    @include oGridColspan((default: 12, M: 6));
+  }
+}
+
 .js-success .o-expander__content {
     max-height: 190px;
     width: 175%; // @TODO This value might need some tweaking

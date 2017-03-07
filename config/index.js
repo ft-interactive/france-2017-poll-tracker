@@ -35,9 +35,29 @@ export default async () => {
       },
 
       round2: {
-        // TODO use
-        scenario1: {},
-        scenario2: {},
+        scenario1: {
+          lines: data.candidates
+            .filter(({ key }) => key === 'macron' || key === 'lepen')
+            .map(({ color, name, key }) => ({
+              color,
+              label: name.last,
+              points: makeRollingAverage(data.round2, poll => poll.scenario1[key]),
+            })),
+          minValue: 0,
+          maxValue: 100,
+        },
+
+        scenario2: {
+          lines: data.candidates
+            .filter(({ key }) => key === 'fillon' || key === 'lepen')
+            .map(({ color, name, key }) => ({
+              color,
+              label: name.last,
+              points: makeRollingAverage(data.round2, poll => poll.scenario2[key]),
+            })),
+          minValue: 0,
+          maxValue: 100,
+        },
       },
     },
   };

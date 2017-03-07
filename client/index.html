@@ -69,16 +69,27 @@
     <button class="o-expander__toggle">Show more polls</a>
   </div>
 
-  <h2>Other scenarios...</h2>
+  <section class="round-2">
+    <h2>The run-off</h2>
+    <p>Assuming no candidate wins 50% of the votes in the first round, a second round will be held on May 7. These charts show polling history for the two most likely scenarios.</p>
 
-  <h3 class="polls--heading">
-    <span class="color--le-pen">Le Pen</span> vs <span class="color--macron">Macron</span>
-  </h3>
-  <figure class="polls--scenario-1"></figure>
+    <div class="round-2__chart">
+      <h3 class="polls--heading">
+        <span class="color--le-pen">Le Pen</span> vs <span class="color--macron">Macron</span>
+      </h3>
+      <figure>
+        <div class="round-1-chart" data-multi-time-series="{{charts.round2.scenario1 | dump}}"></div>
+      </figure>
+    </div>
 
-  <h3 class="polls--heading">
-    <span class="color--le-pen">Le Pen</span> vs <span class="color--fillon">Fillon</span>
-  </h3>
-  <figure class="polls--scenario-2"></figure>
+    <div class="round-2__chart">
+      <h3 class="polls--heading">
+        <span class="color--le-pen">Le Pen</span> vs <span class="color--fillon">Fillon</span>
+      </h3>
+      <figure>
+        <div class="round-1-chart" data-multi-time-series="{{charts.round2.scenario2 | dump}}"></div>
+      </figure>
+    </div>
+  </section>
 </section>
 {% endblock %}
