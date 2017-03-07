@@ -5,14 +5,7 @@ $o-expander-is-silent: false;
 @import 'o-grid/main';
 @import 'o-buttons/main';
 @import 'components/core/main';
-
-// Sundry highlights and text colors
-$color_lepen:     #67ACCF;
-$color_fillon:    #005C91;
-$color_macron:    #F00F0C;
-$color_melenchon: #991B1E;
-$color_hamon:     #D36C6A;
-$color_bayrou:    purple; // @TODO change to an actual colour
+@import './candidates';
 
 $candidates-top-border-color: #979797;
 $candidate-copy-color: #666;
@@ -22,39 +15,8 @@ $table-header-border-color: #979797;
 $cell-date-color: #828282;
 $cell-border-color: #CEC6B9;
 
-.round-1-chart { // Can we move this somewhere better?
-  height: 300px;
-  width: 100%;
-
-  @include oGridRespondTo(M) {
-    height: 400px;
-  }
-}
-
-.color {
-  &--le-pen {
-    color: $color_lepen;
-  }
-
-  &--fillon {
-    color: $color_fillon;
-  }
-
-  &--macron {
-    color: $color_macron;
-  }
-
-  &--melenchon {
-    color: $color_melenchon;
-  }
-
-  &--hamon {
-    color: $color_hamon;
-  }
-
-  &--bayrou {
-    color: $color_bayrou;
-  }
+@each $slug, $color in $candidates {
+  &color--#{$slug} { color: $color; }
 }
 
 .article-head {
@@ -106,22 +68,20 @@ $cell-border-color: #CEC6B9;
     }
   }
 
-  .candidates--grid {
+  .candidates__list {
     padding: 0;
     justify-content: center;
-    align-items: center;
 
     @include oGridRow();
-    @include oGridRowCompact('.candidates--candidate');
+    @include oGridRowCompact('.candidate');
     @include oGridRespondTo(L) {
       justify-content: space-between;
     }
   }
 
-  .candidates--candidate {
+  .candidate {
     padding: .5em 0;
     text-align: center;
-
 
     @include oGridColspan((default: full-width, M: 4, L: 2));
 
@@ -133,65 +93,30 @@ $cell-border-color: #CEC6B9;
       padding: 0 !important;
     }
 
-    &__lepen {
-      .candidates--name {
-        color: $color_lepen;
+    @each $slug, $color in $candidates {
+      &__#{$slug} .candidate__name {
+        color: $color;
       }
     }
 
-    &__fillon {
-      .candidates--name {
-        color: $color_fillon;
-      }
-    }
-
-    &__macron {
-      .candidates--name {
-        color: $color_macron;
-      }
-    }
-
-    &__melenchon {
-      .candidates--name {
-        color: $color_melenchon;
-      }
-    }
-
-    &__hamon {
-      .candidates--name {
-        color: $color_hamon;
-      }
-    }
-
-    &__bayrou {
-      .candidates--name {
-        color: $color_bayrou;
-      }
-    }
-  }
-
-  .candidate {
     &__image {
       width: 130px;
       border: 3px solid gray;
       border-radius: 100%;
 
-      &--fillon { border-color: $color_fillon }
-      &--lepen { border-color: $color_lepen }
-      &--macron { border-color: $color_macron }
-      &--mele { border-color: $color_melenchon }
-      &--hamon { border-color: $color_hamon }
+      @each $slug, $color in $candidates {
+        &--#{$slug} { border-color: $color }
+      }
     }
   }
 
-  .candidates--profile-image {
+  .candidates__image {
     @include oGridColspan((default: 3, M: full-width));
     padding: 0 !important;
   }
 
-  .candidates--details {
+  .candidate__details {
     text-align: left;
-
 
     @include oGridColspan((default: 9, M: full-width));
     @include oGridRespondTo(S, M) {
@@ -205,7 +130,7 @@ $cell-border-color: #CEC6B9;
     }
   }
 
-  .candidates--heading{
+  .candidates__heading{
     font-size: 1.4em;
     margin:0 0;
     text-align: left;
@@ -215,7 +140,7 @@ $cell-border-color: #CEC6B9;
      }
   }
 
-  .candidates--name {
+  .candidate__name {
     font-size: 1.15em;
     font-weight: 400;
     line-height: 1.1em;
@@ -232,14 +157,14 @@ $cell-border-color: #CEC6B9;
     }
   }
 
-  .candidates--party-name {
+  .candidate__party-name {
     font-weight: 700;
     font-family: MetricWeb,sans-serif;
     padding-left: 0;
     font-size: 0.9em;
   }
 
-  .candidates--copy {
+  .candidate__copy {
     color: $candidate-copy-color;
     border-bottom: 1px solid $candidate-copy-bottom-border-color;
     padding-bottom: 1em;
@@ -249,14 +174,15 @@ $cell-border-color: #CEC6B9;
     }
   }
 
-  .candidates--read-more-button {
+  .candidates__read-more-button {
     @include oButtons();
     @include oButtonsSize(big);
   }
 }
 
-.polls-and-data {
+.polls {
   overflow: hidden;
+
   .article-body & {
     max-width: none;
 
@@ -264,28 +190,41 @@ $cell-border-color: #CEC6B9;
       padding: 0 4em;
     }
   }
-  >h2 {
+
+  > h2 {
     font-size: 1.4em;
      @include oGridRespondTo(M) {
       margin: 2em 0 0;
     }
   }
+
+  &__round-1 {
+    [data-multi-time-series] {
+      height: 350px;
+    }
+  }
+
+  &__round-2 {
+    @include oGridRow;
+
+    &__chart {
+      @include oGridColspan((default: 12, M: 6));
+    }
+
+    [data-multi-time-series] {
+      height: 250px;
+    }
+  }
 }
 
-.polls--heading{
-  font-size: 1.4em !important;
-  margin-top: 1.5em !important;
-}
-
-.polls-and-data--data-table {
+.polls__data-table {
   overflow: scroll;
   border-spacing: 0;
   border-collapse: collapse;
 
-  >h2 {
+  > h2 {
     font-size: 1.4em;
     margin: 1.2em 0 0;
-
 
      @include oGridRespondTo(M) {
       margin: 2em 0 1em !important;
@@ -302,6 +241,7 @@ $cell-border-color: #CEC6B9;
     text-transform: uppercase;
     text-align: center;
     padding: 0 3em;
+
     &:first-child, &:nth-child(2) {
       text-align: left;
       padding: 0;
@@ -314,47 +254,39 @@ $cell-border-color: #CEC6B9;
     text-align: center;
     padding: 0.25em 1em;
 
-
-    &.polls-and-data--table-cell__date, &:last-child {
+    &.polls__data-table__date, &:last-child {
       border-right: 0;
-
     }
 
-    &.polls-and-data--table-cell__date, &:nth-child(2) {
+    &.polls__data-table__date, &:nth-child(2) {
       text-align: left;
       padding-left: 0;
     }
   }
 
-  .polls-and-data--table-cell__date {
+  .polls__data-table__date {
     color: $cell-date-color;
     min-width: 4em;
   }
 }
 
-.polls--current-state {
-  margin: 0;
-}
+.o-expander__content {
+  max-height: none;
 
-.round-2 {
-  @include oGridRow;
-
-  &__chart {
-    @include oGridColspan((default: 12, M: 6));
-  }
-}
-
-.js-success .o-expander__content {
+  .js-success & {
     max-height: 190px;
-    width: 175%; // @TODO This value might need some tweaking
+    // width: 175%; // @TODO This value might need some tweaking
     display: block;
     overflow-y: hidden;
 
     @include oGridRespondTo(L) {
       width: auto;
     }
-}
+  }
 
-.js-success .o-expander__content.o-expander__content--expanded, .o-expander__content {
-    max-height: none;
+  &--expanded {
+    .js-success & {
+      max-height: none;
+    }
+  }
 }

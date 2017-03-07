@@ -8,3 +8,4 @@ npm-debug.log*
 .env
 .DS_Store
 /config/data.json
+/client/_candidates.scss
