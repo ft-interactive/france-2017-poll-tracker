@@ -25,7 +25,7 @@ export default async () => {
 
     const scss = `$candidates: (\n  ${lines.join(',\n  ')}\n);\n`;
 
-    fs.writeFileSync(path.resolve(__dirname, '..', 'client', '_candidates.scss'), scss);
+    fs.writeFileSync(path.resolve(__dirname, '..', 'client', 'styles', '_candidate-vars.scss'), scss);
   }
 
   return {
