@@ -93,6 +93,17 @@
   }
 }
 
+.o-expander__toggle {
+  @include oButtons($theme: uncolored);
+  @include oButtonsSize(big);
+  display: block;
+  margin: 1em auto;
+
+  i {
+    display: none;
+  }
+}
+
 .o-expander__content {
   max-height: none;
 
