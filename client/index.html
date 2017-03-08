@@ -11,6 +11,8 @@
     <h2>The candidates</h2>
 
     <div class="candidates__list">
+    {% set latestPoll = (data.round1 | sort(true, false, 'date') | first) %}
+    {% set latestPollResult = latestPoll.result %}
     {% for candidate in data.candidates %}
       <div class="candidate candidate--{{candidate.key}}">
         <div class="candidate__image candidate__image--{{candidate.key}}">
@@ -23,7 +25,10 @@
 
         <div class="candidate__details">
           <h2 class="candidate__name">{{candidate.name.first}} {{candidate.name.last}}</h2>
-          <h3 class="candidate__party-name">{{candidate.party}}</h3>
+          <h3 class="candidate__party-name">
+            {{candidate.party}}
+            <span class="candidate__polling-at"> — Polling at {{latestPollResult[candidate.key] | default('N/A')}}%</span>
+          </h3>
 
           <p class="candidate__description">{{candidate.description}}</p>
         </div>

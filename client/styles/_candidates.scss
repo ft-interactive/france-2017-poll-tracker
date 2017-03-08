@@ -131,6 +131,13 @@
     font-family: MetricWeb, sans-serif;
     padding-left: 0;
     font-size: 0.9em;
+
+    .candidate__polling-at {
+      display: none;
+      @include oGridRespondTo($until: M) {
+        display: inline;
+      }
+    }
   }
 
   .candidate &__description {
