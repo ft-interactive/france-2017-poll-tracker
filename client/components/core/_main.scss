@@ -42,6 +42,9 @@ $share-button-size: 38px;
 }
 
 .article {
+  max-width: 1200px;
+  margin: 0 auto;
+
   &-head {
     margin-top: 18px;
     margin-bottom: 18px;
@@ -76,6 +79,12 @@ $share-button-size: 38px;
   box-sizing: border-box;
   width: 100%;
 
+  & > p {
+    max-width: 708px;
+    text-align: center;
+    margin: 1em auto;
+  }
+
   & > img,
   & > svg {
     width: 100%;
@@ -91,6 +100,11 @@ $share-button-size: 38px;
     max-width: 700px;
   }
 
+  figure {
+    @include oGridRespondTo($until: M) {
+      margin: 0;
+    }
+  }
 }
 
 .enhanced .o-date {opacity: 0;}
