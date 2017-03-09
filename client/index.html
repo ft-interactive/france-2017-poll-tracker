@@ -115,5 +115,11 @@
     <button class="o-expander__toggle">Show more polls</a>
   </div>
 
+
+  <p>
+    {% set illustrator = data.options | first | get('illustrations') %}
+    <em>Illustrations by {{ illustrator }}</em>
+  </p>
+
 </div>
 {% endblock %}

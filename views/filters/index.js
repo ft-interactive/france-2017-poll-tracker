@@ -122,3 +122,6 @@ export const imageServiceSrcset = (url, widths, queryParams) => widths.map(width
 
 // returns the largest item in an array of numbers
 export const arrayMax = array => Math.max(...array);
+
+// Get an item from an object. Useful when combined with `set` and `first()`.
+export const get = (obj, prop) => obj[prop];
