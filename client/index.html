@@ -8,8 +8,6 @@
   <p>It is the most closely watched French election in years. After the successes of Brexit and Trump campaigns, the world’s eyes have turned on France, where Marine Le Pen, leader of the populist National Front, is set to win the first round of the presidential race on April 23, and enter the run-off against either Emmanuel Macron or Francois Fillon.</p>
 
   <section class="candidates">
-    <h2>The candidates</h2>
-
     <div class="candidates__list">
     {% set latestPoll = (data.round1 | sort(true, false, 'date') | first) %}
     {% set latestPollResult = latestPoll.result %}

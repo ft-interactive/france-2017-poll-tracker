@@ -29,15 +29,6 @@
     }
   }
 
-  > h2 {
-    display: none;
-
-    @include oGridRespondTo(M) {
-      display: block;
-      margin: 0.4em 0;
-    }
-  }
-
   &__read-more {
     text-align: center;
     margin-top: 20px;
