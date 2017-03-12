@@ -129,6 +129,16 @@
         display: inline;
       }
     }
+
+    .candidate__betting-odds {
+      display: block;
+      line-height: .75em;
+      padding-bottom: 0.5em;
+
+      @include oGridRespondTo($from: M) {
+        display: none;
+      }
+    }
   }
 
   .candidate &__description {
