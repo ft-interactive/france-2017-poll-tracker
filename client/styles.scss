@@ -5,7 +5,7 @@ $o-expander-is-silent: false;
 @import 'o-grid/main';
 @import 'o-buttons/main';
 @import 'components/core/main';
-@import './styles/candidate-vars';
+@import 'styles/candidate-vars';
 
 $table-header-border-color: #979797;
 $cell-date-color: #828282;
@@ -42,5 +42,27 @@ $cell-border-color: #CEC6B9;
   .fr-pres-elect--link__text {
     padding-left: 0 !important;
     @include oGridColspan((default: full-width, S: hide))
+  }
+}
+
+p.credit__illustrator, footer.o-typography-footer {
+  max-width: none;
+  margin: 0 !important;
+  padding: 16px 64px !important;
+  text-align: left;
+}
+
+p.credit__illustrator {
+  &:before {
+    display: block;
+    height: 2px;
+    background-color: #ccc1b3;
+    content: '';
+    width: 4em;
+  }
+
+  span {
+    margin: 0.5em 0 0;
+    display: block;
   }
 }
