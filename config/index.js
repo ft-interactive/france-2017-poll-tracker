@@ -49,6 +49,7 @@ export default async () => {
           { date: '2017-04-23', label: '1st round' },
           { date: '2017-05-07', label: 'Run-off' },
         ],
+        minDate: '2017-01-01',
       },
 
       round2: {
@@ -62,6 +63,7 @@ export default async () => {
             })),
           minValue: 0,
           maxValue: 100,
+          minDate: '2017-02-01',
         },
 
         scenario2: {
@@ -74,6 +76,7 @@ export default async () => {
             })),
           minValue: 0,
           maxValue: 100,
+          minDate: '2017-02-01',
         },
       },
     },
