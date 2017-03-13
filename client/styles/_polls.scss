@@ -3,6 +3,27 @@
 
   overflow: hidden;
 
+  &__warning-banner {
+    margin: 1em;
+    padding: 1em 4em 1em;
+    border: 1px solid $cell-border-color;
+    background: oColorsGetPaletteColor('pink-tint2');
+    position: relative;
+    min-height: 3em;
+    text-align: justify;
+    line-height: 1.4em;
+
+    .polls__warning-icon {
+      position: absolute;
+      display: block;
+      left: calc(2em - 16px);
+      top: 22px;
+      background-color: oColorsGetPaletteColor('pink-tint4') !important;
+      border-radius: 3em;
+      @include oIconsGetIcon('warning', oColorsGetPaletteColor('pink-tint2'), 16 * 2);
+    }
+  }
+
   .article-body & {
     max-width: none;
 

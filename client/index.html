@@ -43,6 +43,11 @@
   </section>
 
   <section class="polls">
+    <div class="polls__warning-banner">
+      <i class="polls__warning-icon"></i>
+      {% set caveat = data.options | first | get('caveat') %}
+      <strong>{{ caveat.lede }}</strong> {{ caveat.text }}
+    </div>
     <h2>Who is leading in national opinion polls?</h2>
     <p>First round voting intention</p>
 
