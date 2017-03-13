@@ -27,7 +27,9 @@
           <h3 class="candidate__party-name">
             {{candidate.party}}
             <span class="candidate__polling-at"> — Polling at {{latestPollResult[candidate.key] | default('N/A')}}%</span>
+            {# DISABLED FOR NOW
             <span class="candidate__betting-odds">Bookies odds {{ bettingOdds | get(candidate.key) }}</span>
+            #}
           </h3>
 
           <p class="candidate__description">{{candidate.description}}</p>
@@ -60,6 +62,7 @@
     <h2>How to read the polls</h2>
     <p>It has been a rough couple of elections for political polling, which is why we recommend to view the above as a guide to rather than a prediction of how the votes will be distributed on the day of the election. At this point in time, still around 35 per cent of voters [dynamic bit fed from the spreadsheet? TBC with Alan] have not made up their minds who to vote for or whether to vote at all. The no-shows and first-time voters might be key to the final results.</p>
 
+    {# DISABLED FOR NOW
     <section class="polls__bookies">
       <h2>Another way to look at the race</h2>
       <p>Next President Betting Odds</p>
@@ -84,6 +87,7 @@
         </tbody>
       </table>
     </section>
+    #}
 
     <section class="polls__round-2">
       <div class="polls__round-2__intro">
