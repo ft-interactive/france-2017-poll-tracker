@@ -5,7 +5,7 @@
 {% block article_body %}
 
 <div class="graphic">
-  <p>It is the most closely watched French election in years. After the successes of Brexit and Trump campaigns, the world’s eyes have turned on France, where Marine Le Pen, leader of the populist National Front, is set to win the first round of the presidential race on April 23, and enter the run-off against either Emmanuel Macron or Francois Fillon.</p>
+  <p class="graphic__intro">It is the most closely watched French election in years. After the successes of Brexit and Trump campaigns, the world’s eyes have turned on France, where Marine Le Pen, leader of the populist National Front, is set to win the first round of the presidential race on April 23, and enter the run-off against either Emmanuel Macron or Francois Fillon.</p>
 
   <section class="candidates">
     <div class="candidates__list">
@@ -57,7 +57,7 @@
       <div data-multi-time-series="{{charts.round1 | dump}}"></div>
     </figure>
 
-    <p><small>The chart above displays the five leading presidential candidates. Three other candidates for whom the polls are available are Nicolas Dupont-Aignan, Nathalie Arthaud and Philippe Poutou. The three consistently poll at 3 per cent or below, which does not give them much hope for the run-off.</small></p>
+    <p class="polls__chart-note"><small>The chart above displays the five leading presidential candidates. Three other candidates for whom the polls are available are Nicolas Dupont-Aignan, Nathalie Arthaud and Philippe Poutou. The three consistently poll at 3 per cent or below, which does not give them much hope for the run-off.</small></p>
 
     <h2>How to read the polls</h2>
     <p>It has been a rough couple of elections for political polling, which is why we recommend to view the above as a guide to rather than a prediction of how the votes will be distributed on the day of the election. At this point in time, still around 35 per cent of voters [dynamic bit fed from the spreadsheet? TBC with Alan] have not made up their minds who to vote for or whether to vote at all. The no-shows and first-time voters might be key to the final results.</p>
@@ -94,7 +94,6 @@
         <h2>The run-off</h2>
         <p>If, as is traditionally the case, not one candidate secures the necessary 50 per cent of popular vote in the first round, two contenders will stand in the run-off on May 7. There are two possible scenarios French pollsters are focusing on.</p>
 
-        <h3>Run-off scenarios</h3>
       </div>
 
       <div class="polls__round-2__chart">
