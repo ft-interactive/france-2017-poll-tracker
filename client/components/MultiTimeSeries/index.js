@@ -22,6 +22,7 @@ type Options = {
   maxDate: ?Date,
   minValue: ?number,
   maxValue: ?number,
+  keyDates: ?Array<{date: Date, label: string}>
 }
 
 export default class MultiTimeSeries {
@@ -33,11 +34,17 @@ export default class MultiTimeSeries {
   maxDate: Date;
   minValue: number;
   maxValue: number;
+  keyDates: ?Array<{date: Date, label: string}>
 
-  constructor({ container, width, height, lines, minDate, maxDate, minValue, maxValue }: Options) {
+  constructor({
+    container, width, height, lines,
+    minDate, maxDate, minValue, maxValue,
+    keyDates,
+  }: Options) {
     this.container = container;
     this.width = width;
     this.height = height;
+    this.keyDates = keyDates;
 
     this.lines = lines.map(line => ({
       ...line,
@@ -64,8 +71,8 @@ export default class MultiTimeSeries {
     }
 
     // determine min and max values, unless provided
-    this.minValue = minValue;
-    this.maxValue = maxValue;
+    this.minValue = minValue || 0;
+    this.maxValue = maxValue || 100;
   }
 
   setDimensions(width: number, height: number) {
@@ -75,7 +82,11 @@ export default class MultiTimeSeries {
   }
 
   render() {
-    const { container, height, width, lines, minDate, maxDate, minValue, maxValue } = this;
+    const {
+      container, height, width, lines,
+      minDate, maxDate, minValue, maxValue,
+      keyDates,
+    } = this;
 
     if (!width || !height) throw new Error('Dimensions must be set first');
 
@@ -143,6 +154,34 @@ export default class MultiTimeSeries {
       ;
     }
 
+    // add key date markers
+    if (keyDates && keyDates.length) {
+      keyDates.forEach(({ date, label }) => {
+        const xPos = xScale(date);
+
+        const keyDateGroup = g.append('g')
+          .attr('class', 'key-date')
+          .attr('transform', `translate(${xPos})`);
+
+        keyDateGroup.append('line')
+          .attr('x1', 0)
+          .attr('y1', 0 - margin.top)
+          .attr('x2', 0)
+          .attr('y2', chartHeight)
+          .attr('stroke', '#777')
+          .attr('stroke-width', '1')
+          .attr('stroke-dasharray', '5,5');
+
+        keyDateGroup.append('text')
+          .attr('font-size', '14')
+          .attr('y', '-8')
+          .attr('x', '3')
+          .attr('fill', '#777')
+          .text(label);
+      });
+    }
+
+    // add lines for the time series
     lines.forEach(({ points, color, label }) => {
       // draw this line
       g.append('path')
@@ -178,7 +217,6 @@ export default class MultiTimeSeries {
         .text(`${lastPoint.value}%${label ? ` ${label}` : ''}`)
       ;
     });
-
 
     return this;
   }

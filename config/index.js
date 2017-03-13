@@ -44,6 +44,11 @@ export default async () => {
         })),
         minValue: 0,
         maxValue: 30,
+        maxDate: '2017-05-10',
+        keyDates: [
+          { date: '2017-04-23', label: '1st round' },
+          { date: '2017-05-07', label: 'Run-off' },
+        ],
       },
 
       round2: {
