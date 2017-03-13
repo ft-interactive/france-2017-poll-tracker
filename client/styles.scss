@@ -39,12 +39,13 @@ $cell-border-color: #CEC6B9;
 }
 
 .article-body {
-  > .graphic p {
-    text-align: left;
-    max-width: 680px;
+  .graphic__intro {
+    text-align: center;
+    max-width: 780px;
     line-height: 1.6em;
     margin: 1.5em auto 1.5em;
   }
+
 
 
 }
