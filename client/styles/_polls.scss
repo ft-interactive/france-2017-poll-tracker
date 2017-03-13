@@ -39,6 +39,48 @@
   }
 }
 
+.polls__bookies {
+  .polls__data-table-bookies {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    border-spacing: 0;
+    border-collapse: collapse;
+    @include oGridRespondTo($until: M) {
+      display: none;
+    }
+
+    @include oGridRespondTo($from: M) {
+      width: 100%;
+    }
+
+    thead tr th {
+      border-bottom: 1px solid $table-header-border-color;
+      border-right: 1px solid $cell-border-color;
+      font-size: 1.2em;
+      line-height: 1.2em;
+      text-align: center;
+      padding: .25em 1em;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    tbody td {
+      border-right: 1px solid $cell-border-color;
+      border-bottom: 1px solid $cell-border-color;
+      text-align: center;
+      padding: 0.5em 1em;
+      font-size: 1.2em;
+      line-height: 1.2em;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
 .polls__data-table {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
