@@ -25,6 +25,8 @@ type Options = {
   keyDates: ?Array<{date: Date, label: string}>
 }
 
+let uniqueIdBase = 0;
+
 export default class MultiTimeSeries {
   container: Element;
   height: ?number;
@@ -34,7 +36,8 @@ export default class MultiTimeSeries {
   maxDate: Date;
   minValue: number;
   maxValue: number;
-  keyDates: ?Array<{date: Date, label: string}>
+  keyDates: ?Array<{date: Date, label: string}>;
+  uniqueId: number;
 
   constructor({
     container, width, height, lines,
@@ -45,6 +48,9 @@ export default class MultiTimeSeries {
     this.width = width;
     this.height = height;
     this.keyDates = keyDates;
+
+    this.uniqueId = uniqueIdBase;
+    uniqueIdBase += 1;
 
     this.lines = lines.map(line => ({
       ...line,
@@ -85,7 +91,7 @@ export default class MultiTimeSeries {
     const {
       container, height, width, lines,
       minDate, maxDate, minValue, maxValue,
-      keyDates,
+      keyDates, uniqueId,
     } = this;
 
     if (!width || !height) throw new Error('Dimensions must be set first');
@@ -101,6 +107,17 @@ export default class MultiTimeSeries {
     const margin = { top: 20, right: 120, bottom: 30, left: 50 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
+
+    // add a clipping path for the chart area
+    const clipPathId = `multi-time-series-${uniqueId}-clip-path`;
+    svg.append('clipPath')
+      .attr('id', clipPathId)
+      .append('rect')
+      .attr('width', chartWidth)
+      .attr('height', chartHeight)
+      // .attr('x', margin.left)
+      // .attr('y', margin.top)
+    ;
 
     // make a main container element
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
@@ -192,6 +209,7 @@ export default class MultiTimeSeries {
         .attr('stroke-linecap', 'round')
         .attr('stroke-width', '3')
         .attr('d', drawLine)
+        .attr('clip-path', `url(#${clipPathId})`)
       ;
 
       // draw a dot at the end
