@@ -19,7 +19,15 @@ $cell-border-color: #CEC6B9;
   padding: 0;
 
   header {
-    margin: 1em;
+    margin: 1em 2em 0 !important;
+
+    > p {
+      margin: 0.6em auto 0.8em;
+      max-width: 370px;
+      text-align: center;
+
+    }
+
 
     @include oGridRespondTo(M) {
       margin: 1em 2em;
@@ -28,6 +36,17 @@ $cell-border-color: #CEC6B9;
     width: 100%;
     max-width: 1200px;
   }
+}
+
+.article-body {
+  > .graphic p {
+    text-align: left;
+    max-width: 680px;
+    line-height: 1.6em;
+    margin: 1.5em auto 1.5em;
+  }
+
+
 }
 
 .fr-pres-elec--topic {
@@ -49,11 +68,23 @@ $cell-border-color: #CEC6B9;
 h1.o-typography-heading1{
   text-align: center;
   font-size: 1.8em;
-  line-height: 1.18em;
+  line-height: 1.8em;
+   margin-bottom: 0em;
   @include oGridRespondTo(S) {
      font-size: 3em !important;
-     line-height: 3em !important;
+     line-height: 1.4em !important;
+
     }
+
+}
+
+p.o-typography-lead{
+  text-align: center;
+
+   @include oGridRespondTo(S) {
+
+}
+
 
 }
 
