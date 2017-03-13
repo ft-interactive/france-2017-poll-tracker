@@ -5,7 +5,10 @@
 {% block article_body %}
 
 <div class="graphic">
-  <p class="graphic__intro">It is the most closely watched French election in years. After the successes of Brexit and Trump campaigns, the world’s eyes have turned on France, where Marine Le Pen, leader of the populist National Front, is set to win the first round of the presidential race on April 23, and enter the run-off against either Emmanuel Macron or Francois Fillon.</p>
+
+  <div class="standfirst">
+    <p>It is the most closely watched French election in years. After the successes of Brexit and Trump campaigns, the world’s eyes have turned on France, where Marine Le Pen, leader of the populist National Front, is set to win the first round of the presidential race on April 23, and enter the run-off against either Emmanuel Macron or Francois Fillon.</p>
+  </div>
 
   <section class="candidates">
     <div class="candidates__list">
@@ -117,7 +120,7 @@
     </section>
   </section>
 
-  <div data-o-component="o-expander">
+  <section data-o-component="o-expander">
     <h2>The data</h2>
 
     <table class="polls__data-table o-expander__content">
@@ -152,13 +155,14 @@
       <button class="o-expander__toggle">Show more polls</a>
     </div>
 
-  </div>
+  </section>
 
-
-  <p class="credit__illustrator">
-    {% set illustrator = data.options | first | get('illustrations') %}
-    <span>Illustrations by {{ illustrator }}</span>
-  </p>
+  <section class="credits">
+    <p class="credit__illustrator">
+      {% set illustrator = data.options | first | get('illustrations') %}
+      <span>Illustrations by {{ illustrator }}</span>
+    </p>
+  </section>
 
 </div>
 {% endblock %}

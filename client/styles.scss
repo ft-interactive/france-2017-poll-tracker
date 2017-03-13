@@ -16,43 +16,65 @@ $cell-border-color: #CEC6B9;
 @import './styles/polls';
 
 .article-head {
-  padding: 0;
-
   header {
-    margin: 1em 2em 0 !important;
-
-    > p {
-      margin: 0.2em auto 0.8em;
-      max-width: 370px;
-      text-align: center;
-
-    }
-
-
-    @include oGridRespondTo(M) {
-      margin: 1em 2em;
-    }
-
     width: 100%;
     max-width: 1200px;
+
+    > p {
+      margin: 0 0 0.8em;
+      max-width: 370px;
+      font-size: 18px;
+    }
+
+    @include oGridRespondTo(M) {
+      > p {
+        text-align: center;
+      }
+    }
   }
 }
 
-.article-body {
-  .graphic p {
+h1.o-typography-heading1 {
+  font-size: 1.8em;
+  line-height: 1;
+  margin: 0.5em 0 0.3em;
+
+  @include oGridRespondTo(S) {
+    font-size: 2.4em;
+  }
+
+  @include oGridRespondTo(M) {
     text-align: center;
-    max-width: 780px;
+    font-size: 3em !important;
+    line-height: 1.4em !important;
+  }
+}
+
+.standfirst {
+  padding: 0 10px;
+
+  > p {
     line-height: 1.6em;
-    margin: 1.5em auto 1.5em;
   }
 
-  .graphic h2 {
-    font-size: 1.618em;
-    text-align: center;
+  @include oGridRespondTo(M) {
+    padding: 0 20px;
+
+    > p {
+      text-align: center;
+      max-width: 780px;
+      margin: 1.5em auto;
+    }
   }
+}
 
+.graphic p {
+  // margin: 1.5em auto 1.5em;
+}
 
-
+.graphic h2 {
+  font-size: 1.618em;
+  // text-align: center;
 }
 
 .fr-pres-elec--topic {
@@ -69,29 +91,6 @@ $cell-border-color: #CEC6B9;
     padding-left: 0 !important;
     @include oGridColspan((default: full-width, S: hide))
   }
-}
-
-h1.o-typography-heading1{
-  text-align: center;
-  font-size: 1.8em;
-  line-height: 1.8em;
-   margin-bottom: 0em;
-  @include oGridRespondTo(S) {
-     font-size: 3em !important;
-     line-height: 1.4em !important;
-
-    }
-
-}
-
-p.o-typography-lead{
-  text-align: center;
-
-   @include oGridRespondTo(S) {
-
-}
-
-
 }
 
 p.credit__illustrator, footer.o-typography-footer {
