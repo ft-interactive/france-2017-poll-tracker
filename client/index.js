@@ -26,6 +26,11 @@ expander.init(null, {
       ...line,
       points: line.points.map(point => ({ ...point, date: new Date(point.date) })),
     })),
+    keyDates: settings.keyDates ?
+      settings.keyDates.map(kd => ({ ...kd, date: new Date(kd.date) })) :
+      undefined,
+    minDate: settings.minDate ? new Date(settings.minDate) : undefined,
+    maxDate: settings.maxDate ? new Date(settings.maxDate) : undefined,
   });
 
   // function to [re]size the chart to fit its container, so we can control it from CSS
