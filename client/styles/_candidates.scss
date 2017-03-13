@@ -107,16 +107,20 @@
   .candidate &__name {
     font-size: 1.15em;
     font-weight: 500;
-    line-height: 1.1em;
+    line-height: 1.2em;
     margin-top: 0;
     margin-bottom: 0;
+    @include oGridRespondTo(M) {
+      font-size: 1.3em;
+      margin-top: 0.5em;
+    }
   }
 
   .candidate &__party-name {
     font-weight: 700;
     font-family: MetricWeb, sans-serif;
     padding-left: 0;
-    font-size: 0.9em;
+    font-size: 0.95em;
 
     .candidate__polling-at {
       display: none;
@@ -138,7 +142,16 @@
 
   .candidate &__description {
     font-size: 1em;
+    line-height: 1.3em !important;
     color: #666;
-    margin: 0 0 10px;
+    margin: 0 0 10px !important;
+    
+    @include oGridRespondTo(M){
+      text-align: center !important;
+    }
+
+   
   }
+
+
 }
