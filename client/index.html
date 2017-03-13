@@ -109,14 +109,20 @@
         {% endfor %}
       </tbody>
     </table>
+    <div class="polls__data-table-footnote">
+      {% set footnote = data.options | first | get('table footnote') %}
+      {{ footnote }}
+    </div>
+    <div class="polls__toggle-button">
+      <button class="o-expander__toggle">Show more polls</a>
+    </div>
 
-    <button class="o-expander__toggle">Show more polls</a>
   </div>
 
 
-  <p>
+  <p class="credit__illustrator">
     {% set illustrator = data.options | first | get('illustrations') %}
-    <em>Illustrations by {{ illustrator }}</em>
+    <span>Illustrations by {{ illustrator }}</span>
   </p>
 
 </div>

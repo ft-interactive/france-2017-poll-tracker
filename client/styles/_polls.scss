@@ -93,11 +93,23 @@
   }
 }
 
+.polls__toggle-button {
+  text-align: center;
+  padding: 1em;
+
+  @include oGridRespondTo($from: M) {
+    text-align: right;
+  }
+}
+
+.polls__data-table-footnote {
+  color: #ccc;
+}
+
 .o-expander__toggle {
-  @include oButtons($theme: uncolored);
+  @include oButtons();
   @include oButtonsSize(big);
-  display: block;
-  margin: 1em auto;
+  display: inline-block;
 
   i {
     display: none;
