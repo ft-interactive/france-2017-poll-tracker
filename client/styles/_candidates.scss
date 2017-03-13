@@ -8,8 +8,6 @@
   max-width: 1200px;
   margin: 0 auto;
 
-  top-border: 1px solid #979797;
-
   &__list {
     padding: 0;
 
@@ -64,9 +62,18 @@
   }
 
   &__image {
+    overflow: hidden;
+    border-radius: 100%;
+    border: 1.5px solid transparent;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+
+    @each $slug, $color in $candidates {
+      .candidate--#{$slug} & { border-color: $color }
+    }
+
     @include oGridRespondTo($until: M) {
-      width: 100px;
-      height: 100px;
       position: absolute;
       left: 0;
       top: 10px;
@@ -74,26 +81,14 @@
 
     @include oGridRespondTo(M) {
       margin: 0 auto;
+      width: 130px;
+      height: 130px;
+      border-width: 2px;
     }
 
     > img {
-      border-radius: 100%;
-      border: 1.5px solid transparent;
-      box-sizing: border-box;
       width: 100%;
-      height: 100%;
-      display: block;
-
-      @include oGridRespondTo(M) { border-width: 2px; }
-
-      @each $slug, $color in $candidates {
-        .candidate--#{$slug} & { border-color: $color }
-      }
-    }
-
-    @include oGridRespondTo(M) {
-      width: 130px;
-      height: 130px;
+      display: block;      
     }
   }
 
