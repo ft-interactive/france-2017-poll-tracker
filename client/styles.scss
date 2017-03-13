@@ -22,7 +22,7 @@ $cell-border-color: #CEC6B9;
     margin: 1em 2em 0 !important;
 
     > p {
-      margin: 0.6em auto 0.8em;
+      margin: 0.2em auto 0.8em;
       max-width: 370px;
       text-align: center;
 
@@ -39,11 +39,15 @@ $cell-border-color: #CEC6B9;
 }
 
 .article-body {
-  .graphic__intro {
+  .graphic p {
     text-align: center;
     max-width: 780px;
     line-height: 1.6em;
     margin: 1.5em auto 1.5em;
+  }
+
+  .graphic h2 {
+    text-align: center;
   }
 
 

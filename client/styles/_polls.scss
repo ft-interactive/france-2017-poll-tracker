@@ -10,7 +10,6 @@
     background: oColorsGetPaletteColor('pink-tint2');
     position: relative;
     min-height: 3em;
-    text-align: justify;
     line-height: 1.4em;
 
     .polls__warning-icon {
@@ -33,9 +32,9 @@
   }
 
   > h2 {
-    font-size: 1.4em;
      @include oGridRespondTo(M) {
       margin: 2em 0 0;
+
     }
   }
 
@@ -57,6 +56,12 @@
     [data-multi-time-series] {
       height: 250px;
     }
+  }
+
+  small {
+    font-family: MetricWeb, sans-serif;
+    color: oColorsGetPaletteColor('pink-tint5');
+    font-size: 0.9em;
   }
 }
 
