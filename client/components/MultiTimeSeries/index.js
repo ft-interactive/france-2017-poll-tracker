@@ -185,12 +185,12 @@ export default class MultiTimeSeries {
           .attr('y1', 0 - margin.top)
           .attr('x2', 0)
           .attr('y2', chartHeight)
-          .attr('stroke', '#777')
+          .attr('stroke', '#333')
           .attr('stroke-width', '1')
           .attr('stroke-dasharray', '5,5');
 
         keyDateGroup.append('text')
-          .attr('font-size', '14')
+          .attr('font-size', '15')
           .attr('y', '-8')
           .attr('x', '3')
           .attr('fill', '#777')

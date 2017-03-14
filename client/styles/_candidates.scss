@@ -29,7 +29,9 @@
 
   &__read-more {
     text-align: center;
-    margin: 20px auto 50px;
+    margin: 30px auto 30px;
+
+  
 
     > a {
       @include oButtons();
@@ -42,8 +44,8 @@
   position: relative;
 
   @include oGridRespondTo($until: M) {
-    min-height: 100px + 15px;
-    padding-left: 100px + 15px;
+    min-height: 100px + 5px;
+    padding-left: 100px + 5px;
   }
 
   @include oGridRespondTo(M) {
@@ -66,8 +68,13 @@
     border-radius: 100%;
     border: 1.5px solid transparent;
     box-sizing: border-box;
+    width: 90px;
+    height: 90px;
+
+    @include oGridRespondTo(M) {
     width: 100px;
     height: 100px;
+    }
 
     @each $slug, $color in $candidates {
       .candidate--#{$slug} & { border-color: $color }
@@ -105,13 +112,12 @@
   }
 
   .candidate &__name {
-    font-size: 1.15em;
+    font-size: 1.3em;
     font-weight: 500;
     line-height: 1.2em;
     margin-top: 0;
     margin-bottom: 0;
     @include oGridRespondTo(M) {
-      font-size: 1.3em;
       margin-top: 0.5em;
     }
   }

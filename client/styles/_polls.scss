@@ -4,13 +4,18 @@
   overflow: hidden;
 
   &__warning-banner {
-    margin: 1em;
-    padding: 1em 4em 1em;
+    margin: 0.5em;
+    padding: 1em 1.2em 1em 4em;
     border: 1px solid $cell-border-color;
     background: oColorsGetPaletteColor('pink-tint2');
     position: relative;
     min-height: 3em;
     line-height: 1.4em;
+
+     @include oGridRespondTo(M) {
+       margin: 1em auto;
+       padding: 1em 4em 1em;
+    }
 
     .polls__warning-icon {
       position: absolute;
@@ -31,12 +36,7 @@
     }
   }
 
-  > h2 {
-     @include oGridRespondTo(M) {
-      margin: 2em 0 0;
-
-    }
-  }
+  
 
   &__round-1 {
     [data-multi-time-series] {
@@ -47,7 +47,22 @@
   &__round-2 {
     @include oGridRow;
 
-    &__intro { @include oGridColspan(12); }
+    &__intro { @include oGridColspan(12);
+
+      > h2 {
+      }
+     
+     > p {
+     
+        max-width: 780px;
+        margin: 0 auto 30px;
+
+      @include oGridRespondTo(M) {
+         text-align: center;
+      }
+     }
+
+    }
 
     &__chart {
       @include oGridColspan((default: 12, M: 6));
@@ -119,11 +134,13 @@
 
   > h2 {
     font-size: 1.4em;
-    margin: 1.2em 0 0;
+
 
      @include oGridRespondTo(M) {
       margin: 2em 0 1em !important;
+      text-align: center;
     }
+
   }
 
   thead, tbody, tr {

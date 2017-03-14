@@ -28,6 +28,7 @@ $cell-border-color: #CEC6B9;
 
     @include oGridRespondTo(M) {
       > p {
+        margin: inherit;
         text-align: center;
       }
     }
@@ -37,7 +38,7 @@ $cell-border-color: #CEC6B9;
 h1.o-typography-heading1 {
   font-size: 1.8em;
   line-height: 1;
-  margin: 0.5em 0 0.3em;
+  margin: 0.5em 0 0.2em;
 
   @include oGridRespondTo(S) {
     font-size: 2.4em;
@@ -49,6 +50,14 @@ h1.o-typography-heading1 {
     line-height: 1.4em !important;
   }
 }
+
+.o-typography-lead {
+  font-size: 1.6em !important;
+  line-height: 1em;
+
+}
+
+
 
 .standfirst {
   padding: 0 10px;
@@ -73,9 +82,18 @@ h1.o-typography-heading1 {
 }
 
 .graphic h2 {
-  font-size: 1.618em;
+  margin-top: 1em;
+  font-size: 1.3em;
+
+  @include oGridRespondTo(M) {
+    font-size: 1.618em;
+
+  }
+  
   // text-align: center;
 }
+
+
 
 .fr-pres-elec--topic {
   .fr-pres-elect--link__image {
@@ -96,21 +114,30 @@ h1.o-typography-heading1 {
 p.credit__illustrator, footer.o-typography-footer {
   max-width: none;
   margin: 0 !important;
-  padding: 16px 64px !important;
+  padding: 16px 10px !important;
+  
   text-align: left;
+
+  @include oGridRespondTo(M) {
+    padding: 16px 64px !important;
+  }
 }
 
 p.credit__illustrator {
   &:before {
     display: block;
-    height: 2px;
+    height: 1px;
     background-color: #ccc1b3;
     content: '';
     width: 4em;
   }
 
   span {
-    margin: 0.5em 0 0;
+    font-family: MetricWeb, sans-serif;
+    font-size: 0.85em;
+    margin: 0.7em 0 0;
     display: block;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 }
