@@ -114,8 +114,13 @@ h1.o-typography-heading1 {
 p.credit__illustrator, footer.o-typography-footer {
   max-width: none;
   margin: 0 !important;
-  padding: 16px 64px !important;
+  padding: 16px 10px !important;
+  
   text-align: left;
+
+  @include oGridRespondTo(M) {
+    padding: 16px 64px !important;
+  }
 }
 
 p.credit__illustrator {
