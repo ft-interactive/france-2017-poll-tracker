@@ -28,6 +28,7 @@ $cell-border-color: #CEC6B9;
 
     @include oGridRespondTo(M) {
       > p {
+        margin: inherit;
         text-align: center;
       }
     }
@@ -37,7 +38,7 @@ $cell-border-color: #CEC6B9;
 h1.o-typography-heading1 {
   font-size: 1.8em;
   line-height: 1;
-  margin: 0.5em 0 0.3em;
+  margin: 0.5em 0 0.2em;
 
   @include oGridRespondTo(S) {
     font-size: 2.4em;
@@ -49,6 +50,14 @@ h1.o-typography-heading1 {
     line-height: 1.4em !important;
   }
 }
+
+.o-typography-lead {
+  font-size: 1.6em !important;
+  line-height: 1em;
+
+}
+
+
 
 .standfirst {
   padding: 0 10px;
@@ -76,6 +85,8 @@ h1.o-typography-heading1 {
   font-size: 1.618em;
   // text-align: center;
 }
+
+
 
 .fr-pres-elec--topic {
   .fr-pres-elect--link__image {
