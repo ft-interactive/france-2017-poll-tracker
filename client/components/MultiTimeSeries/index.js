@@ -57,6 +57,10 @@ export default class MultiTimeSeries {
       points: line.points.sort((a, b) => a.date - b.date),
     }));
 
+    this.lines.sort((a, b) =>
+      b.points[b.points.length - 1].value - a.points[a.points.length - 1].value,
+    );
+
     // determine min and max dates, unless provided
     {
       let realMinDate = minDate;
@@ -199,6 +203,7 @@ export default class MultiTimeSeries {
     }
 
     // add lines for the time series
+    let previousLabelPos = -Infinity;
     lines.forEach(({ points, color, label }) => {
       // draw this line
       g.append('path')
@@ -224,16 +229,18 @@ export default class MultiTimeSeries {
       ;
 
       // draw a label at the end
+      const labelPos = yScale(lastPoint.value);
       g.append('text')
         .attr('fill', color)
         .attr('x', xScale(lastPoint.date))
-        .attr('y', yScale(lastPoint.value))
+        .attr('y', Math.max(labelPos, previousLabelPos + 15))
         .attr('font-size', '17px')
         .attr('font-weight', '600')
         .attr('dx', '8px')
         .attr('dy', '.3em')
         .text(`${lastPoint.value}%${label ? ` ${label}` : ''}`)
       ;
+      previousLabelPos = labelPos;
     });
 
     return this;
