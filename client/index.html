@@ -116,11 +116,11 @@
     </section>
   </section>
 
-  <section class="polls__data-table" data-o-component="o-expander">
+  <section class="underlying-data" data-o-component="o-expander">
     <h2>The underlying polls</h2>
-    <p>Below is a full list of individual opinion polls for the first round of the French presidential election</p>
+    <p>Below is a full list of individual opinion polls for the first round of the French presidential election.</p>
 
-    <table class="polls__data-table o-expander__content">
+    <table class="underlying-data o-expander__content">
       <thead>
         <tr>
           <td>Date</td>
@@ -134,7 +134,7 @@
       <tbody>
         {% for poll in data.round1 %}
         <tr>
-          <td class="polls__data-table__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
+          <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
           <td>{{ poll.pollster }}</td>
           {% for candidate in data.candidates %}
           <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
@@ -144,11 +144,11 @@
         {% endfor %}
       </tbody>
     </table>
-    <div class="polls__data-table-footnote">
+    <div class="underlying-data__footnote">
       {% set footnote = data.options | first | get('table footnote') %}
       {{ footnote }}
     </div>
-    <div class="polls__toggle-button">
+    <div class="underlying-data__toggle-button">
       <button class="o-expander__toggle">Show more polls</a>
     </div>
 
@@ -157,7 +157,7 @@
   <section class="credits">
     <p class="credit__illustrator">
       {% set illustrator = data.options | first | get('illustrations') %}
-      <span>Illustrations by {{ illustrator }}</span>
+      <span>Illustrations by {{ illustrator }}. Source: FT research</span>
     </p>
   </section>
 

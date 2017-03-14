@@ -31,8 +31,6 @@
     text-align: center;
     margin: 30px auto 30px;
 
-  
-
     > a {
       @include oButtons();
       @include oButtonsSize(big);
@@ -70,11 +68,6 @@
     box-sizing: border-box;
     width: 90px;
     height: 90px;
-
-    @include oGridRespondTo(M) {
-    width: 100px;
-    height: 100px;
-    }
 
     @each $slug, $color in $candidates {
       .candidate--#{$slug} & { border-color: $color }

@@ -36,7 +36,7 @@
     }
   }
 
-  
+
 
   &__round-1 {
     [data-multi-time-series] {
@@ -51,9 +51,9 @@
 
       > h2 {
       }
-     
+
      > p {
-     
+
         max-width: 780px;
         margin: 0 auto 30px;
 
@@ -124,75 +124,6 @@
       }
     }
   }
-}
-
-.polls__data-table {
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  border-spacing: 0;
-  border-collapse: collapse;
-
-  > h2 {
-    font-size: 1.4em;
-
-
-     @include oGridRespondTo(M) {
-      margin: 2em 0 1em !important;
-      text-align: center;
-    }
-
-  }
-
-  thead, tbody, tr {
-    width: 100%;
-  }
-
-  thead tr td {
-    border-bottom: 1px solid $table-header-border-color;
-    line-height: 1.2em;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 0 3em;
-
-    &:first-child, &:nth-child(2) {
-      text-align: left;
-      padding: 0;
-    }
-  }
-
-  tbody td {
-    border-right: 1px solid $cell-border-color;
-    border-bottom: 1px solid $cell-border-color;
-    text-align: center;
-    padding: 0.25em 1em;
-
-    &.polls__data-table__date, &:last-child {
-      border-right: 0;
-    }
-
-    &.polls__data-table__date, &:nth-child(2) {
-      text-align: left;
-      padding-left: 0;
-    }
-  }
-
-  .polls__data-table__date {
-    color: $cell-date-color;
-    min-width: 4em;
-  }
-}
-
-.polls__toggle-button {
-  text-align: center;
-  padding: 1em;
-
-  @include oGridRespondTo($from: M) {
-    text-align: right;
-  }
-}
-
-.polls__data-table-footnote {
-  color: #ccc;
 }
 
 .o-expander__toggle {

@@ -14,6 +14,7 @@ $cell-border-color: #CEC6B9;
 
 @import './styles/candidates';
 @import './styles/polls';
+@import './styles/underlying-data';
 
 .article-head {
   header {
@@ -54,10 +55,7 @@ h1.o-typography-heading1 {
 .o-typography-lead {
   font-size: 1.6em !important;
   line-height: 1em;
-
 }
-
-
 
 .standfirst {
   padding: 0 10px;
@@ -77,23 +75,15 @@ h1.o-typography-heading1 {
   }
 }
 
-.graphic p {
-  // margin: 1.5em auto 1.5em;
-}
-
 .graphic h2 {
   margin-top: 1em;
   font-size: 1.3em;
 
   @include oGridRespondTo(M) {
     font-size: 1.618em;
-
+    text-align: center;
   }
-  
-  // text-align: center;
 }
-
-
 
 .fr-pres-elec--topic {
   .fr-pres-elect--link__image {
@@ -115,7 +105,7 @@ p.credit__illustrator, footer.o-typography-footer {
   max-width: none;
   margin: 0 !important;
   padding: 16px 10px !important;
-  
+
   text-align: left;
 
   @include oGridRespondTo(M) {
