@@ -14,7 +14,7 @@ export default () => ({ // eslint-disable-line
   headline: 'French election poll tracker',
 
   // summary === standfirst (Summary is what the content API calls it)
-  summary: 'Who is leading the presidential race?',
+  // summary: 'Who is leading the presidential race?',
 
   topic: {
     name: 'France presidential election',
