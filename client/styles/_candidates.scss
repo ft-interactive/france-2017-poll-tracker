@@ -29,7 +29,9 @@
 
   &__read-more {
     text-align: center;
-    margin: 20px auto 50px;
+    margin: 30px auto 30px;
+
+  
 
     > a {
       @include oButtons();
