@@ -118,9 +118,9 @@
 
   <section class="underlying-data" data-o-component="o-expander">
     <h2>The underlying polls</h2>
-    <p>Below is a full list of individual opinion polls for the first round of the French presidential election.</p>
+    <p class="underlying-data__intro">Below is a full list of individual opinion polls for the first round of the French presidential election.</p>
 
-    <table class="underlying-data o-expander__content">
+    <table class="underlying-data__table o-expander__content">
       <thead>
         <tr>
           <td>Date</td>
@@ -148,10 +148,12 @@
       {% set footnote = data.options | first | get('table footnote') %}
       {{ footnote }}
     </div>
+
     <div class="underlying-data__toggle-button">
       <button class="o-expander__toggle">Show more polls</a>
     </div>
 
+    <p class="underlying-data__source">Source: FT Research</p>
   </section>
 
   <section class="credits">

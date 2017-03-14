@@ -1,14 +1,6 @@
 .underlying-data {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  border-spacing: 0;
-  border-collapse: collapse;
-
-  p {
-    text-align: center;
-    max-width: 780px;
-    margin: 1.5em auto;
-  }
 
   h2 {
     font-size: 1.4em;
@@ -17,6 +9,17 @@
       margin: 2em 0 1em !important;
       text-align: center;
     }
+  }
+
+  .o-typography-body-wrapper &__intro {
+    text-align: center;
+    max-width: 780px;
+    margin: 1.5em auto;
+  }
+
+  &__table {
+    border-spacing: 0;
+    border-collapse: collapse;
   }
 
   thead, tbody, tr {
@@ -57,17 +60,22 @@
     min-width: 4em;
   }
 
+  &__footnote {
+    color: #ccc;
+  }
 
   &__toggle-button {
     text-align: center;
-    padding: 1em;
+    padding: 1em 0;
 
     @include oGridRespondTo($from: M) {
       text-align: right;
     }
   }
 
-  &__footnote {
-    color: #ccc;
+  &__source {
+    color: oColorsGetPaletteColor('pink-tint5');
+    font-family: MetricWeb, sans-serif;
+    font-size: 0.8em;
   }
 }
