@@ -82,7 +82,14 @@ h1.o-typography-heading1 {
 }
 
 .graphic h2 {
-  font-size: 1.618em;
+  margin-top: 1em;
+  font-size: 1.3em;
+
+  @include oGridRespondTo(M) {
+    font-size: 1.618em;
+
+  }
+  
   // text-align: center;
 }
 

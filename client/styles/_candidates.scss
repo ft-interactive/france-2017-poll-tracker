@@ -68,8 +68,13 @@
     border-radius: 100%;
     border: 1.5px solid transparent;
     box-sizing: border-box;
+    width: 90px;
+    height: 90px;
+
+    @include oGridRespondTo(M) {
     width: 100px;
     height: 100px;
+    }
 
     @each $slug, $color in $candidates {
       .candidate--#{$slug} & { border-color: $color }
