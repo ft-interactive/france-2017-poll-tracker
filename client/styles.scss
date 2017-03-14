@@ -103,14 +103,18 @@ p.credit__illustrator, footer.o-typography-footer {
 p.credit__illustrator {
   &:before {
     display: block;
-    height: 2px;
+    height: 1px;
     background-color: #ccc1b3;
     content: '';
     width: 4em;
   }
 
   span {
-    margin: 0.5em 0 0;
+    font-family: MetricWeb, sans-serif;
+    font-size: 0.85em;
+    margin: 0.7em 0 0;
     display: block;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 }
