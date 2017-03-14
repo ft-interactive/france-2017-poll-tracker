@@ -155,3 +155,10 @@
     }
   }
 }
+
+// HACK: hide key-date markers on mobile, as they get squashed
+@include oGridRespondTo($until: M) {
+  .key-date {
+    visibility: hidden;
+  }
+}
