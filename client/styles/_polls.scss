@@ -184,12 +184,21 @@
 
 .polls__toggle-button {
   text-align: center;
-  padding: 1em;
+  padding: 1em 0;
 
   @include oGridRespondTo($from: M) {
     text-align: right;
   }
+
+ 
 }
+
+ .polls__data-table 
+  .polls__source {
+    color: oColorsGetPaletteColor('pink-tint5');
+    font-family: WebMetric, sans-serif;
+    font-size: 0.8em;
+  }
 
 .polls__data-table-footnote {
   color: #ccc;
