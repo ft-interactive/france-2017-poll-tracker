@@ -53,9 +53,13 @@
       }
      
      > p {
-      text-align: center;
-      max-width: 780px;
-      margin: 0 auto 30px;
+     
+        max-width: 780px;
+        margin: 0 auto 30px;
+        
+      @include oGridRespondTo(M) {
+         text-align: center;
+      }
      }
 
     }
