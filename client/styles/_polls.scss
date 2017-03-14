@@ -13,7 +13,7 @@
     line-height: 1.4em;
 
      @include oGridRespondTo(M) {
-       margin: 1em;
+       margin: 1em auto;
        padding: 1em 4em 1em;
     }
 
