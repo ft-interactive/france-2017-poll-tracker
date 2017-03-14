@@ -48,6 +48,9 @@
     @include oGridRow;
 
     &__intro { @include oGridColspan(12);
+
+      > h2 {
+      }
      
      > p {
       text-align: center;

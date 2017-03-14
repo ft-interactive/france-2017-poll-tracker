@@ -44,8 +44,8 @@
   position: relative;
 
   @include oGridRespondTo($until: M) {
-    min-height: 100px + 15px;
-    padding-left: 100px + 15px;
+    min-height: 100px + 5px;
+    padding-left: 100px + 5px;
   }
 
   @include oGridRespondTo(M) {
@@ -112,13 +112,12 @@
   }
 
   .candidate &__name {
-    font-size: 1.15em;
+    font-size: 1.3em;
     font-weight: 500;
     line-height: 1.2em;
     margin-top: 0;
     margin-bottom: 0;
     @include oGridRespondTo(M) {
-      font-size: 1.3em;
       margin-top: 0.5em;
     }
   }
