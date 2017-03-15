@@ -16,6 +16,10 @@ $cell-border-color: #CEC6B9;
 @import './styles/polls';
 @import './styles/underlying-data';
 
+.article__byline {
+  font-size: 15px;
+}
+
 .article-head {
   header {
     width: 100%;
