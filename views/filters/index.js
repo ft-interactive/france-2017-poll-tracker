@@ -2,6 +2,7 @@ import markdownIt from 'markdown-it';
 import removeMarkdown from 'remove-markdown';
 import { utcFormat } from 'd3-time-format';
 import nunjucks from 'nunjucks';
+import he from 'he';
 
 export { default as slugify } from 'slugify';
 const SafeString = nunjucks.runtime.SafeString;
@@ -126,3 +127,6 @@ export const arrayMax = array => Math.max(...array);
 
 // Get an item from an object. Useful when combined with `set` and `first()`.
 export const get = (obj, prop) => obj[prop];
+
+// replace spaces with '&nbsp;'
+export const noBreak = string => new SafeString(he.encode(string).split(' ').join('&nbsp'));

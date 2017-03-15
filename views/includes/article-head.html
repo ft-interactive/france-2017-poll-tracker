@@ -32,7 +32,7 @@
     {%- for author in byline -%}
       {{ " and " if not loop.first and loop.last else (", " if not loop.first else "") }}
       {%- if author.url -%}
-        <a href="{{ author.url }}" class="o-typography-link-topic o-typography-link-topic--small" itemprop="author">{{ author.name }}</a>
+        <a href="{{ author.url }}" class="o-typography-link-topic o-typography-link-topic--small" itemprop="author">{{ author.name | noBreak }}</a>
       {%- else -%}
         {{ author.name }}
       {%- endif -%}
