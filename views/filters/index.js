@@ -24,8 +24,9 @@ export function isotime(date) {
 }
 
 // strftime format docs: https://github.com/d3/d3-time-format
-export function strftime(date, format = defaultFTDateFormat) {
-  date = new Date(date);
+export function strftime(_date, format = defaultFTDateFormat) {
+  const date = new Date(_date);
+
   if (!date) {
     return '';
   } else if (!(date instanceof Date)) {
