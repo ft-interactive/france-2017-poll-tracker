@@ -58,7 +58,6 @@ export default async () => {
             .filter(({ key }) => key === 'macron' || key === 'lepen')
             .map(({ color, name, key }) => ({
               color,
-              label: name.last,
               points: makeRollingAverage(data.round2, poll => poll.scenario1[key]),
             })),
           minValue: 0,
@@ -71,7 +70,6 @@ export default async () => {
             .filter(({ key }) => key === 'fillon' || key === 'lepen')
             .map(({ color, name, key }) => ({
               color,
-              label: name.last,
               points: makeRollingAverage(data.round2, poll => poll.scenario2[key]),
             })),
           minValue: 0,
