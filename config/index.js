@@ -14,6 +14,7 @@ export default async () => {
 
   const data = (await axios.get(combinedEndpoint)).data;
   const byline = data.options.map(item => item.byline);
+
   // sort all polls by date
   [data.round1, data.round2].forEach((sheet) => {
     sheet.sort((a, b) => new Date(a.date) - new Date(b.date));
