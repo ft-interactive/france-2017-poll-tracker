@@ -28,8 +28,7 @@
         <div class="candidate__details">
           <h2 class="candidate__name">{{candidate.name.first}} {{candidate.name.last}}</h2>
           <h3 class="candidate__party-name">
-            {{candidate.party}}
-            <span class="candidate__polling-at"> — Polling at {{latestPollResult[candidate.key] | default('N/A')}}%</span>
+            {{candidate.party}}<span class="candidate__polling-at">&emsp13;&middot;&emsp13;Polling at {{latestPollResult[candidate.key] | default('N/A')}}%</span>
             {# DISABLED FOR NOW
             <span class="candidate__betting-odds">Bookies odds {{ bettingOdds | get(candidate.key) }}</span>
             #}
