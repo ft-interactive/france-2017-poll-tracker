@@ -56,7 +56,7 @@ export default async () => {
         scenario1: {
           lines: data.candidates
             .filter(({ key }) => key === 'macron' || key === 'lepen')
-            .map(({ color, name, key }) => ({
+            .map(({ color, key }) => ({
               color,
               points: makeRollingAverage(data.round2, poll => poll.scenario1[key]),
             })),
@@ -68,7 +68,7 @@ export default async () => {
         scenario2: {
           lines: data.candidates
             .filter(({ key }) => key === 'fillon' || key === 'lepen')
-            .map(({ color, name, key }) => ({
+            .map(({ color, key }) => ({
               color,
               points: makeRollingAverage(data.round2, poll => poll.scenario2[key]),
             })),
