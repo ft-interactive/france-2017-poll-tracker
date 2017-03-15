@@ -20,7 +20,7 @@
 
 <p>
   {%- if publishedDate -%}
-  <time class="article__timestamp o-date o-typography-timestamp"
+  <span class="o-typography-timestamp">Updated</span> <time class="article__timestamp o-date o-typography-timestamp"
           data-o-component="o-date" datetime="{{ publishedDate | isotime }}"
           itemprop="datePublished" content="{{ publishedDate | isotime }}"
           data-o-date-js>{{ publishedDate | ftdate }}</time>
