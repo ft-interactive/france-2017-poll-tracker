@@ -132,7 +132,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for poll in data.round1 %}
+        {% for poll in data.round1 | reverse %}
         <tr>
           <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
           <td>{{ poll.pollster }}</td>
