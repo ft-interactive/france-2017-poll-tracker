@@ -26,14 +26,14 @@ $cell-border-color: #CEC6B9;
     max-width: 1200px;
 
     > p {
-      margin: 0 0 0.8em;
+      margin: 0 0 0.3em;
       max-width: 370px;
       font-size: 18px;
     }
 
     @include oGridRespondTo(M) {
       > p {
-        margin: inherit;
+        margin: 0 auto;
         text-align: center;
       }
     }
@@ -43,7 +43,7 @@ $cell-border-color: #CEC6B9;
 h1.o-typography-heading1 {
   font-size: 1.8em;
   line-height: 1;
-  margin: 0.5em 0 0.2em;
+  margin: 1em 0 0.2em;
 
   @include oGridRespondTo(S) {
     font-size: 2.4em;
