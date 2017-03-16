@@ -1,4 +1,5 @@
 .underlying-data {
+  @include oGridContainer();
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 
