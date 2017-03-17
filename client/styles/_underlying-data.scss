@@ -74,13 +74,13 @@
       border-right: 0;
     }
 
-    &:nth-child(n+3) {
-         text-align: right;
-         width:12%;
-         // padding-right: 5%;
-       }
+    &:nth-child(n + 3) {
+      text-align: right;
+      width:12%;
+    }
 
-    &.underlying-data__date, &:nth-child(2) {
+    &.underlying-data__date,
+    &:nth-child(2) {
       text-align: left;
       padding-left: 0;
     }
