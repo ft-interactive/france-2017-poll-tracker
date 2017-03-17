@@ -108,7 +108,7 @@ export default class MultiTimeSeries {
     svg.attr('height', height);
 
     // determine chart dimensions - TODO: ensure right margin is big enough for biggest label?
-    const margin = { top: 20, right: 60, bottom: 30, left: 40 };
+    const margin = { top: 20, right: 60, bottom: 30, left: 20 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
@@ -151,7 +151,8 @@ export default class MultiTimeSeries {
     g.append('g')
       .attr('transform', `translate(0,${chartHeight})`)
       .attr('class', 'x-axis')
-      .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(1)))
+      .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(1))
+        .tickFormat(d3.timeFormat('%b')))
     ;
 
     // add y-axis
@@ -206,6 +207,18 @@ export default class MultiTimeSeries {
     let previousLabelPos = -Infinity;
     lines.forEach(({ points, color, label }) => {
       // draw this line
+      g.append('path')
+        .datum(points)
+        .attr('fill', 'none')
+        .attr('stroke', '#fff4e7')
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-linecap', 'round')
+        .attr('stroke-width', '6')
+        .attr('class', 'multi-time-series__series-line-backer')
+        .attr('d', drawLine)
+        .attr('clip-path', `url(#${clipPathId})`)
+      ;
+
       g.append('path')
         .datum(points)
         .attr('fill', 'none')

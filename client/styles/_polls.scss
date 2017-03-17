@@ -41,6 +41,8 @@
   }
 
   &__round-1 {
+    margin: 0;
+
     [data-multi-time-series] {
       height: 400px;
 
@@ -72,6 +74,10 @@
 
     &__chart {
       @include oGridColspan((default: 12, M: 6));
+
+      > figure {
+        margin: 0;
+      }
     }
 
     [data-multi-time-series] {
@@ -178,12 +184,29 @@
   }
 }
 
-[data-multi-time-series] text {
-  font-family: MetricWeb, sans-serif;
-  font-feature-settings: 'tnum' 1;
+[data-multi-time-series] {
+  text {
+    font-family: MetricWeb, sans-serif;
+    font-feature-settings: 'tnum' 1;
+
+  }
+
+  .x-axis,
+  .y-axis {
+    line, path {
+      stroke: oColorsGetPaletteColor('pink-tint4');
+    }
+
+    text {
+      fill: oColorsGetPaletteColor('grey-tint5');
+    }
+  }
 }
 
 .polls__round-2 {
+  .multi-time-series__series-line-backer {
+    stroke-width: 4;
+  }
   .multi-time-series__series-line {
     stroke-width: 2;
   }
