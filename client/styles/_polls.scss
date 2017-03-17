@@ -61,7 +61,7 @@
 
       > p {
         max-width: 780px;
-        margin: 0 auto 30px;
+        margin: 0 auto;
 
         @include oGridRespondTo(M) {
           text-align: center;
@@ -80,6 +80,7 @@
     h3 {
       font-family: MetricWeb, sans-serif;
       font-weight: 600;
+      margin-top: 30px;
     }
   }
 
