@@ -213,6 +213,7 @@ export default class MultiTimeSeries {
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
         .attr('stroke-width', '3')
+        .attr('class', 'multi-time-series__series-line')
         .attr('d', drawLine)
         .attr('clip-path', `url(#${clipPathId})`)
       ;
