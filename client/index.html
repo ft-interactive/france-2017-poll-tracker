@@ -50,7 +50,7 @@
       {{ copy.pollingCaveat | md(true) }}
     </div>
     <h2>{{copy.round1Headline}}</h2>
-    <p>{{copy.round1ChartLabel}}</p>
+    <p class="polls__chart-subhead">{{copy.round1ChartLabel}}</p>
 
     <figure class="polls__round-1">
       <div data-multi-time-series="{{charts.round1 | dump}}"></div>
@@ -147,7 +147,7 @@
       </div>
 
       <div class="underlying-data__toggle-button">
-        <button class="o-expander__toggle">Show more polls</a>
+        <button class="o-expander__toggle">Show more polls</button>
       </div>
     </div>
 
