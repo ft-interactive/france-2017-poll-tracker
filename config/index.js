@@ -10,10 +10,16 @@ export default async () => {
   const d = await article();
   const flags = await getFlags();
   const onwardJourney = await getOnwardJourney();
-  const combinedEndpoint = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_KEY}/candidates,round1,round2,options,betting`;
+  const combinedEndpoint = `https://bertha.ig.ft.com/${process.env.REPUBLISH ? 'republish' : 'view'}/publish/gss/${process.env.SPREADSHEET_KEY}/candidates,round1,round2,betting,byline,copy`;
 
   const data = (await axios.get(combinedEndpoint)).data;
-  const byline = data.options.map(item => item.byline);
+
+  const byline = data.byline;
+
+  const copy = {};
+  data.copy.forEach(({ name, value }) => {
+    copy[name] = value;
+  });
 
   // sort all polls by date
   [data.round1, data.round2].forEach((sheet) => {
@@ -35,6 +41,7 @@ export default async () => {
     onwardJourney,
     data,
     byline,
+    copy,
 
     charts: {
       round1: {
