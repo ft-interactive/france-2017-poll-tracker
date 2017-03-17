@@ -74,7 +74,13 @@
       border-right: 0;
     }
 
-    &.underlying-data__date, &:nth-child(2) {
+    &:nth-child(n + 3) {
+      text-align: right;
+      width:12%;
+    }
+
+    &.underlying-data__date,
+    &:nth-child(2) {
       text-align: left;
       padding-left: 0;
     }
@@ -86,7 +92,8 @@
   }
 
   &__footnote {
-    color: #ccc;
+    color: oColorsGetPaletteColor('pink-tint5');
+    margin-top: 1em;
   }
 
   &__toggle-button {
@@ -98,9 +105,5 @@
     }
   }
 
-  .o-typography-body-wrapper &__source {
-    color: oColorsGetPaletteColor('pink-tint5');
-    font-family: MetricWeb, sans-serif;
-    font-size: 1em;
-  }
+
 }
