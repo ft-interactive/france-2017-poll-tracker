@@ -30,6 +30,8 @@ $cell-border-color: #CEC6B9;
 }
 
 .article-head {
+  margin-bottom: 0;
+
   header {
     width: 100%;
     max-width: 1200px;
@@ -52,7 +54,7 @@ $cell-border-color: #CEC6B9;
 h1.o-typography-heading1 {
   font-size: 1.8em;
   line-height: 1;
-  margin: 1em 0 0.2em;
+  margin: 0.15em 0 0.2em;
 
   @include oGridRespondTo(S) {
     font-size: 2.4em;
@@ -62,6 +64,7 @@ h1.o-typography-heading1 {
     text-align: center;
     font-size: 3em !important;
     line-height: 1.4em !important;
+    margin-top: 0.5em;
   }
 }
 
