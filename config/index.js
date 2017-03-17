@@ -35,6 +35,14 @@ export default async () => {
     fs.writeFileSync(path.resolve(__dirname, '..', 'client', 'styles', '_candidate-vars.scss'), scss);
   }
 
+  // order candidates by their latest polling average
+  {
+    const lastRound1Values = data.round1[data.round1.length - 1];
+    data.candidates.sort((a, b) => (
+      lastRound1Values.result[b.key] - lastRound1Values.result[a.key]
+    ));
+  }
+
   return {
     ...articleData,
     flags,
