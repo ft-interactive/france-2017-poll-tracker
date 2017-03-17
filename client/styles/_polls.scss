@@ -40,29 +40,34 @@
     }
   }
 
-
-
   &__round-1 {
     [data-multi-time-series] {
-      height: 350px;
+      height: 400px;
+
+      @include oGridRespondTo(L) {
+        height: 450px;
+      }
     }
   }
 
   &__round-2 {
     @include oGridRow;
 
-    &__intro { @include oGridColspan(12);
+    &__intro {
+      @include oGridColspan(12);
 
-
-     > p { 
-        max-width: 780px;
-        margin: 0 auto 30px;
-
-      @include oGridRespondTo(M) {
-         text-align: center;
+      @include oGridRespondTo($until: M) {
+        padding: 0 10px;
       }
-     }
 
+      > p {
+        max-width: 780px;
+        margin: 0 auto;
+
+        @include oGridRespondTo(M) {
+          text-align: center;
+        }
+      }
     }
 
     &__chart {
@@ -72,9 +77,11 @@
     [data-multi-time-series] {
       height: 250px;
     }
+
     h3 {
       font-family: MetricWeb, sans-serif;
       font-weight: 600;
+      margin-top: 30px;
     }
   }
 
@@ -86,48 +93,48 @@
 
 
 }
-
-.polls__bookies {
-  .polls__data-table-bookies {
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-    border-spacing: 0;
-    border-collapse: collapse;
-    @include oGridRespondTo($until: M) {
-      display: none;
-    }
-
-    @include oGridRespondTo($from: M) {
-      width: 100%;
-    }
-
-    thead tr th {
-      border-bottom: 1px solid $table-header-border-color;
-      border-right: 1px solid $cell-border-color;
-      font-size: 1.2em;
-      line-height: 1.2em;
-      text-align: center;
-      padding: .25em 1em;
-
-      &:last-child {
-        border-right: 0;
-      }
-    }
-
-    tbody td {
-      border-right: 1px solid $cell-border-color;
-      border-bottom: 1px solid $cell-border-color;
-      text-align: center;
-      padding: 0.5em 1em;
-      font-size: 1.2em;
-      line-height: 1.2em;
-
-      &:last-child {
-        border-right: 0;
-      }
-    }
-  }
-}
+//
+// .polls__bookies {
+//   .polls__data-table-bookies {
+//     overflow: scroll;
+//     -webkit-overflow-scrolling: touch;
+//     border-spacing: 0;
+//     border-collapse: collapse;
+//     @include oGridRespondTo($until: M) {
+//       display: none;
+//     }
+//
+//     @include oGridRespondTo($from: M) {
+//       width: 100%;
+//     }
+//
+//     thead tr th {
+//       border-bottom: 1px solid $table-header-border-color;
+//       border-right: 1px solid $cell-border-color;
+//       font-size: 1.2em;
+//       line-height: 1.2em;
+//       text-align: center;
+//       padding: .25em 1em;
+//
+//       &:last-child {
+//         border-right: 0;
+//       }
+//     }
+//
+//     tbody td {
+//       border-right: 1px solid $cell-border-color;
+//       border-bottom: 1px solid $cell-border-color;
+//       text-align: center;
+//       padding: 0.5em 1em;
+//       font-size: 1.2em;
+//       line-height: 1.2em;
+//
+//       &:last-child {
+//         border-right: 0;
+//       }
+//     }
+//   }
+// }
 
 .o-expander__toggle {
   @include oButtons();

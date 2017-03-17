@@ -7,7 +7,7 @@
 <div class="graphic">
 
   <div class="standfirst">
-    <p>It is the most closely watched French election in years – and the closest. After the UK chose Brexit and Donald Trump took the White House, France's choice of its next president could bring more populist upheaval to global politics and decide the fate of the EU and the euro. With the first round on April 23, the outcome remains highly uncertain.</p>
+    {{copy.intro | md}}
   </div>
 
   <section class="candidates">
@@ -40,26 +40,23 @@
     {% endfor %}
     </div>
     <div class="candidates__read-more">
-      <a role="button" href="https://ig.ft.com/sites/france-election/candidates/">
-        Read full profiles of candidates
-      </a>
+      <a role="button" href="https://ig.ft.com/sites/france-election/candidates/">{{copy.candidateProfilesLinkText}}</a>
     </div>
   </section>
 
   <section class="polls">
     <div class="polls__warning-banner">
       <i class="polls__warning-icon"></i>
-      {% set caveat = data.options | first | get('caveat') %}
-      <strong>{{ caveat.lede }}</strong> {{ caveat.text }}
+      {{ copy.pollingCaveat | md(true) }}
     </div>
-    <h2>Who is leading in national opinion polls?</h2>
-    <p class="polls__chart-subhead">First round voting intention (%)</p>
+    <h2>{{copy.round1Headline}}</h2>
+    <p class="polls__chart-subhead">{{copy.round1ChartLabel}}</p>
 
     <figure class="polls__round-1">
       <div data-multi-time-series="{{charts.round1 | dump}}"></div>
     </figure>
 
-    <p class="polls__chart-note"><small>The chart above displays the five leading presidential candidates. Three other candidates for whom the polls are available are Nicolas Dupont-Aignan, Nathalie Arthaud and Philippe Poutou. The three consistently poll at 3 per cent or below, which does not give them much hope for the run-off.</small></p>
+    <p class="polls__chart-note"><small>{{copy.round1ChartFootnote}}</small></p>
 
     {# DISABLED FOR NOW
     <section class="polls__bookies">
@@ -90,8 +87,8 @@
 
     <section class="polls__round-2">
       <div class="polls__round-2__intro">
-        <h2>The run-off</h2>
-        <p>Unless a candidate wins at least 50 per cent of the popular vote in the first round - almost inconceivable with such a large field – the two leading contenders will go into a run-off on May 7. French pollsters are focusing on two possible scenarios.</p>
+        <h2>{{copy.round2Headline}}</h2>
+        {{copy.round2Intro | md}}
       </div>
 
       <div class="polls__round-2__chart">
@@ -116,49 +113,50 @@
   </section>
 
   <section class="underlying-data" data-o-component="o-expander">
-    <h2>The underlying polls</h2>
-    <p class="underlying-data__intro">Below is a full list of individual opinion polls for the first round of the French presidential election.</p>
+    <h2>{{copy.tableHeadline}}</h2>
+    <p class="underlying-data__intro">{{copy.tableIntro | md(true)}}</p>
 
-    <table class="underlying-data__table o-expander__content">
-      <thead>
-        <tr>
-          <td>Date</td>
-          <td>Pollster</td>
-          {% for candidate in data.candidates %}
-          <td>{{ candidate.name.last }}</td>
+    <div class="underlying-data__table-wrapper">
+      <table class="underlying-data__table o-expander__content">
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>Pollster</td>
+            {% for candidate in data.candidates %}
+            <td>{{ candidate.name.last }}</td>
+            {% endfor %}
+            <td>Sample*</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for poll in data.round1 | reverse %}
+          <tr>
+            <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
+            <td>{{ poll.pollster }}</td>
+            {% for candidate in data.candidates %}
+            <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
+            {% endfor %}
+            <td>{{ poll.sample }}</td>
+          </tr>
           {% endfor %}
-          <td>Sample*</td>
-        </tr>
-      </thead>
-      <tbody>
-        {% for poll in data.round1 | reverse %}
-        <tr>
-          <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
-          <td>{{ poll.pollster }}</td>
-          {% for candidate in data.candidates %}
-          <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
-          {% endfor %}
-          <td>{{ poll.sample }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <div class="underlying-data__footnote">
-      {% set footnote = data.options | first | get('table footnote') %}
-      {{ footnote }}
+        </tbody>
+      </table>
+
+      <div class="underlying-data__footnote">
+        {{ copy.sourceNote }}
+      </div>
+
+      <div class="underlying-data__toggle-button">
+        <button class="o-expander__toggle">Show more polls</button>
+      </div>
     </div>
 
-    <div class="underlying-data__toggle-button">
-      <button class="o-expander__toggle">Show more polls</a>
-    </div>
-
-    <p class="underlying-data__source">Source: FT Research</p>
+    {# <p class="underlying-data__source">{{copy.sourceNote}}</p> #}
   </section>
 
   <section class="credits">
     <p class="credit__illustrator">
-      {% set illustrator = data.options | first | get('illustrations') %}
-      <span>Illustrations by {{ illustrator }}</span>
+      <span>{{copy.footerCredit}}</span>
     </p>
   </section>
 
