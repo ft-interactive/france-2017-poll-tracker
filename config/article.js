@@ -4,8 +4,7 @@ export default () => ({ // eslint-disable-line
   id: 'c83014f8-f779-11e6-9516-2d969e0d3b65',
 
   // canonical URL of the published page
-  // https://ig.ft.com/sites/france-2017-poll-tracker get filled in by the ./configure script
-  url: 'https://ig.ft.com/sites/france-2017-poll-tracker',
+  url: 'https://ig.ft.com/sites/france-election/polls/',
 
   // To set an exact publish date do this:
   //       new Date('2016-05-17T17:11:22Z')

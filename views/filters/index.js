@@ -111,7 +111,9 @@ export function spoorTrackingPixel(str) {
 // - see https://www.ft.com/__origami/service/image/v2/docs/api for options
 export const imageServiceUrl = (url, queryParams = {}) => {
   const queryString = Object.keys(queryParams)
-    .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(queryParams[name])}`);
+    .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(queryParams[name])}`)
+    .join('&')
+  ;
 
   return `https://www.ft.com/__origami/service/image/v2/images/raw/${encodeURIComponent(url)}?source=ig&${queryString}`;
 };

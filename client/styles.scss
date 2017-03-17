@@ -16,6 +16,15 @@ $cell-border-color: #CEC6B9;
 @import './styles/polls';
 @import './styles/underlying-data';
 
+.o-share {
+  position: absolute;
+  right: 0;
+
+  @include oGridRespondTo($until: M) {
+    display: none !important;
+  };
+}
+
 .article__byline {
   font-size: 15px;
 }
@@ -96,8 +105,11 @@ h1.o-typography-heading1 {
 
 .fr-pres-elec--topic {
   .fr-pres-elect--link__image {
-    @include oGridColspan((default: hide, S: full-width));
-    padding-left: 0 !important;
+    // @include oGridColspan((default: hide, S: full-width));
+    // padding-left: 0 !important;
+    @include oGridRespondTo($until: M) {
+      display: none;
+    };
 
     img {
       width: 264px;
@@ -105,8 +117,10 @@ h1.o-typography-heading1 {
   }
 
   .fr-pres-elect--link__text {
-    padding-left: 0 !important;
-    @include oGridColspan((default: full-width, S: hide))
+    // padding-left: 0 !important;
+    //
+    // @include oGridColspan((default: full-width, S: hide));
+    @include oGridRespondTo(M) { display: none; }
   }
 }
 
