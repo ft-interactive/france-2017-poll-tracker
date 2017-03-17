@@ -108,7 +108,7 @@ export default class MultiTimeSeries {
     svg.attr('height', height);
 
     // determine chart dimensions - TODO: ensure right margin is big enough for biggest label?
-    const margin = { top: 20, right: 120, bottom: 30, left: 50 };
+    const margin = { top: 20, right: 60, bottom: 30, left: 40 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
