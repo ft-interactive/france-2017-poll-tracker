@@ -64,12 +64,12 @@
 {%- endif -%}
 
 <title>{{ title | default(headline, true) }} &mdash; FT.com</title>
-<meta name="twitter:title" content="{{ twitterHeadline | default(socialHeadline) | default(headline, true) }}">
-<meta property="og:title" content="{{ facebookHeadline | default (socialHeadline) | default(headline, true) }}">
+<meta name="twitter:title" content="{{ twitterHeadline | default(copy.socialHeadline) | default(copy.headline, true) }}">
+<meta property="og:title" content="{{ facebookHeadline | default (copy.socialHeadline) | default(copy.headline, true) }}">
 
-<meta name="description" content="{{ description }}">
-<meta name="twitter:description" content="{{ description }}">
-<meta property="og:description" content="{{ description }}">
+<meta name="description" content="{{ copy.description }}">
+<meta name="twitter:description" content="{{ copy.description }}">
+<meta property="og:description" content="{{ copy.description }}">
 
 <link rel="canonical" href="{{ url }}">
 <meta name="twitter:url" content="{{ url }}">
@@ -78,12 +78,10 @@
 {% if mainImage.url %}
 <link rel="image_src" href="{{ mainImage.url }}">
 {% endif %}
-{% if twitterImage | default(socialImage) | default(mainImage.url) %}
-<meta name="twitter:image" content="{{ twitterImage | default(socialImage) | default(mainImage.url) }}">
-{% endif %}
-{% if facebookImage | default(socialImage) | default(mainImage.url) %}
-<meta property="og:image" content="{{ facebookImage | default(socialImage) | default(mainImage.url) }}">
-{% endif %}
+
+
+<meta name="twitter:image" content="{{ copy.socialImageURL | imageServiceUrl({ fit: 'contain', width: 1024, height: 512 }) }}">
+<meta property="og:image" content="{{ copy.socialImageURL | imageServiceUrl({ fit: 'contain', width: 1024, height: 512 }) }}">
 
 <meta name="twitter:card" content="{{ twitterCard }}">
 <meta name="twitter:site" content="@ft">

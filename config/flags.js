@@ -7,7 +7,7 @@ export default () => ({ // eslint-disable-line
   googleAnalytics: prod,
   ads: true,
   onwardjourney: true,
-  shareButtons: false,
+  shareButtons: true,
   header: true,
   footer: true,
 
