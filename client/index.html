@@ -123,7 +123,7 @@
             <td>Date</td>
             <td>Pollster</td>
             {% for candidate in data.candidates %}
-            <td>{{ candidate.name.last }}</td>
+            <td>{{ candidate.name.last | noBreak }}</td>
             {% endfor %}
             <td>Sample*</td>
           </tr>
