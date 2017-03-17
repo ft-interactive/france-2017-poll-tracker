@@ -69,6 +69,7 @@
     border-bottom: 1px solid $cell-border-color;
     text-align: center;
     padding: 0.25em 1em;
+    font-feature-settings: 'tnum' 1;
 
     &.underlying-data__date, &:last-child {
       border-right: 0;

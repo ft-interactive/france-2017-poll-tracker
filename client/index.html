@@ -154,10 +154,14 @@
     {# <p class="underlying-data__source">{{copy.sourceNote}}</p> #}
   </section>
 
-  <section class="credits">
-    <p class="credit__illustrator">
-      <span>{{copy.footerCredit}}</span>
-    </p>
+  <section class="end-matter">
+    <div class="methodology">
+      {{ copy.methodology | md }}
+    </div>
+
+    <div class="credits">
+      {{ copy.footerCredit }}
+    </div>
   </section>
 
 </div>

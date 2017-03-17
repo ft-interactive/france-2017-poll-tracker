@@ -124,9 +124,10 @@ h1.o-typography-heading1 {
   }
 }
 
-p.credit__illustrator, footer.o-typography-footer {
+// p.credit__illustrator,
+footer.o-typography-footer {
   max-width: none;
-  margin: 0 !important;
+  // margin: 0 !important;
   padding: 16px 10px !important;
 
   text-align: left;
@@ -136,21 +137,40 @@ p.credit__illustrator, footer.o-typography-footer {
   }
 }
 
-p.credit__illustrator {
-  &:before {
-    display: block;
-    height: 1px;
-    background-color: #ccc1b3;
-    content: '';
-    width: 4em;
+.end-matter {
+  font: MetricWeb, sans-serif;
+  color: oColorsGetPaletteColor('grey-tint4');
+  margin: 20px 10px;
+
+  border-top: 1px solid oColorsGetPaletteColor('pink-tint3');
+  padding-top: 10px;
+
+  @include oGridRespondTo(M) {
+    // padding: 0 20px;
+    margin: 20px auto;
+    max-width: 625px;
   }
 
-  span {
-    font-family: MetricWeb, sans-serif;
-    font-size: 0.85em;
-    margin: 0.7em 0 0;
-    display: block;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  p {
+    font: inherit;
+    color: inherit;
   }
+  // p.credit__illustrator {
+  //   &:before {
+  //     display: block;
+  //     height: 1px;
+  //     background-color: #ccc1b3;
+  //     content: '';
+  //     width: 4em;
+  //   }
+  //
+  //   span {
+  //     font-family: MetricWeb, sans-serif;
+  //     font-size: 0.85em;
+  //     margin: 0.7em 0 0;
+  //     display: block;
+  //     letter-spacing: 0.02em;
+  //     text-transform: uppercase;
+  //   }
+  // }
 }
