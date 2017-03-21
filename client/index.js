@@ -1,9 +1,8 @@
 // @flow
 
-import * as expander from 'o-expander'; // eslint-disable-line
 import MultiTimeSeries from './components/MultiTimeSeries';
 
-expander.init(null, {
+oExpander['o-expander'].init(null, {
   expandedToggleText: 'Show fewer polls',
   collapsedToggleText: 'Show more polls',
 });
