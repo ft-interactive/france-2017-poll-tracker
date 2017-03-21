@@ -136,6 +136,7 @@ exec(function(){
 // and use ?callback= to clear the queue of scripts to load
 var polyfillFeatures = [
   'default',
+  'fetch',
   // 'matchMedia',
   // 'fetch',
   // 'IntersectionObserver',
