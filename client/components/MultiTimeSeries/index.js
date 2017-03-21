@@ -252,7 +252,7 @@ export default class MultiTimeSeries {
         .attr('font-weight', '600')
         .attr('dx', '8px')
         .attr('dy', '.3em')
-        .text(`${lastPoint.value}%${label ? ` ${label}` : ''}`)
+        .text(`${Math.round(lastPoint.value)}%${label ? ` ${label}` : ''}`)
       ;
       previousLabelPos = labelPos;
     });

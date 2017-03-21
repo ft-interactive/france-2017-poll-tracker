@@ -35,13 +35,22 @@ export default async () => {
     fs.writeFileSync(path.resolve(__dirname, '..', 'client', 'styles', '_candidate-vars.scss'), scss);
   }
 
-  // order candidates by their latest polling average
-  {
-    const lastRound1Values = data.round1[data.round1.length - 1];
-    data.candidates.sort((a, b) => (
-      lastRound1Values.result[b.key] - lastRound1Values.result[a.key]
-    ));
-  }
+  // calculate rolling averages for first chart up front
+  const round1RollingAverages = data.candidates.reduce((result, { key }) => ({
+    ...result,
+    [key]: makeRollingAverage(data.round1, poll => poll.result[key]),
+  }), {});
+
+  // tell each candidate its latest polling average, and order them by it
+  data.candidates = data.candidates
+    .map(c => ({
+      ...c,
+      currentPollingAverage: round1RollingAverages[c.key][0].value,
+    }))
+    .sort((a, b) => (
+      b.currentPollingAverage - a.currentPollingAverage
+    ))
+  ;
 
   return {
     ...articleData,
@@ -56,7 +65,7 @@ export default async () => {
         lines: data.candidates.map(({ color, name, key }) => ({
           color,
           label: name.last,
-          points: makeRollingAverage(data.round1, poll => poll.result[key]),
+          points: round1RollingAverages[key],
         })),
         minValue: 0,
         maxValue: 30,
