@@ -272,7 +272,7 @@ gulp.task('images', () => gulp.src('dist/**/*.{jpg,png,gif,svg}')
     progressive: true,
     interlaced: true,
   }))
-  .pipe(gulp.dest('dist'))
+  .pipe(gulp.dest('dist')),
 );
 function distServer() {
   const serveStatic = require('serve-static');
