@@ -361,12 +361,6 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-axios@^0.15.3:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
-  dependencies:
-    follow-redirects "1.0.0"
-
 babel-code-frame@^6.16.0, babel-code-frame@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.22.0.tgz#027620bee567a88c32561574e7fd0801d33118e4"
@@ -1073,10 +1067,11 @@ beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
 
-bertha-client@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/bertha-client/-/bertha-client-0.0.5.tgz#f3604574002f439dca8f3cc5fc5afbea95560b60"
+bertha-client@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/bertha-client/-/bertha-client-0.0.6.tgz#543ee1fdd85bff18afd895decc23685451ea076c"
   dependencies:
+    babel-runtime "^6.23.0"
     node-fetch "^1.6.3"
 
 better-assert@~1.0.0:
@@ -3451,12 +3446,6 @@ flat-cache@^1.2.1:
 flow-bin@^0.40.0:
   version "0.40.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.40.0.tgz#e10d60846d923124e47f548f16ba60fd8baff5a5"
-
-follow-redirects@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
-  dependencies:
-    debug "^2.2.0"
 
 for-in@^1.0.1:
   version "1.0.2"
