@@ -110,7 +110,12 @@
     </section>
   </section>
 
-  <section class="underlying-data" data-o-component="o-expander">
+  <section
+    class="underlying-data"
+    data-o-component="o-expander"
+    data-o-expander-expanded-toggle-text="Show fewer polls"
+    data-o-expander-collapsed-toggle-text="Show more polls"
+  >
     <h2>{{copy.tableHeadline}}</h2>
     <p class="underlying-data__intro">{{copy.tableIntro | md(true)}}</p>
 
@@ -132,7 +137,7 @@
             <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
             <td>{{ poll.pollster }}</td>
             {% for candidate in data.candidates %}
-            <td>{{ (poll.result[candidate.key] | round) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
+            <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
             {% endfor %}
             <td>{{ poll.sample }}</td>
           </tr>
