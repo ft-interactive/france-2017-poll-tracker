@@ -38,26 +38,26 @@ export default (polls, selectValue, decayFactor = 0.75) => {
       }
 
       // delete highest and lowest values
-      if (accumulation.length >= 7) {
-        let lowestValue = Infinity;
-        let highestValue = -Infinity;
-        let indexOfLowest;
-        let indexOfHighest;
-
-        accumulation.forEach(({ value }, index) => {
-          if (value < lowestValue) {
-            lowestValue = value;
-            indexOfLowest = index;
-          }
-          if (value > highestValue) {
-            highestValue = value;
-            indexOfHighest = index;
-          }
-        });
-
-        accumulation.splice(indexOfLowest, 1);
-        accumulation.splice(indexOfHighest, 1);
-      }
+      // if (accumulation.length >= 7) {
+      //   let lowestValue = Infinity;
+      //   let highestValue = -Infinity;
+      //   let indexOfLowest;
+      //   let indexOfHighest;
+      //
+      //   accumulation.forEach(({ value }, index) => {
+      //     if (value < lowestValue) {
+      //       lowestValue = value;
+      //       indexOfLowest = index;
+      //     }
+      //     if (value > highestValue) {
+      //       highestValue = value;
+      //       indexOfHighest = index;
+      //     }
+      //   });
+      //
+      //   accumulation.splice(indexOfLowest, 1);
+      //   accumulation.splice(indexOfHighest, 1);
+      // }
 
       // work out the weighted average of the remaining items
       const weightsTotal = accumulation.reduce((total, { weight }) => total + weight, 0);
