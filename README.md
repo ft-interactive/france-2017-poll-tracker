@@ -12,7 +12,8 @@ npm start
 
 Build/compile, start a dev server and watches for changes.
 
-Also: `gulp download-data`. Relies on a SPREADSHEET_KEY environment variable (put it in a .env file).
+Relies on a SPREADSHEET_KEY environment variable: create a .env file in your local project, add `SPREADSHEET_KEY=1234xxx` using the google id from the spreadsheet and save the file. The .env file will be ignored by git so will not get committed. 
+Run `npm start` again. 
 
 # Deploy
 
