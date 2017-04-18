@@ -12,8 +12,10 @@ npm start
 
 Build/compile, start a dev server and watches for changes.
 
-Relies on a SPREADSHEET_KEY environment variable: create a .env file in your local project, add `SPREADSHEET_KEY=1234xxx` using the google id from the spreadsheet and save the file. The .env file will be ignored by git so will not get committed. 
-Run `npm start` again. 
+Relies on a SPREADSHEET_KEY environment variable: 
+1. Create a .env file in your local project
+2. Add `SPREADSHEET_KEY=1234xxx` using the google id from the spreadsheet and save the file. The .env file will be ignored by git so will not get committed. 
+3. Run `npm start` again. 
 
 # Deploy
 
