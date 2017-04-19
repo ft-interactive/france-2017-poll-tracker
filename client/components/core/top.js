@@ -143,9 +143,7 @@ var polyfillFeatures = [
   // 'HTMLPictureElement'
 ];
 
-var polyfillUrl = 'https://cdn.polyfill.io/v2/polyfill.min.js?callback=clearQueue&features='
-                    + polyfillFeatures.join(',')
-                    + '&excludes=Symbol,Symbol.iterator,Symbol.species';
+var polyfillUrl = 'https://cdn.polyfill.io/v2/polyfill.min.js?callback=clearQueue&features=' + polyfillFeatures.join(',');
 
 exec(polyfillUrl, true, false, null, {crossorigin: 'anonymous'})
 
