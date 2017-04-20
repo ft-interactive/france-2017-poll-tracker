@@ -58,7 +58,12 @@ export default async () => {
     ))
   ;
 
-  return {
+  const candidatesByKey = data.candidates.reduce((acc, candidate) => ({
+    ...acc,
+    [candidate.key]: candidate,
+  }), {});
+
+  const result = {
     ...articleData,
     flags,
     onwardJourney,
@@ -83,31 +88,33 @@ export default async () => {
         minDate: '2017-01-01',
       },
 
-      round2: {
-        scenario1: {
+      // this array must correspond IN ORDER with the scenarioX columns on the round2 sheet
+      round2: [
+        ['macron', 'lepen'], // scenario1
+        ['fillon', 'lepen'], // scenario2
+        ['melenchon', 'lepen'], // etc
+        ['melenchon', 'fillon'],
+        ['melenchon', 'macron'],
+        ['macron', 'fillon'],
+      ].map(([candidateA, candidateB], i) => ({
+        candidateA: candidatesByKey[candidateA],
+        candidateB: candidatesByKey[candidateB],
+        chartData: {
           lines: data.candidates
-            .filter(({ key }) => key === 'macron' || key === 'lepen')
+            .filter(({ key }) => key === candidateA || key === candidateB)
             .map(({ color, key }) => ({
               color,
-              points: makeRollingAverage(data.round2, poll => poll.scenario1[key]),
+              points: makeRollingAverage(data.round2, poll => poll[`scenario${i + 1}`][key]),
             })),
           minValue: 20,
           maxValue: 80,
           minDate: '2017-02-01',
         },
-
-        scenario2: {
-          lines: data.candidates
-            .filter(({ key }) => key === 'fillon' || key === 'lepen')
-            .map(({ color, key }) => ({
-              color,
-              points: makeRollingAverage(data.round2, poll => poll.scenario2[key]),
-            })),
-          minValue: 20,
-          maxValue: 80,
-          minDate: '2017-02-01',
-        },
-      },
+      }), {}),
     },
   };
+
+  // console.log('result', result.charts.round2);
+
+  return result;
 };
