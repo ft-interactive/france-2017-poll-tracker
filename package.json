@@ -86,7 +86,7 @@
     "clean": "rm -rf dist",
     "deploy": "ft-graphics-deploy --assets-prefix=https://ig.ft.com/__v2-static-assets/",
     "lint": "eslint --no-eslintrc --config=.eslintrc-ci.yml .",
-    "postinstall": "bower install",
+    "postinstall": "bower install --allow-root",
     "prebuild": "yarn run clean",
     "preflight": "gulp test:preflight",
     "prestart": "yarn run clean",
