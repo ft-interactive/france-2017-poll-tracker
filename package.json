@@ -12,10 +12,6 @@
       "stage-0"
     ]
   },
-  "cacheDirectories": [
-    "node_modules",
-    "bower_components"
-  ],
   "devDependencies": {
     "ansi-to-html": "^0.6.0",
     "babel-core": "^6.23.1",
@@ -77,6 +73,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "flow-bin": "^0.40.0",
     "ft-graphics-deploy": "^0.1.0",
     "minimist": "^1.2.0",
     "nightwatch": "^0.9.12",
@@ -88,17 +85,12 @@
     "build": "gulp",
     "clean": "rm -rf dist",
     "deploy": "ft-graphics-deploy --assets-prefix=https://ig.ft.com/__v2-static-assets/",
-    "deploy:confirm": "ft-graphics-deploy --assets-prefix=https://ig.ft.com/__v2-static-assets/ --confirm",
     "lint": "eslint --no-eslintrc --config=.eslintrc-ci.yml .",
-    "postinstall": "bower install",
+    "postinstall": "bower install --allow-root",
     "prebuild": "yarn run clean",
     "preflight": "gulp test:preflight",
     "prestart": "yarn run clean",
     "start": "nodemon --watch gulpfile.babel.js --watch config --exec 'gulp watch'",
     "test": "yarn run lint && yarn run build"
-  },
-  "dependencies": {
-    "flow-bin": "^0.40.0",
-    "npmlog": "^4.0.2"
   }
 }
