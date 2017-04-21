@@ -67,14 +67,15 @@ export default async () => {
     [candidate.key]: candidate,
   }), {});
 
-  // identify which scenario it turned out to be (messy, but works with original spreadsheet structure)
+  // identify which scenario it turned out to be (messy, but works with original
+  // spreadsheet structure)
   const runOffCandidates = data.candidates.filter(c => c.runoff).map(c => c.key).sort();
-  const actualRunOffScenarioNumber = [1, 2, 3, 4, 5, 6]
-    .find(x => (
-      Immutable.List(Object.keys(data.round2[0][`scenario${x}`])).isSuperset(
-        Immutable.List(runOffCandidates),
-      )
-    ));
+  const actualRunOffScenarioNumber = [1, 2, 3, 4, 5, 6].find(x => (
+    Immutable.List(Object.keys(data.round2[0][`scenario${x}`])).isSuperset(
+      Immutable.List(runOffCandidates),
+    )
+  ));
+  if (!actualRunOffScenarioNumber) throw new Error(`Could not find scenario for candidates: ${runOffCandidates.join(' & ')}`);
 
   const result = {
     ...articleData,
@@ -103,7 +104,7 @@ export default async () => {
 
           keyDates: [
             { date: '2017-04-23', label: '1st round' },
-            { date: '2017-05-07', label: 'Run-off' },
+            { date: '2017-05-07', label: '2nd round' },
           ],
         },
       },
@@ -119,7 +120,7 @@ export default async () => {
         maxDate: '2017-05-10',
         keyDates: [
           { date: '2017-04-23', label: '1st round' },
-          { date: '2017-05-07', label: 'Run-off' },
+          // { date: '2017-05-07', label: 'Run-off' },
         ],
         minDate: '2017-01-01',
       },
