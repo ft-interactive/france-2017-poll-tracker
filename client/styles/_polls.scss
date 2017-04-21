@@ -40,7 +40,7 @@
     }
   }
 
-  &__round-1 {
+  &__run-off {
     margin: 0;
 
     [data-multi-time-series] {
@@ -52,7 +52,7 @@
     }
   }
 
-  &__round-2 {
+  &__round-1 {
     @include oGridRow;
 
     &__intro {
@@ -73,7 +73,7 @@
     }
 
     &__chart {
-      @include oGridColspan((default: 12, M: 6));
+      @include oGridColspan((default: 12));
 
       > figure {
         margin: 0;
@@ -81,7 +81,11 @@
     }
 
     [data-multi-time-series] {
-      height: 250px;
+      height: 400px;
+
+      @include oGridRespondTo(L) {
+        height: 450px;
+      }
     }
 
     h3 {

@@ -65,6 +65,12 @@
     }
   }
 
+  &--eliminated {
+    * {
+      color: oColorsGetPaletteColor('pink-tint4') !important;
+    }
+  }
+
   &__image {
     overflow: hidden;
     border-radius: 100%;
@@ -76,6 +82,8 @@
     @each $slug, $color in $candidates {
       .candidate--#{$slug} & { border-color: $color }
     }
+
+    .candidate--eliminated & { border-color: oColorsGetPaletteColor('pink-tint3'); }
 
     @include oGridRespondTo($until: M) {
       position: absolute;
