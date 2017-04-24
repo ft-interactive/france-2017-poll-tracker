@@ -66,6 +66,10 @@
   }
 
   &--eliminated {
+    @include oGridRespondTo($until: L) {
+      display: none;
+    }
+
     * {
       color: oColorsGetPaletteColor('pink-tint4') !important;
     }
@@ -135,9 +139,9 @@
 
     .candidate__polling-at {
       display: none;
-      @include oGridRespondTo($until: M) {
-        display: inline;
-      }
+      // @include oGridRespondTo($until: M) {
+      //   display: inline;
+      // }
     }
 
     .candidate__betting-odds {

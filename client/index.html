@@ -26,7 +26,7 @@
         <div class="candidate__details">
           <h2 class="candidate__name">{{candidate.name.first}} {{candidate.name.last}}</h2>
           <h3 class="candidate__party-name">
-            {{candidate.party}}<span class="candidate__polling-at">&emsp13;&middot;&emsp13;Polling at {{candidate.currentPollingAverage | round}}%</span>
+            {{candidate.party}}{# <span class="candidate__polling-at">&emsp13;&middot;&emsp13;Polling at {{candidate.currentPollingAverage | round}}%</span> #}
           </h3>
 
           <p class="candidate__description">{{candidate.description}}</p>
@@ -40,10 +40,10 @@
   </section>
 
   <section class="polls">
-    <div class="polls__warning-banner">
+    {# <div class="polls__warning-banner">
       <i class="polls__warning-icon"></i>
       {{ copy.pollingCaveat | md(true) }}
-    </div>
+    </div> #}
     <h2>{{copy.runOffHeadline}}</h2>
 
     <div>
