@@ -12,12 +12,12 @@
 
   <section class="candidates">
     <div class="candidates__list">
-    {% set bettingOdds = (data.betting | first) %}
     {% for candidate in data.candidates %}
-      <div class="candidate candidate--{{candidate.key}}">
+      <div class="candidate candidate--{{candidate.key}}{% if not candidate.runoff %} candidate--eliminated{% endif %}">
         <div class="candidate__image candidate__image--{{candidate.key}}">
+          {% set whichImage = candidate.images.normal if candidate.runoff else candidate.images.grey %}
           {{ macros.imageServiceImg(
-            original=candidate.images.normal,
+            original=whichImage,
             alt='Illustration of ' + candidate.name.first + ' ' + candidate.name.last,
             widths=[94, 130, 188, 260]
           ) }}
@@ -26,10 +26,7 @@
         <div class="candidate__details">
           <h2 class="candidate__name">{{candidate.name.first}} {{candidate.name.last}}</h2>
           <h3 class="candidate__party-name">
-            {{candidate.party}}<span class="candidate__polling-at">&emsp13;&middot;&emsp13;Polling at {{candidate.currentPollingAverage | round}}%</span>
-            {# DISABLED FOR NOW
-            <span class="candidate__betting-odds">Bookies odds {{ bettingOdds | get(candidate.key) }}</span>
-            #}
+            {{candidate.party}}{# <span class="candidate__polling-at">&emsp13;&middot;&emsp13;Polling at {{candidate.currentPollingAverage | round}}%</span> #}
           </h3>
 
           <p class="candidate__description">{{candidate.description}}</p>
@@ -38,57 +35,42 @@
     {% endfor %}
     </div>
     <div class="candidates__read-more">
-      <a role="button" href="https://ig.ft.com/sites/france-election/candidates/">{{copy.candidateProfilesLinkText}}</a>
+      {# <a role="button" href="https://ig.ft.com/sites/france-election/candidates/">{{copy.candidateProfilesLinkText}}</a> #}
     </div>
   </section>
 
   <section class="polls">
-    <div class="polls__warning-banner">
+    {# <div class="polls__warning-banner">
       <i class="polls__warning-icon"></i>
       {{ copy.pollingCaveat | md(true) }}
+    </div> #}
+    <h2>{{copy.runOffHeadline}}</h2>
+
+    <div>
+      {# <h3>
+        <span class="color-{{ scenario.candidateA.key }}">{{ scenario.candidateA.name.last }}</span> vs <span class="color-{{ scenario.candidateB.key }}">{{ scenario.candidateB.name.last }}</span>
+      </h3> #}
+
+      <p class="polls__chart-subhead">{{copy.runOffChartLabel}}</p>
+
+      <figure class="polls__run-off">
+        <div data-multi-time-series="{{charts.runOff.chartData | dump}}"></div>
+      </figure>
     </div>
-    <h2>{{copy.round1Headline}}</h2>
-    <p class="polls__chart-subhead">{{copy.round1ChartLabel}}</p>
 
-    <figure class="polls__round-1">
-      <div data-multi-time-series="{{charts.round1 | dump}}"></div>
-    </figure>
+     <small class="polls__chart-note">{{copy.runOffChartFootnote}}</small>
 
-   <small class="polls__chart-note">{{copy.round1ChartFootnote}}</small>
+    <section class="polls__round-1">
+      <div class="polls__round-1__intro">
+        <h2>{{copy.round1Headline}}</h2>
 
-    {# DISABLED FOR NOW
-    <section class="polls__bookies">
-      <h2>Another way to look at the race</h2>
-      <p>Next President Betting Odds</p>
-      <table class="polls__data-table-bookies">
-        <thead>
-          <tr>
-            {% for candidate in data.candidates %}
-            <th class="color-{{candidate.key}}">
-              {{candidate.name.first}} {{candidate.name.last}}
-            </th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {% for candidate in data.candidates %}
-            <td class="color-{{candidate.key}}">
-              {{ bettingOdds | get(candidate.key) }}
-            </td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    #}
-
-    <section class="polls__round-2">
-      <div class="polls__round-2__intro">
-        <h2>{{copy.round2Headline}}</h2>
-        {{copy.round2Intro | md}}
+        {{copy.round1Intro | md}}
       </div>
 
+      <figure class="polls__round-1__chart">
+        <div data-multi-time-series="{{charts.round1 | dump}}"></div>
+      </figure>
+{#
       {% for scenario in charts.round2 %}
       <div class="polls__round-2__chart">
         <h3>
@@ -99,7 +81,9 @@
           <div data-multi-time-series="{{scenario.chartData | dump}}"></div>
         </figure>
       </div>
-      {% endfor %}
+      {% endfor %} #}
+
+      <small class="polls__chart-note">{{copy.round1ChartFootnote}}</small>
     </section>
   </section>
 
@@ -110,7 +94,7 @@
     data-o-expander-collapsed-toggle-text="Show more polls"
   >
     <h2>{{copy.tableHeadline}}</h2>
-    <p class="underlying-data__intro">{{copy.tableIntro | md(true)}}</p>
+    {# <p class="underlying-data__intro">{{copy.tableIntro | md(true)}}</p> #}
 
     <div class="underlying-data__table-wrapper">
       <table class="underlying-data__table o-expander__content">
@@ -156,7 +140,7 @@
     </div>
 
     <div class="credits">
-      {{ copy.footerCredit }}
+      {{ copy.footerNotes | md }}
     </div>
   </section>
 
