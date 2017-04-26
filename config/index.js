@@ -45,28 +45,6 @@ export default async () => {
     fs.writeFileSync(path.resolve(__dirname, '..', 'client', 'styles', '_candidate-vars.scss'), scss);
   }
 
-  // calculate rolling averages for first chart up front
-  const round1RollingAverages = data.candidates.reduce((result, { key }) => ({
-    ...result,
-    [key]: makeRollingAverage(data.round1, poll => poll.result[key]),
-  }), {});
-
-  // tell each candidate its latest polling average, and order them by it
-  data.candidates = data.candidates
-    .map(c => ({
-      ...c,
-      currentPollingAverage: round1RollingAverages[c.key][0].value,
-    }))
-    .sort((a, b) => (
-      b.currentPollingAverage - a.currentPollingAverage
-    ))
-  ;
-
-  const candidatesByKey = data.candidates.reduce((acc, candidate) => ({
-    ...acc,
-    [candidate.key]: candidate,
-  }), {});
-
   // identify which scenario it turned out to be (messy, but works with original
   // spreadsheet structure)
   const runOffCandidates = data.candidates.filter(c => c.runoff).map(c => c.key).sort();
@@ -76,6 +54,45 @@ export default async () => {
     )
   ));
   if (!actualRunOffScenarioNumber) throw new Error(`Could not find scenario for candidates: ${runOffCandidates.join(' & ')}`);
+
+  // calculate rolling averages for first chart up front
+  const round1RollingAverages = data.candidates.reduce((result, { key }) => ({
+    ...result,
+    [key]: makeRollingAverage(data.round1, poll => poll.result[key]),
+  }), {});
+
+  // and round 2
+  const round2RollingAverages = data.candidates.reduce((acc, { key }) => {
+    if (!runOffCandidates.includes(key)) return acc;
+
+    return {
+      ...acc,
+      [key]: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
+    };
+  }, {});
+
+  // console.log('round2RollingAverages', round2RollingAverages);
+
+  // tell each candidate its latest polling average, and order them by it
+  data.candidates = data.candidates
+    .map(c => ({
+      ...c,
+      currentRound1PollingAverage: round1RollingAverages[c.key][0].value,
+
+      currentRound2PollingAverage: (round2RollingAverages[c.key]
+        ? round2RollingAverages[c.key][0].value
+        : null),
+    }))
+    .sort((a, b) => (
+      b.currentRound1PollingAverage - a.currentRound1PollingAverage
+    ))
+  ;
+
+  const candidatesByKey = data.candidates.reduce((acc, candidate) => ({
+    ...acc,
+    [candidate.key]: candidate,
+  }), {});
+
 
   const result = {
     ...articleData,
@@ -94,7 +111,8 @@ export default async () => {
             .filter(({ key }) => key === runOffCandidates[0] || key === runOffCandidates[1])
             .map(({ color, key, name }) => ({
               color,
-              points: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
+              // points: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
+              points: round2RollingAverages[key],
               label: name.last,
             })),
           minValue: 20,

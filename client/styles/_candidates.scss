@@ -139,9 +139,10 @@
 
     .candidate__polling-at {
       display: none;
-      // @include oGridRespondTo($until: M) {
-      //   display: inline;
-      // }
+
+      @include oGridRespondTo($until: M) {
+        display: inline;
+      }
     }
 
     .candidate__betting-odds {
