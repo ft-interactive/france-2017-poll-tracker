@@ -40,17 +40,9 @@
   </section>
 
   <section class="polls">
-    {# <div class="polls__warning-banner">
-      <i class="polls__warning-icon"></i>
-      {{ copy.pollingCaveat | md(true) }}
-    </div> #}
     <h2>{{copy.runOffHeadline}}</h2>
 
     <div>
-      {# <h3>
-        <span class="color-{{ scenario.candidateA.key }}">{{ scenario.candidateA.name.last }}</span> vs <span class="color-{{ scenario.candidateB.key }}">{{ scenario.candidateB.name.last }}</span>
-      </h3> #}
-
       <p class="polls__chart-subhead">{{copy.runOffChartLabel}}</p>
 
       <figure class="polls__run-off">
@@ -59,7 +51,56 @@
     </div>
 
      <small class="polls__chart-note">{{copy.runOffChartFootnote}}</small>
+  </section>
 
+
+  <section
+    class="underlying-data"
+    data-o-component="o-expander"
+    data-o-expander-expanded-toggle-text="Show fewer polls"
+    data-o-expander-collapsed-toggle-text="Show more polls"
+  >
+    <h2>{{copy.tableHeadline}}</h2>
+
+    <div class="underlying-data__table-wrapper">
+      <table class="underlying-data__table o-expander__content">
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>Pollster</td>
+            {% for candidate in runOffCandidates %}
+            <td>{{ candidate.name.last | noBreak }}</td>
+            {% endfor %}
+            <td>Sample*</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for poll in round2TableData | reverse %}
+          <tr>
+            <td class="underlying-data__date">{{ poll.start | strftime('%b %-d') }}&ndash;{{ poll.end | strftime('%-d') }}</td>
+            <td>{{ poll.pollster }}</td>
+            {% for candidate in runOffCandidates %}
+            <td>{{ (poll[candidate.key] | round(1)) + '%' if poll[candidate.key] else 'N/A' }}</td>
+            {% endfor %}
+            <td>{{ poll.sample | numberWithCommas }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="underlying-data__footnote">
+        {{ copy.sourceNote }}
+      </div>
+
+      <div class="underlying-data__toggle-button">
+        <button class="o-expander__toggle">Show more polls</button>
+      </div>
+    </div>
+
+  </section>
+
+
+  <section class="polls">
     <section class="polls__round-1">
       <div class="polls__round-1__intro">
         <h2>{{copy.round1Headline}}</h2>
@@ -70,18 +111,6 @@
       <figure class="polls__round-1__chart">
         <div data-multi-time-series="{{charts.round1 | dump}}"></div>
       </figure>
-{#
-      {% for scenario in charts.round2 %}
-      <div class="polls__round-2__chart">
-        <h3>
-          <span class="color-{{ scenario.candidateA.key }}">{{ scenario.candidateA.name.last }}</span> vs <span class="color-{{ scenario.candidateB.key }}">{{ scenario.candidateB.name.last }}</span>
-        </h3>
-
-        <figure>
-          <div data-multi-time-series="{{scenario.chartData | dump}}"></div>
-        </figure>
-      </div>
-      {% endfor %} #}
 
       <small class="polls__chart-note">{{copy.round1ChartFootnote}}</small>
     </section>
@@ -94,7 +123,6 @@
     data-o-expander-collapsed-toggle-text="Show more polls"
   >
     <h2>{{copy.tableHeadline}}</h2>
-    {# <p class="underlying-data__intro">{{copy.tableIntro | md(true)}}</p> #}
 
     <div class="underlying-data__table-wrapper">
       <table class="underlying-data__table o-expander__content">
@@ -116,7 +144,7 @@
             {% for candidate in data.candidates %}
             <td>{{ (poll.result[candidate.key] | round(1)) + '%' if poll.result[candidate.key] else 'N/A' }}</td>
             {% endfor %}
-            <td>{{ poll.sample }}</td>
+            <td>{{ poll.sample | numberWithCommas }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -131,7 +159,6 @@
       </div>
     </div>
 
-    {# <p class="underlying-data__source">{{copy.sourceNote}}</p> #}
   </section>
 
   <section class="end-matter">

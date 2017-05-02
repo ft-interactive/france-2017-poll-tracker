@@ -47,13 +47,14 @@ export default async () => {
 
   // identify which scenario it turned out to be (messy, but works with original
   // spreadsheet structure)
-  const runOffCandidates = data.candidates.filter(c => c.runoff).map(c => c.key).sort();
+  const runOffCandidates = data.candidates.filter(c => c.runoff);
+  const runOffCandidateKeys = runOffCandidates.map(c => c.key).sort();
   const actualRunOffScenarioNumber = [1, 2, 3, 4, 5, 6].find(x => (
     Immutable.List(Object.keys(data.round2[0][`scenario${x}`])).isSuperset(
-      Immutable.List(runOffCandidates),
+      Immutable.List(runOffCandidateKeys),
     )
   ));
-  if (!actualRunOffScenarioNumber) throw new Error(`Could not find scenario for candidates: ${runOffCandidates.join(' & ')}`);
+  if (!actualRunOffScenarioNumber) throw new Error(`Could not find scenario for candidates: ${runOffCandidateKeys.join(' & ')}`);
 
   // calculate rolling averages for first chart up front
   const round1RollingAverages = data.candidates.reduce((result, { key }) => ({
@@ -62,14 +63,10 @@ export default async () => {
   }), {});
 
   // and round 2
-  const round2RollingAverages = data.candidates.reduce((acc, { key }) => {
-    if (!runOffCandidates.includes(key)) return acc;
-
-    return {
-      ...acc,
-      [key]: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
-    };
-  }, {});
+  const round2RollingAverages = runOffCandidates.reduce((acc, { key }) => ({
+    ...acc,
+    [key]: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
+  }), {});
 
   // console.log('round2RollingAverages', round2RollingAverages);
 
@@ -93,6 +90,14 @@ export default async () => {
     [candidate.key]: candidate,
   }), {});
 
+  const round2TableData = data.round2
+    .filter(row => row[`scenario${actualRunOffScenarioNumber}`][runOffCandidateKeys[0]] != null)
+    .map(row => ({
+      ...row[`scenario${actualRunOffScenarioNumber}`],
+      ...row,
+    }));
+
+  console.log(round2TableData);
 
   const result = {
     ...articleData,
@@ -101,17 +106,18 @@ export default async () => {
     data,
     byline,
     copy: data.interRoundCopy,
+    runOffCandidates,
+    round2TableData,
 
     charts: {
       runOff: {
-        candidateA: candidatesByKey[runOffCandidates[0]],
-        candidateB: candidatesByKey[runOffCandidates[1]],
+        candidateA: candidatesByKey[runOffCandidateKeys[0]],
+        candidateB: candidatesByKey[runOffCandidateKeys[1]],
         chartData: {
           lines: data.candidates
-            .filter(({ key }) => key === runOffCandidates[0] || key === runOffCandidates[1])
+            .filter(({ key }) => key === runOffCandidateKeys[0] || key === runOffCandidateKeys[1])
             .map(({ color, key, name }) => ({
               color,
-              // points: makeRollingAverage(data.round2, poll => poll[`scenario${actualRunOffScenarioNumber}`][key]),
               points: round2RollingAverages[key],
               label: name.last,
             })),
