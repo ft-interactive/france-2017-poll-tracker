@@ -132,3 +132,9 @@ export const get = (obj, prop) => obj[prop];
 
 // replace spaces with '&nbsp;'
 export const noBreak = string => new SafeString(he.encode(string).split(' ').join('&nbsp'));
+
+export const numberWithCommas = (x) => {
+  const parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
+};
