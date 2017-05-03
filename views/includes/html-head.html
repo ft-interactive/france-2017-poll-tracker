@@ -63,7 +63,7 @@
 <script async src="https://origami-build.ft.com/v2/bundles/js?export=oErrors&modules=o-errors@^3.4.0"></script>
 {%- endif -%}
 
-<title>{{ copy.title | default(headline, true) }} &mdash; FT.com</title>
+<title>{{ copy.title | default(headline, true) }}</title>
 <meta name="twitter:title" content="{{ twitterHeadline | default(copy.socialHeadline) | default(copy.headline, true) }}">
 <meta property="og:title" content="{{ facebookHeadline | default (copy.socialHeadline) | default(copy.headline, true) }}">
 
