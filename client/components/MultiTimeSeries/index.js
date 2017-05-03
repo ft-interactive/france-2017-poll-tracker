@@ -160,7 +160,7 @@ export default class MultiTimeSeries {
       // first just use D3's generic y-axis
       const yAxisGroup = g.append('g')
         .call(d3.axisRight(yScale)
-          .ticks(3)
+          .ticks(5)
           .tickSize(chartWidth))
         .attr('class', 'y-axis')
       ;
