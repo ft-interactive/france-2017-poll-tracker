@@ -43,3 +43,4 @@ Please note the MIT licence includes only the software, and does not cover any F
 
 [devdeps-url]: https://david-dm.org/ft-interactive/france-2017-poll-tracker#info=devDependencies
 [devdeps-image]: https://img.shields.io/david/dev/ft-interactive/france-2017-poll-tracker.svg?style=flat-square
+
